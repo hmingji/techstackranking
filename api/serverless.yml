@@ -1,0 +1,32 @@
+service: techStack-ranking-api
+
+plugins:
+  - serverless-esbuild
+
+custom:
+  esbuild:
+    bundle: true
+    minify: false
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: prod
+  region: ap-southeast-1
+  environment:
+    NODE_ENV: production
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - 'batch:SubmitJob'
+          Resource: '*'
+
+functions:
+  app:
+    handler: src/index.handler
+    events:
+      - http:
+          method: ANY
+          path: /{proxy+}
