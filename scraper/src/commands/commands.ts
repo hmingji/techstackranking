@@ -37,23 +37,51 @@ export const indeedsgCommands: Command[] = [
   {
     action: 'loop',
     loopOption: {
-      iterateBy: 'loopAmount',
-      loopAmount: 2,
+      iterateBy: 'selector',
+      loopEndSelector: '.jobsearch-LeftPane > nav > div:nth-child(7) > a',
+      notFoundAsLoopEnd: true,
     },
     commands: [
       {
+        action: 'loop',
+        loopOption: {
+          iterateBy: 'loopAmount',
+          loopAmount: 17,
+        },
+        commands: [
+          {
+            action: 'click',
+            selector: '.jobsearch-ResultsList > li:nth-child(::i) a',
+          },
+          {
+            action: 'sleep',
+            ms: 2000,
+          },
+          {
+            action: 'extract',
+            extractMap: new Map<string, string>([
+              ['position', '.jobsearch-JobInfoHeader-title'],
+              ['company', '.jobsearch-CompanyInfoContainer a'],
+              ['description', '#jobDescriptionText'],
+            ]),
+          },
+        ],
+      },
+      {
         action: 'click',
-        selector: '.jobsearch-ResultsList > li:nth-child(::i) a',
+        selector: 'div.jobsearch-LeftPane > nav > div:last-child > a',
       },
       {
         action: 'sleep',
-        ms: 2000,
+        ms: 4000,
       },
       {
-        action: 'extract',
-        extractMap: new Map<string, string>([
-          ['description', '#jobDescriptionText'],
-        ]),
+        action: 'press',
+        key: 'Enter',
+      },
+      {
+        action: 'sleep',
+        ms: 1000,
       },
     ],
   },

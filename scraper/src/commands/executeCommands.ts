@@ -46,9 +46,10 @@ export async function executeCommands(
     if (i == commands.length && !loopOver) break;
     if (i == commands.length && loopOver) {
       if (iterateBy === 'selector') {
-        const endNode = await page.evaluate(() => {
-          return document.querySelector(loopEndSelector!);
-        });
+        const endNode = await page.evaluate((s) => {
+          return document.querySelector(s) ? true : false;
+        }, loopEndSelector!);
+        console.log('evaluating node exist: ', endNode);
         const endNodeNotFound = endNode ? false : true;
         if (notFoundAsLoopEnd === endNodeNotFound) break;
       } else {
@@ -83,6 +84,9 @@ export async function executeCommands(
       }
 
       case 'click': {
+        while (page.url().includes('viewjob')) {
+          await page.goBack({ waitUntil: 'networkidle0' });
+        }
         const selector =
           iterateBy && iterateBy === 'loopAmount'
             ? commands[i].selector!.replace('::i', loopCount.toString())
@@ -94,6 +98,7 @@ export async function executeCommands(
         }, selector);
 
         console.log(`clicking target node: ${node}`);
+
         if (node !== null) page.click(selector);
         break;
       }

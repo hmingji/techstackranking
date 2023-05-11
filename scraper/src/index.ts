@@ -12,10 +12,10 @@ async function main() {
   });
   await browser.close();
   console.log('scraping completed, now uploading scraped data to s3');
-  //   await uploadToS3(
-  //     `scrap-data-${new Date(Date.now()).toISOString()}`,
-  //     JSON.stringify(contentScraped)
-  //   );
+  await uploadToS3(
+    `scrap-data-${new Date(Date.now()).toISOString()}`,
+    JSON.stringify(contentScraped)
+  );
   console.log('upload completed. now exiting');
 }
 
