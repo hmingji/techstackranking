@@ -1,5 +1,5 @@
 {
-  "name": "scraper",
+  "name": "processor",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,12 +11,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.329.0",
-    "puppeteer": "^20.1.2",
-    "puppeteer-extra": "^3.3.6",
-    "puppeteer-extra-plugin-stealth": "^2.11.2"
+    "@aws-sdk/client-s3": "^3.331.0",
+    "natural": "^6.3.0",
+    "pg": "^8.10.0",
+    "sequelize": "^6.31.1"
   },
   "devDependencies": {
+    "@types/natural": "^5.1.2",
+    "@types/sequelize": "^4.28.15",
+    "dotenv": "^16.0.3",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   }
