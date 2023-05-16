@@ -2,7 +2,7 @@ import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
 
 const client = new S3Client({ region: 'ap-southeast-1' });
 
-export const scrapedDataBucket = 'techstackranking-scraped-data';
+export const scrapedDataBucket = process.env.S3_BUCKET ?? '';
 
 export const getObject = async (bucket: string, key: string) => {
   const command = new GetObjectCommand({
