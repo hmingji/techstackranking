@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "value": "Cloud Computing"
+  },
+  {
+    "id": 2,
+    "value": "Data Analytics"
+  },
+  {
+    "id": 3,
+    "value": "Database"
+  },
+  {
+    "id": 4,
+    "value": "Dev"
+  },
+  {
+    "id": 5,
+    "value": "DevOps"
+  },
+  {
+    "id": 6,
+    "value": "Distributed System"
+  },
+  {
+    "id": 7,
+    "value": "Ecosystem"
+  },
+  {
+    "id": 8,
+    "value": "Frontend"
+  },
+  {
+    "id": 9,
+    "value": "ML/DL"
+  },
+  {
+    "id": 10,
+    "value": "Programming Language"
+  },
+  {
+    "id": 11,
+    "value": "System"
+  },
+  {
+    "id": 12,
+    "value": "Technology"
+  },
+  {
+    "id": 13,
+    "value": "Web"
+  }
+]

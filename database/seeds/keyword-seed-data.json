@@ -1,0 +1,862 @@
+[
+  {
+    "id": 1,
+    "value": "ali",
+    "TechStackId": 1
+  },
+  {
+    "id": 2,
+    "value": "aws",
+    "TechStackId": 2
+  },
+  {
+    "id": 3,
+    "value": "azure",
+    "TechStackId": 3
+  },
+  {
+    "id": 4,
+    "value": "firebase",
+    "TechStackId": 4
+  },
+  {
+    "id": 5,
+    "value": "google",
+    "TechStackId": 5
+  },
+  {
+    "id": 6,
+    "value": "bigquery",
+    "TechStackId": 6
+  },
+  {
+    "id": 7,
+    "value": "bigtable",
+    "TechStackId": 7
+  },
+  {
+    "id": 8,
+    "value": "etl",
+    "TechStackId": 8
+  },
+  {
+    "id": 9,
+    "value": "logstash",
+    "TechStackId": 9
+  },
+  {
+    "id": 10,
+    "value": "mapreduce",
+    "TechStackId": 10
+  },
+  {
+    "id": 11,
+    "value": "parquet",
+    "TechStackId": 11
+  },
+  {
+    "id": 12,
+    "value": "cassandra",
+    "TechStackId": 12
+  },
+  {
+    "id": 13,
+    "value": "cosmodb",
+    "TechStackId": 13
+  },
+  {
+    "id": 14,
+    "value": "couchdb",
+    "TechStackId": 14
+  },
+  {
+    "id": 15,
+    "value": "documentdb",
+    "TechStackId": 15
+  },
+  {
+    "id": 16,
+    "value": "dynamodb",
+    "TechStackId": 16
+  },
+  {
+    "id": 17,
+    "value": "foundationdb",
+    "TechStackId": 17
+  },
+  {
+    "id": 18,
+    "value": "influxdb",
+    "TechStackId": 18
+  },
+  {
+    "id": 19,
+    "value": "jdbc",
+    "TechStackId": 19
+  },
+  {
+    "id": 20,
+    "value": "mariadb",
+    "TechStackId": 20
+  },
+  {
+    "id": 21,
+    "value": "memcached",
+    "TechStackId": 21
+  },
+  {
+    "id": 22,
+    "value": "mongodb",
+    "TechStackId": 22
+  },
+  {
+    "id": 23,
+    "value": "mssql",
+    "TechStackId": 23
+  },
+  {
+    "id": 24,
+    "value": "mysql",
+    "TechStackId": 24
+  },
+  {
+    "id": 25,
+    "value": "neo4j",
+    "TechStackId": 25
+  },
+  {
+    "id": 26,
+    "value": "nosql",
+    "TechStackId": 26
+  },
+  {
+    "id": 27,
+    "value": "oracle",
+    "TechStackId": 27
+  },
+  {
+    "id": 28,
+    "value": "pl/sql",
+    "TechStackId": 28
+  },
+  {
+    "id": 29,
+    "value": "postgresql",
+    "TechStackId": 29
+  },
+  {
+    "id": 30,
+    "value": "rdbms",
+    "TechStackId": 30
+  },
+  {
+    "id": 31,
+    "value": "redis",
+    "TechStackId": 31
+  },
+  {
+    "id": 32,
+    "value": "scylladb",
+    "TechStackId": 32
+  },
+  {
+    "id": 33,
+    "value": "snowflake",
+    "TechStackId": 33
+  },
+  {
+    "id": 34,
+    "value": "timescaledb",
+    "TechStackId": 34
+  },
+  {
+    "id": 35,
+    "value": "ood",
+    "TechStackId": 35
+  },
+  {
+    "id": 36,
+    "value": "oop",
+    "TechStackId": 36
+  },
+  {
+    "id": 37,
+    "value": "tdd",
+    "TechStackId": 37
+  },
+  {
+    "id": 38,
+    "value": "ansible",
+    "TechStackId": 38
+  },
+  {
+    "id": 39,
+    "value": "chef",
+    "TechStackId": 39
+  },
+  {
+    "id": 40,
+    "value": "ci/cd",
+    "TechStackId": 40
+  },
+  {
+    "id": 41,
+    "value": "circleci",
+    "TechStackId": 41
+  },
+  {
+    "id": 42,
+    "value": "grunt",
+    "TechStackId": 42
+  },
+  {
+    "id": 43,
+    "value": "gulp",
+    "TechStackId": 43
+  },
+  {
+    "id": 44,
+    "value": "jenkins",
+    "TechStackId": 44
+  },
+  {
+    "id": 45,
+    "value": "puppet",
+    "TechStackId": 45
+  },
+  {
+    "id": 46,
+    "value": "terraform",
+    "TechStackId": 46
+  },
+  {
+    "id": 47,
+    "value": "amqp",
+    "TechStackId": 47
+  },
+  {
+    "id": 48,
+    "value": "celery",
+    "TechStackId": 48
+  },
+  {
+    "id": 49,
+    "value": "envoy",
+    "TechStackId": 49
+  },
+  {
+    "id": 50,
+    "value": "grpc",
+    "TechStackId": 50
+  },
+  {
+    "id": 51,
+    "value": "kafka",
+    "TechStackId": 51
+  },
+  {
+    "id": 52,
+    "value": "mqtt",
+    "TechStackId": 52
+  },
+  {
+    "id": 53,
+    "value": "rabbitmq",
+    "TechStackId": 53
+  },
+  {
+    "id": 54,
+    "value": ".net",
+    "TechStackId": 54
+  },
+  {
+    "id": 55,
+    "value": "android",
+    "TechStackId": 55
+  },
+  {
+    "id": 56,
+    "value": "apache",
+    "TechStackId": 56
+  },
+  {
+    "id": 57,
+    "value": "cocoa",
+    "TechStackId": 57
+  },
+  {
+    "id": 58,
+    "value": "ios",
+    "TechStackId": 58
+  },
+  {
+    "id": 59,
+    "value": "j2ee",
+    "TechStackId": 59
+  },
+  {
+    "id": 60,
+    "value": "node.js",
+    "TechStackId": 60
+  },
+  {
+    "id": 61,
+    "value": "angular",
+    "TechStackId": 61
+  },
+  {
+    "id": 62,
+    "value": "babel",
+    "TechStackId": 62
+  },
+  {
+    "id": 63,
+    "value": "blazor",
+    "TechStackId": 63
+  },
+  {
+    "id": 64,
+    "value": "chai",
+    "TechStackId": 64
+  },
+  {
+    "id": 65,
+    "value": "cypress",
+    "TechStackId": 65
+  },
+  {
+    "id": 66,
+    "value": "d3",
+    "TechStackId": 66
+  },
+  {
+    "id": 67,
+    "value": "enzyme",
+    "TechStackId": 67
+  },
+  {
+    "id": 68,
+    "value": "flutter",
+    "TechStackId": 68
+  },
+  {
+    "id": 69,
+    "value": "gatsby",
+    "TechStackId": 69
+  },
+  {
+    "id": 70,
+    "value": "graphql",
+    "TechStackId": 70
+  },
+  {
+    "id": 71,
+    "value": "jest",
+    "TechStackId": 71
+  },
+  {
+    "id": 72,
+    "value": "jquery",
+    "TechStackId": 72
+  },
+  {
+    "id": 73,
+    "value": "less",
+    "TechStackId": 73
+  },
+  {
+    "id": 74,
+    "value": "next.js",
+    "TechStackId": 74
+  },
+  {
+    "id": 75,
+    "value": "nuxt.js",
+    "TechStackId": 75
+  },
+  {
+    "id": 76,
+    "value": "parcel",
+    "TechStackId": 76
+  },
+  {
+    "id": 77,
+    "value": "qt",
+    "TechStackId": 77
+  },
+  {
+    "id": 78,
+    "value": "react",
+    "TechStackId": 78
+  },
+  {
+    "id": 79,
+    "value": "rollup",
+    "TechStackId": 79
+  },
+  {
+    "id": 80,
+    "value": "sass",
+    "TechStackId": 80
+  },
+  {
+    "id": 81,
+    "value": "svelte",
+    "TechStackId": 81
+  },
+  {
+    "id": 82,
+    "value": "vue.js",
+    "TechStackId": 82
+  },
+  {
+    "id": 83,
+    "value": "webgl",
+    "TechStackId": 83
+  },
+  {
+    "id": 84,
+    "value": "webpack",
+    "TechStackId": 84
+  },
+  {
+    "id": 85,
+    "value": "xamarin",
+    "TechStackId": 85
+  },
+  {
+    "id": 86,
+    "value": "caffe",
+    "TechStackId": 86
+  },
+  {
+    "id": 87,
+    "value": "dl4j",
+    "TechStackId": 87
+  },
+  {
+    "id": 88,
+    "value": "kaggle",
+    "TechStackId": 88
+  },
+  {
+    "id": 89,
+    "value": "keras",
+    "TechStackId": 89
+  },
+  {
+    "id": 90,
+    "value": "opencv",
+    "TechStackId": 90
+  },
+  {
+    "id": 91,
+    "value": "opengl",
+    "TechStackId": 91
+  },
+  {
+    "id": 92,
+    "value": "tensorflow",
+    "TechStackId": 92
+  },
+  {
+    "id": 93,
+    "value": "c",
+    "TechStackId": 93
+  },
+  {
+    "id": 94,
+    "value": "c#",
+    "TechStackId": 94
+  },
+  {
+    "id": 95,
+    "value": "c++",
+    "TechStackId": 95
+  },
+  {
+    "id": 96,
+    "value": "clojure",
+    "TechStackId": 96
+  },
+  {
+    "id": 97,
+    "value": "dart",
+    "TechStackId": 97
+  },
+  {
+    "id": 98,
+    "value": "elixir",
+    "TechStackId": 98
+  },
+  {
+    "id": 99,
+    "value": "erlang",
+    "TechStackId": 99
+  },
+  {
+    "id": 100,
+    "value": "f#",
+    "TechStackId": 100
+  },
+  {
+    "id": 101,
+    "value": "go",
+    "TechStackId": 101
+  },
+  {
+    "id": 102,
+    "value": "haskell",
+    "TechStackId": 102
+  },
+  {
+    "id": 103,
+    "value": "html",
+    "TechStackId": 103
+  },
+  {
+    "id": 104,
+    "value": "css",
+    "TechStackId": 104
+  },
+  {
+    "id": 105,
+    "value": "java",
+    "TechStackId": 105
+  },
+  {
+    "id": 106,
+    "value": "javascript",
+    "TechStackId": 106
+  },
+  {
+    "id": 107,
+    "value": "kotlin",
+    "TechStackId": 107
+  },
+  {
+    "id": 108,
+    "value": "objective-c",
+    "TechStackId": 108
+  },
+  {
+    "id": 109,
+    "value": "perl",
+    "TechStackId": 109
+  },
+  {
+    "id": 110,
+    "value": "php",
+    "TechStackId": 110
+  },
+  {
+    "id": 111,
+    "value": "python",
+    "TechStackId": 111
+  },
+  {
+    "id": 112,
+    "value": "r",
+    "TechStackId": 112
+  },
+  {
+    "id": 113,
+    "value": "ruby",
+    "TechStackId": 113
+  },
+  {
+    "id": 114,
+    "value": "rust",
+    "TechStackId": 114
+  },
+  {
+    "id": 115,
+    "value": "scala",
+    "TechStackId": 115
+  },
+  {
+    "id": 116,
+    "value": "sql",
+    "TechStackId": 116
+  },
+  {
+    "id": 117,
+    "value": "swift",
+    "TechStackId": 117
+  },
+  {
+    "id": 118,
+    "value": "typescript",
+    "TechStackId": 118
+  },
+  {
+    "id": 119,
+    "value": "bash",
+    "TechStackId": 119
+  },
+  {
+    "id": 120,
+    "value": "centos",
+    "TechStackId": 120
+  },
+  {
+    "id": 121,
+    "value": "debian",
+    "TechStackId": 121
+  },
+  {
+    "id": 122,
+    "value": "iis",
+    "TechStackId": 122
+  },
+  {
+    "id": 123,
+    "value": "linux",
+    "TechStackId": 123
+  },
+  {
+    "id": 124,
+    "value": "powershell",
+    "TechStackId": 124
+  },
+  {
+    "id": 125,
+    "value": "shell",
+    "TechStackId": 125
+  },
+  {
+    "id": 126,
+    "value": "ubuntu",
+    "TechStackId": 126
+  },
+  {
+    "id": 127,
+    "value": "unix",
+    "TechStackId": 127
+  },
+  {
+    "id": 128,
+    "value": "browserstack",
+    "TechStackId": 128
+  },
+  {
+    "id": 129,
+    "value": "cucumber",
+    "TechStackId": 129
+  },
+  {
+    "id": 130,
+    "value": "datadog",
+    "TechStackId": 130
+  },
+  {
+    "id": 131,
+    "value": "docker",
+    "TechStackId": 131
+  },
+  {
+    "id": 132,
+    "value": "elasticsearch",
+    "TechStackId": 132
+  },
+  {
+    "id": 133,
+    "value": "git",
+    "TechStackId": 133
+  },
+  {
+    "id": 134,
+    "value": "grafana",
+    "TechStackId": 134
+  },
+  {
+    "id": 135,
+    "value": "kibana",
+    "TechStackId": 135
+  },
+  {
+    "id": 136,
+    "value": "kubernetes",
+    "TechStackId": 136
+  },
+  {
+    "id": 137,
+    "value": "locust",
+    "TechStackId": 137
+  },
+  {
+    "id": 138,
+    "value": "oauth",
+    "TechStackId": 138
+  },
+  {
+    "id": 139,
+    "value": "oidc",
+    "TechStackId": 139
+  },
+  {
+    "id": 140,
+    "value": "openshift",
+    "TechStackId": 140
+  },
+  {
+    "id": 141,
+    "value": "prometheus",
+    "TechStackId": 141
+  },
+  {
+    "id": 142,
+    "value": "unity",
+    "TechStackId": 142
+  },
+  {
+    "id": 143,
+    "value": "zabbix",
+    "TechStackId": 143
+  },
+  {
+    "id": 144,
+    "value": "electron",
+    "TechStackId": 144
+  },
+  {
+    "id": 145,
+    "value": "koa",
+    "TechStackId": 145
+  },
+  {
+    "id": 146,
+    "value": "laravel",
+    "TechStackId": 146
+  },
+  {
+    "id": 147,
+    "value": "nginx",
+    "TechStackId": 147
+  },
+  {
+    "id": 148,
+    "value": "spring",
+    "TechStackId": 148
+  },
+  {
+    "id": 149,
+    "value": "springboot",
+    "TechStackId": 149
+  },
+  {
+    "id": 150,
+    "value": "webrtc",
+    "TechStackId": 150
+  },
+  {
+    "id": 151,
+    "value": "websocket",
+    "TechStackId": 151
+  },
+  {
+    "id": 152,
+    "value": "drupal",
+    "TechStackId": 152
+  },
+  {
+    "id": 153,
+    "value": "elementor",
+    "TechStackId": 153
+  },
+  {
+    "id": 154,
+    "value": "wordpress",
+    "TechStackId": 154
+  },
+  {
+    "id": 155,
+    "value": "aliyun",
+    "TechStackId": 1
+  },
+  {
+    "id": 156,
+    "value": "alibaba",
+    "TechStackId": 1
+  },
+  {
+    "id": 157,
+    "value": "amazon",
+    "TechStackId": 2
+  },
+  {
+    "id": 158,
+    "value": "gcp",
+    "TechStackId": 5
+  },
+  {
+    "id": 159,
+    "value": "postgres",
+    "TechStackId": 29
+  },
+  {
+    "id": 160,
+    "value": "object-oriented",
+    "TechStackId": 36
+  },
+  {
+    "id": 161,
+    "value": "test-driven",
+    "TechStackId": 37
+  },
+  {
+    "id": 162,
+    "value": "dotnet",
+    "TechStackId": 54
+  },
+  {
+    "id": 163,
+    "value": "nodejs",
+    "TechStackId": 60
+  },
+  {
+    "id": 164,
+    "value": "node",
+    "TechStackId": 60
+  },
+  {
+    "id": 165,
+    "value": "angularjs",
+    "TechStackId": 61
+  },
+  {
+    "id": 166,
+    "value": "angular.js",
+    "TechStackId": 61
+  },
+  {
+    "id": 167,
+    "value": "nextjs",
+    "TechStackId": 74
+  },
+  {
+    "id": 168,
+    "value": "nuxtjs",
+    "TechStackId": 75
+  },
+  {
+    "id": 169,
+    "value": "reactjs",
+    "TechStackId": 78
+  },
+  {
+    "id": 170,
+    "value": "react.js",
+    "TechStackId": 78
+  },
+  {
+    "id": 171,
+    "value": "vuejs",
+    "TechStackId": 82
+  },
+  {
+    "id": 172,
+    "value": "vue",
+    "TechStackId": 82
+  }
+]

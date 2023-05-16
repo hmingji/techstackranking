@@ -1,8 +1,9 @@
 {
   "name": "@techstack-ranking/database",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "all sql database related logic for techstack ranking",
+  "private": true,
+  "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,8 +11,14 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/pg": "^8.6.6",
+    "@types/sequelize": "^4.28.15",
     "dotenv": "^16.0.3",
-    "sequelize": "^6.31.1",
-    "sequelize-cli": "^6.6.0"
+    "sequelize-cli": "^6.6.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "pg": "^8.11.0",
+    "sequelize": "^6.31.1"
   }
 }
