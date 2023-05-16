@@ -1,0 +1,31 @@
+{
+  "name": "techstackranking",
+  "packageManager": "yarn@1.22.19",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "deploy:api": "yarn workspace @techstack-ranking/api deploy"
+  },
+  "workspaces": {
+    "packages": [
+      "api",
+      "client",
+      "database",
+      "processor",
+      "scraper"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hmingji/techstackranking.git"
+  },
+  "keywords": [],
+  "author": "Heng Ming Ji",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hmingji/techstackranking/issues"
+  },
+  "homepage": "https://github.com/hmingji/techstackranking#readme"
+}
