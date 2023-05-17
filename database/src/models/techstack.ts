@@ -1,4 +1,5 @@
 import {
+  BelongsToManyCountAssociationsMixin,
   BelongsToSetAssociationMixin,
   CreationOptional,
   DataTypes,
@@ -13,15 +14,17 @@ import Keyword from './keyword';
 import Job from './job';
 
 class TechStack extends Model<
-  InferAttributes<TechStack, { omit: 'category' }>,
-  InferCreationAttributes<TechStack, { omit: 'category' }>
+  InferAttributes<TechStack, { omit: 'category' | 'jobs' }>,
+  InferCreationAttributes<TechStack, { omit: 'category' | 'jobs' }>
 > {
   declare id: CreationOptional<number>;
   declare name: string;
   declare count: number;
 
   declare category?: NonAttribute<Category>;
+  declare jobs?: NonAttribute<Job>;
   declare setCategory: BelongsToSetAssociationMixin<Category, number>;
+  declare countJobs: BelongsToManyCountAssociationsMixin;
 }
 
 TechStack.init(

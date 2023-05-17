@@ -1,10 +1,14 @@
 import { init } from './core';
 import testData from './testdata/test01.json';
-import { Job, TechStack } from '@techstack-ranking/database';
+import {
+  Job,
+  TechStack,
+  computeTechStackCount,
+} from '@techstack-ranking/database';
 import nlp from 'compromise/three';
 import { getKeywordTrie } from './core/trie';
 import { getEntryLevelKeywords, getTechStackMap } from './core/keyword';
-import { removeHTML } from 'core/removeHTML';
+import { removeHTML } from './core/removeHTML';
 
 async function main() {
   await init();
@@ -63,8 +67,13 @@ async function main() {
 
     //check duplicate
     //compute tech stack count
+    //await computeTechStackCount();
     console.log('saved item');
   }
 }
 
-main();
+//main();
+
+async function test() {}
+
+test();
