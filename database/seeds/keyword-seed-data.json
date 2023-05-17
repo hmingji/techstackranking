@@ -21,7 +21,7 @@
   },
   {
     "id": 5,
-    "value": "google",
+    "value": "google cloud",
     "TechStackId": 5
   },
   {
@@ -781,7 +781,7 @@
   },
   {
     "id": 157,
-    "value": "amazon",
+    "value": "amazon web service",
     "TechStackId": 2
   },
   {
@@ -858,5 +858,35 @@
     "id": 172,
     "value": "vue",
     "TechStackId": 82
+  },
+  {
+    "id": 173,
+    "value": "object oriented",
+    "TechStackId": 36
+  },
+  {
+    "id": 174,
+    "value": "test driven",
+    "TechStackId": 37
+  },
+  {
+    "id": 175,
+    "value": "objective c",
+    "TechStackId": 108
+  },
+  {
+    "id": 176,
+    "value": "continuous integration",
+    "TechStackId": 40
+  },
+  {
+    "id": 177,
+    "value": "circle ci",
+    "TechStackId": 41
+  },
+  {
+    "id": 178,
+    "value": "continuous delivery",
+    "TechStackId": 40
   }
 ]

@@ -32,6 +32,6 @@ Category.init(
   }
 );
 
-Category.hasMany(TechStack, { foreignKey: 'CategoryId', as: 'category' });
+//Category.hasMany(TechStack, { foreignKey: 'CategoryId', as: 'category' });
 
 export default Category;

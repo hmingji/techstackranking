@@ -56,6 +56,6 @@ Job.init(
   }
 );
 
-Job.belongsToMany(TechStack, { through: 'JobTechStacks' });
+//Job.belongsToMany(TechStack, { through: 'JobTechStacks' });
 
 export default Job;

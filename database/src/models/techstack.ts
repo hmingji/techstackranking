@@ -41,12 +41,12 @@ TechStack.init(
   }
 );
 
-TechStack.hasMany(Keyword);
-TechStack.belongsTo(Category, {
-  targetKey: 'id',
-  foreignKey: 'CategoryId',
-  as: 'category',
-});
-TechStack.belongsToMany(Job, { through: 'JobTechStacks' });
+// TechStack.hasMany(Keyword);
+// TechStack.belongsTo(Category, {
+//   targetKey: 'id',
+//   foreignKey: 'CategoryId',
+//   as: 'category',
+// });
+// TechStack.belongsToMany(Job, { through: 'JobTechStacks' });
 
 export default TechStack;
