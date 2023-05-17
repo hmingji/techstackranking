@@ -4,6 +4,7 @@ import {
   Job,
   TechStack,
   computeTechStackCount,
+  removeDuplicateJob,
 } from '@techstack-ranking/database';
 import nlp from 'compromise/three';
 import { getKeywordTrie } from './core/trie';
@@ -55,25 +56,24 @@ async function main() {
       }
     });
 
-    // const job = await Job.create({
-    //   position: item.position,
-    //   company: item.company,
-    //   description: item.description,
-    //   entryLevel: isEntry,
-    // });
-    // if (job) {
-    //   job.addTechStacks(techStacks);
-    // }
+    const job = await Job.create({
+      position: posTrimmed,
+      company: comTrimmed,
+      description: descTrimmed,
+      entryLevel: isEntry,
+    });
+    if (job) {
+      job.addTechStacks(techStacks);
+    }
 
     //check duplicate
     //compute tech stack count
     //await computeTechStackCount();
-    console.log('saved item');
+    //   console.log('saved item');
   }
+  //await removeDuplicateJob();
+  //BUG TO FIX: the association jobtechstacks row should be removed when job or techstack removed
+  //study on the ondelete and on update
 }
 
-//main();
-
-async function test() {}
-
-test();
+main();
