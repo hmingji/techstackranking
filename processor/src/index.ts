@@ -20,7 +20,6 @@ async function main() {
   const techStackKey = Array.from(techStackMap.keys());
 
   for (const item of scraped) {
-    //perform text transform
     let isEntry = false;
     let techStacks: TechStack[] = [];
     const posTrimmed = removeHTML(item.position);
@@ -62,18 +61,15 @@ async function main() {
       description: descTrimmed,
       entryLevel: isEntry,
     });
+
     if (job) {
       job.addTechStacks(techStacks);
     }
-
-    //check duplicate
-    //compute tech stack count
-    //await computeTechStackCount();
-    //   console.log('saved item');
   }
-  //await removeDuplicateJob();
-  //BUG TO FIX: the association jobtechstacks row should be removed when job or techstack removed
-  //study on the ondelete and on update
+
+  await removeDuplicateJob();
+  await computeTechStackCount();
+  console.log('All scraped content processed.');
 }
 
 main();
