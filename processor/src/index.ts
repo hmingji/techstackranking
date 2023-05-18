@@ -55,6 +55,14 @@ async function main() {
         if (i !== 0) normalPhrase += ' ';
         normalPhrase += p[i].normal;
       }
+      //special case: if normalPhrase is c, it could be c# or c++
+      if (normalPhrase === 'c') {
+        if (p[0].post.length >= 1 && p[0].post.slice(0, 1) === '#')
+          normalPhrase = 'c#';
+        else if (p[0].post.length >= 2 && p[0].post.slice(0, 2) === '++')
+          normalPhrase = 'c++';
+      }
+
       if (entryKeywords.includes(normalPhrase)) isEntry = true;
       if (techStackKey.includes(normalPhrase)) {
         const techstack = techStackMap.get(normalPhrase);
