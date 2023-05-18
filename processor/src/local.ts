@@ -1,3 +1,7 @@
+//added dotenv for local development
+import dotenv from 'dotenv';
+dotenv.config();
+
 import { init } from './core';
 import {
   Job,
@@ -9,7 +13,7 @@ import nlp from 'compromise/three';
 import { getKeywordTrie } from './core/trie';
 import { getEntryLevelKeywords, getTechStackMap } from './core/keyword';
 import { removeHTML } from './core/removeHTML';
-import { getScrapedData } from './s3/getScrapedData';
+import { getScrapedData } from 's3/getScrapedData';
 
 async function main() {
   const keyFlagIdx = process.argv.indexOf('-k');
@@ -30,7 +34,6 @@ async function main() {
   for (const item of scraped) {
     let isEntry = false;
     let techStacks: TechStack[] = [];
-    let techStackIds: number[] = [];
     const posTrimmed = removeHTML(item.position);
     const comTrimmed = removeHTML(item.company);
     const descTrimmed = removeHTML(item.description);
@@ -58,8 +61,7 @@ async function main() {
       if (entryKeywords.includes(normalPhrase)) isEntry = true;
       if (techStackKey.includes(normalPhrase)) {
         const techstack = techStackMap.get(normalPhrase);
-        if (techstack && !techStackIds.includes(techstack.id)) {
-          techStackIds.push(techstack.id);
+        if (techstack && !techStacks.includes(techstack)) {
           techStacks.push(techstack);
         }
       }

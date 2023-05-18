@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const config = {
   development: {
     username: process.env.LOCALDB_USER ?? '',

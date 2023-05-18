@@ -1,7 +1,3 @@
-// export * from './job';
-// export * from './keyword';
-// export * from './techstack';
-// export * from './category';
 import Job from './job';
 import Keyword from './keyword';
 import TechStack from './techstack';

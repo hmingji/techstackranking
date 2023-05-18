@@ -24,8 +24,8 @@ COPY tsconfig.json ./
 COPY src /app/src
 
 ENV NODE_ENV=production
-RUN npm ci
-RUN npm run build
+RUN yarn install
+RUN yarn run build
 
 ENV DISPLAY :99
 CMD ["/bin/sh", "-c", "Xvfb :99 -screen 0 1024x768x16 & NODE_ENV=production node ./build/index.js"]

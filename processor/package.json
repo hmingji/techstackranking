@@ -1,8 +1,8 @@
 {
   "name": "@techstack-ranking/processor",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "batch task to process all scraped data into structured data and store into db",
+  "main": "src/index.ts",
   "scripts": {
     "start": "node build/index.js",
     "build": "tsc -p ."
@@ -13,11 +13,9 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.331.0",
     "@techstack-ranking/database": "1.0.0",
-    "compromise": "^14.9.0",
-    "natural": "^6.3.0"
+    "compromise": "^14.9.0"
   },
   "devDependencies": {
-    "@types/natural": "^5.1.2",
     "@types/node": "^20.1.5",
     "dotenv": "^16.0.3",
     "ts-node": "^10.9.1",

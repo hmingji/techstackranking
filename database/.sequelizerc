@@ -1,5 +1,7 @@
 const path = require('path');
+require('dotenv').config();
 
+//the config is for sequelize-cli to perform migration and seed
 module.exports = {
   env: process.env.NODE_ENV || 'development',
   config: path.resolve('config', 'config.js'),
