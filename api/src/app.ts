@@ -3,6 +3,7 @@ import winston from 'winston';
 import expressWinston from 'express-winston';
 import cors from 'cors';
 import { sendScrapCommand } from './batch/sendScrapCommand';
+import { getTechStacks } from './controllers/techStackController';
 
 export const app = express();
 
@@ -31,7 +32,7 @@ app.use(
   })
 );
 
-app.get('/startScrap', async function (req, res) {
+app.get('/startscrap', async function (req, res) {
   try {
     const result = await sendScrapCommand();
     res.send(`sent command ${result}`);
@@ -39,3 +40,5 @@ app.get('/startScrap', async function (req, res) {
     return res.status(500).send('Error');
   }
 });
+
+app.get('/techstacks', getTechStacks);

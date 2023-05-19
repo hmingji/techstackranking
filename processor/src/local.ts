@@ -13,7 +13,7 @@ import nlp from 'compromise/three';
 import { getKeywordTrie } from './core/trie';
 import { getEntryLevelKeywords, getTechStackMap } from './core/keyword';
 import { removeHTML } from './core/removeHTML';
-import { getScrapedData } from 's3/getScrapedData';
+import { getScrapedData } from './s3/getScrapedData';
 
 async function main() {
   const keyFlagIdx = process.argv.indexOf('-k');
@@ -34,6 +34,7 @@ async function main() {
   for (const item of scraped) {
     let isEntry = false;
     let techStacks: TechStack[] = [];
+    let techStackIds: number[] = [];
     const posTrimmed = removeHTML(item.position);
     const comTrimmed = removeHTML(item.company);
     const descTrimmed = removeHTML(item.description);
@@ -58,10 +59,19 @@ async function main() {
         if (i !== 0) normalPhrase += ' ';
         normalPhrase += p[i].normal;
       }
+      //special case: if normalPhrase is c, it could be c# or c++
+      if (normalPhrase === 'c') {
+        if (p[0].post.length >= 1 && p[0].post.slice(0, 1) === '#')
+          normalPhrase = 'c#';
+        else if (p[0].post.length >= 2 && p[0].post.slice(0, 2) === '++')
+          normalPhrase = 'c++';
+      }
+
       if (entryKeywords.includes(normalPhrase)) isEntry = true;
       if (techStackKey.includes(normalPhrase)) {
         const techstack = techStackMap.get(normalPhrase);
-        if (techstack && !techStacks.includes(techstack)) {
+        if (techstack && !techStackIds.includes(techstack.id)) {
+          techStackIds.push(techstack.id);
           techStacks.push(techstack);
         }
       }
