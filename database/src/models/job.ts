@@ -15,8 +15,8 @@ import TechStack from './techstack';
 import { sequelize } from './sequelize';
 
 class Job extends Model<
-  InferAttributes<Job, { omit: 'techstacks' }>,
-  InferCreationAttributes<Job, { omit: 'techstacks' }>
+  InferAttributes<Job, { omit: 'TechStacks' }>,
+  InferCreationAttributes<Job, { omit: 'TechStacks' }>
 > {
   declare id: CreationOptional<number>;
   declare position: string;
@@ -27,7 +27,7 @@ class Job extends Model<
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 
-  declare techstacks?: NonAttribute<TechStack[]>;
+  declare TechStacks?: NonAttribute<TechStack[]>;
   declare getTechStacks: HasManyGetAssociationsMixin<TechStack>;
   declare addTechStacks: HasManyAddAssociationsMixin<TechStack, number>;
   declare removeTechStacks: HasManyRemoveAssociationsMixin<TechStack, number>;
