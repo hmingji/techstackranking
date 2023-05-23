@@ -1,1 +1,14 @@
-<p>chart works!</p>
+<h3>Tech stack ranking</h3>
+<h3>based on number of times mentioned in job posts</h3>
+
+<div class="chart-wrapper">
+  <canvas
+    baseChart
+    [data]="barChartData"
+    [options]="barChartOptions"
+    [plugins]="barChartPlugins"
+    [legend]="barChartLegend"
+    [type]="'bar'"
+  >
+  </canvas>
+</div>

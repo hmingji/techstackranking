@@ -1,1 +1,15 @@
 @import '../../../styles.scss';
+
+.chart-wrapper {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+}
+
+h3 {
+  color: $primaryFontColor;
+  font-family: 'Spectral';
+  font-size: 36px;
+  font-weight: 200;
+  text-align: center;
+}
