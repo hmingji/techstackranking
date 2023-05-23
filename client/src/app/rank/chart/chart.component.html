@@ -4,7 +4,8 @@
 <div class="chart-wrapper">
   <canvas
     baseChart
-    [data]="barChartData"
+    *ngIf="chartData$ | async as chartData"
+    [data]="chartData"
     [options]="barChartOptions"
     [plugins]="barChartPlugins"
     [legend]="barChartLegend"

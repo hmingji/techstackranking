@@ -7,7 +7,7 @@ export async function getTechStacks(req: Request, res: Response) {
   console.log(req.query.limit);
   const sort = (req.query.sort as string) ?? 'count';
   const order = (req.query.order as string) ?? 'desc';
-  const limit = parseInt((req.query.limit as string) ?? '20');
+  const limit = parseInt((req.query.limit as string) ?? '15');
   const offset = parseInt((req.query.offset as string) ?? '0');
 
   //validate query string

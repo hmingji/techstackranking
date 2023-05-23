@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
+import { RankService } from '../rank.service';
+import { filter, map } from 'rxjs';
 
 @Component({
   selector: 'app-chart',
@@ -7,20 +9,28 @@ import { ChartConfiguration } from 'chart.js';
   styleUrls: ['./chart.component.scss'],
 })
 export class ChartComponent {
-  public barChartLegend = false;
-  public barChartPlugins = [];
+  constructor(private rankService: RankService) {}
+  barChartLegend = false;
+  barChartPlugins = [];
 
-  public barChartData: ChartConfiguration<'bar'>['data'] = {
-    labels: ['React', 'Vue.js', 'Java', 'Python', 'AWS', 'Docker', 'CI/CD'], //tech stack
-    datasets: [
-      {
-        data: [65, 59, 80, 81, 56, 55, 40],
-        backgroundColor: 'rgb(104, 170,242)',
-      },
-    ],
-  };
+  chartData$ = this.rankService.techStacks$.pipe(
+    filter((res) => !!res),
+    map(
+      (res) =>
+        ({
+          labels: res.map((t) => t.name),
+          datasets: [
+            {
+              data: res.map((t) => t.count),
+              backgroundColor: 'rgb(104, 170,242)',
+            },
+          ],
+        } as ChartConfiguration<'bar'>['data'])
+    )
+  );
 
-  public barChartOptions: ChartConfiguration<'bar'>['options'] = {
+  barChartOptions: ChartConfiguration<'bar'>['options'] = {
+    aspectRatio: 1.5,
     responsive: true,
     indexAxis: 'y',
     scales: {
