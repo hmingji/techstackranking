@@ -1,10 +1,23 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+//const routes: Routes = [];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(
+      [
+        {
+          path: 'rank',
+          data: { preload: false },
+          loadChildren: () =>
+            import('./rank/rank.module').then((m) => m.RankModule),
+        },
+        { path: '', redirectTo: 'rank', pathMatch: 'full' },
+      ],
+      { relativeLinkResolution: 'legacy' } as ExtraOptions
+    ),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
