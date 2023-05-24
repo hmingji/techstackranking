@@ -43,4 +43,10 @@
       </tbody>
     </table>
   </div>
+  <div
+    class="alert"
+    *ngIf="errorMessage$ | async as errorMessage"
+  >
+    {{ errorMessage }}
+  </div>
 </div>
