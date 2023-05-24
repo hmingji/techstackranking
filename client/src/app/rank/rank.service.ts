@@ -8,6 +8,7 @@ import {
   map,
   scan,
   switchMap,
+  tap,
   throwError,
 } from 'rxjs';
 

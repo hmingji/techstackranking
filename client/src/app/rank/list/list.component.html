@@ -6,13 +6,19 @@
         (click)="setPage(-1)"
         [disabled]="disablePrevious$ | async"
       >
-        Prev
+        <fa-icon
+          [icon]="faChevronLeft"
+          size="xs"
+        ></fa-icon>
       </button>
       <button
-        (click)="setPage(1)"
+        (click)="setPage(+1)"
         [disabled]="disableNext$ | async"
       >
-        Next
+        <fa-icon
+          [icon]="faChevronRight"
+          size="xs"
+        ></fa-icon>
       </button>
     </div>
   </div>
@@ -23,9 +29,9 @@
     <table>
       <thead>
         <tr>
-          <th>Rank</th>
-          <th>Tech Stack</th>
-          <th>Count</th>
+          <th>RANK</th>
+          <th>TECH STACK</th>
+          <th>COUNT</th>
         </tr>
       </thead>
       <tbody>

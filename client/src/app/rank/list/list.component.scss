@@ -1,1 +1,77 @@
 @import '../../../styles.scss';
+
+.list-container {
+  margin: auto;
+  width: 100%;
+  max-width: 768px;
+  padding: 5px 10px;
+  margin-top: 10px;
+}
+
+.title-wrapper {
+  display: flex;
+  h6 {
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 500;
+    color: $primaryFontColor;
+    margin-right: auto;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 5px;
+
+    button {
+      background-color: $primaryBgColor;
+      border: 0;
+      border-radius: 5px;
+      padding: 4px 10px;
+      cursor: pointer;
+
+      fa-icon {
+        color: $primaryFontColor;
+      }
+      &:hover {
+        background-color: $primaryBorderColor;
+      }
+
+      &:disabled {
+        cursor: default;
+        &:hover {
+          background-color: $primaryBgColor;
+        }
+        fa-icon {
+          color: $dimPrimaryFontColor;
+        }
+      }
+    }
+  }
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  color: $dimPrimaryFontColor;
+  font-size: 10px;
+  font-weight: 500;
+  font-family: 'Inter';
+  text-align: left;
+}
+
+tr {
+  border-bottom: 1px solid $primaryBorderColor;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 3fr 1fr;
+  padding: 10px 0;
+}
+
+td {
+  color: $primaryFontColor;
+  font-size: 11px;
+  font-weight: 400;
+  font-family: 'Inter';
+}

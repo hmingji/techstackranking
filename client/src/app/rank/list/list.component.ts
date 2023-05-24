@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RankService } from '../rank.service';
 import {
   EMPTY,
@@ -8,14 +8,22 @@ import {
   combineLatest,
   map,
 } from 'rxjs';
+import {
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent {
+export class ListComponent implements OnInit {
   constructor(private rankService: RankService) {}
+  ngOnInit(): void {
+    this.setPage(1);
+  }
+
   pageSize = this.rankService.pageSize;
   totalResults$ = this.rankService.techStacks$.pipe(map((r) => r.count));
   totalPages$ = this.totalResults$.pipe(
@@ -24,6 +32,8 @@ export class ListComponent {
   currentPage$ = this.rankService.currentPage$;
   private errorMessageSubject = new Subject<string>();
   errorMessage$ = this.errorMessageSubject.asObservable();
+  faChevronLeft = faChevronLeft;
+  faChevronRight = faChevronRight;
 
   techStacks$ = combineLatest([
     this.currentPage$,
@@ -35,15 +45,12 @@ export class ListComponent {
         name: t.name,
         count: t.count,
       }))
-    )
+    ),
+    catchError((err) => {
+      this.errorMessageSubject.next(err);
+      return EMPTY;
+    })
   );
-
-  // this.rankService.pagedTechStacks$.pipe(
-  //   catchError((err) => {
-  //     this.errorMessageSubject.next(err);
-  //     return EMPTY;
-  //   })
-  // );
 
   disablePrevious$: Observable<boolean> = this.currentPage$.pipe(
     map((pageNumber) => pageNumber === 1)
