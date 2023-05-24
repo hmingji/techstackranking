@@ -1,1 +1,40 @@
-<p>list works!</p>
+<div class="list-container">
+  <div class="title-wrapper">
+    <h6>All Tech Stacks</h6>
+    <div class="button-group">
+      <button
+        (click)="setPage(-1)"
+        [disabled]="disablePrevious$ | async"
+      >
+        Prev
+      </button>
+      <button
+        (click)="setPage(1)"
+        [disabled]="disableNext$ | async"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+  <div
+    class="table-wrapper"
+    *ngIf="techStacks$ | async as techStacks"
+  >
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Tech Stack</th>
+          <th>Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let techstack of techStacks">
+          <td>{{ techstack.rank }}</td>
+          <td>{{ techstack.name }}</td>
+          <td>{{ techstack.count }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

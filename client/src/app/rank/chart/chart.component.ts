@@ -18,10 +18,10 @@ export class ChartComponent {
     map(
       (res) =>
         ({
-          labels: res.map((t) => t.name),
+          labels: res.rows.map((t) => t.name),
           datasets: [
             {
-              data: res.map((t) => t.count),
+              data: res.rows.map((t) => t.count),
               backgroundColor: 'rgb(104, 170,242)',
             },
           ],

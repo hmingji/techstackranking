@@ -17,12 +17,13 @@ export async function getTechStacks(req: Request, res: Response) {
   )
     res.status(400).json({ message: 'Invalid query string' });
 
-  const result = await TechStack.findAll({
+  const result = await TechStack.findAndCountAll({
     attributes: ['id', 'name', 'count'],
     order: [[sort, order]],
     limit,
     offset,
   });
+
   if (!result) res.status(404).json({ message: 'Not found' });
   res.status(200).json(result);
 }

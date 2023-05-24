@@ -3,3 +3,8 @@ export interface TechStack {
   name: string;
   count: number;
 }
+
+export interface TechStackResponse {
+  rows: TechStack[];
+  count: number;
+}
