@@ -15,8 +15,10 @@ export async function getTechStacks(req: Request, res: Response) {
     if (
       !['count', 'name'].includes(sort.toLowerCase()) ||
       !['desc', 'asc'].includes(order.toLowerCase())
-    )
+    ) {
       res.status(400).json({ message: 'Invalid query string' });
+      return;
+    }
 
     const result = await TechStack.findAndCountAll({
       attributes: ['id', 'name', 'count'],
@@ -25,9 +27,13 @@ export async function getTechStacks(req: Request, res: Response) {
       offset,
     });
 
-    if (!result) res.status(404).json({ message: 'Not found' });
+    if (!result) {
+      res.status(404).json({ message: 'Not found' });
+      return;
+    }
     res.status(200).json(result);
   } catch (err) {
     console.log('err', err);
+    res.status(500).json({ error: 'Internal server error' });
   }
 }

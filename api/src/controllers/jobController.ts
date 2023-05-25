@@ -1,6 +1,3 @@
-//support different sorting and filtering
-//filter by createdAt(before/after one single date), entrylevel(true/false), tech stack(array of ts id)
-//sort by tsCount, createdAt
 import {
   InferAttributes,
   Job,
@@ -9,49 +6,130 @@ import {
   WhereOptions,
   sequelize,
 } from '@techstack-ranking/database';
-import { Request, Response, urlencoded } from 'express';
+import { Request, Response } from 'express';
 
+//TODO: add validation on query parameter
+//at frontend add error component, display error component based on response
 //order by number of tech stack matched, createdAt
 export async function getJobs(req: Request, res: Response) {
-  //filter
-  //const filterRecord: Record<'createdAt'|'entryLevel'|'techstacks', string> = {}
-  //building where object incrementally by checking if query string exist
-  let whereOption: WhereOptions<InferAttributes<Job, { omit: 'TechStacks' }>> =
-    {};
-  if (req.query.createdAt) {
-    const query = JSON.parse(req.query.createdAt as string);
-    whereOption = {
-      ...whereOption,
-      createdAt: {
-        [query[0] === 'gte' ? Op.gte : Op.lte]: new Date(Date.parse(query[1])),
-      },
-    };
+  try {
+    //pagination
+    const limit = parseInt((req.query.limit as string) ?? '15');
+    const offset = parseInt((req.query.offset as string) ?? '0');
+
+    let sort = (req.query.sort as string) ?? 'created';
+    const order = (req.query.order as string) ?? 'desc';
+
+    //validate sort and order
+    if (
+      !['created', 'techstack'].includes(sort.toLowerCase()) ||
+      !['desc', 'asc'].includes(order.toLowerCase())
+    ) {
+      res.status(400).json({ message: 'Invalid query string' });
+      return;
+    }
+    sort = sort === 'created' ? 'createdAt' : 'tsCount';
+
+    //filtering
+    let whereOption: WhereOptions<
+      InferAttributes<Job, { omit: 'TechStacks' }>
+    > = {};
+    if (req.query.created) {
+      const queryVal = (req.query.created as string).split(',');
+      whereOption['createdAt'] = {
+        [queryVal[0] === 'gte' ? Op.gte : Op.lte]: new Date(
+          Date.parse(queryVal[1])
+        ),
+      };
+    }
+    if (req.query.entry) {
+      const queryVal = req.query.entry === 'true';
+      whereOption['entryLevel'] = { [Op.eq]: queryVal };
+    }
+    if (req.query.company) {
+      const queryVal = '%' + (req.query.company as string) + '%';
+      whereOption['company'] = { [Op.iLike]: queryVal };
+    }
+    if (req.query.techstacks) {
+      const queryVal = (req.query.techstacks as string).split(',');
+      const uniqueQueryVal = [...new Set(queryVal)];
+      whereOption['$TechStacks.id$'] = { [Op.in]: uniqueQueryVal };
+    }
+
+    let total: number;
+    const jobsMatched = await Job.findAll({
+      attributes: [
+        'id',
+        [sequelize.literal('COUNT(*) OVER(PARTITION BY "Job".id)'), 'tsCount'],
+      ],
+      include: [{ model: TechStack }],
+      where: whereOption,
+      order: [[sort, order]],
+    });
+    total = jobsMatched.length;
+
+    const jobIds = jobsMatched.map((p) => p.id);
+    const jobIdsPaged = jobIds.slice(offset, limit);
+    const jobsPaged = await Job.findAll({
+      attributes: ['id', 'position', 'company', 'entryLevel', 'createdAt'],
+      where: { id: { [Op.in]: jobIdsPaged } },
+      include: [
+        {
+          model: TechStack,
+          attributes: ['id', 'name'],
+          through: { attributes: [] },
+        },
+      ],
+    });
+    const jobsPagedSorted = jobIdsPaged.map((id) =>
+      jobsPaged.find((p) => p.id === id)
+    );
+
+    const result = { rows: jobsPagedSorted, count: total };
+    if (!result) {
+      res.status(404).json({ error: 'Not Found' });
+      return;
+    }
+    res.status(200).json(result);
+  } catch (err) {
+    console.error('error occured: ', err);
+    res.status(500).json({ error: 'Internal server error' });
   }
-  //array could be repeated value foo=1&foo=2
-  console.log(encodeURI("['gte', ]"));
-  console.log(req.query.createdAt);
-  //const result = await Job.findAll({ where: whereOption });
-  //res.status(200).json(result);
-  //   const result = await Job.findAll({
-  //     attributes: [
-  //       'id',
-  //       [sequelize.literal('COUNT(*) OVER(PARTITION BY "Job".id)'), 'tsCount'],
-  //     ],
-  //     include: [{ model: TechStack }],
-  //     where: { '$TechStacks.name$': { [Op.in]: ['React', 'Webpack'] } },
-  //     order: [['tsCount', 'DESC']],
-  //   });
-  //   const jobIds = result.map((p) => p.id);
-  //   const jobIdsSliced = jobIds.slice(0, 15);
-  //   const final = await Job.findAll({
-  //     where: { id: { [Op.in]: jobIdsSliced } },
-  //     include: [{ model: TechStack }],
-  //   });
-  //   const finalSorted = jobIdsSliced.map((id) => final.find((p) => p.id === id));
-  //   if (!result) res.status(404).json({ error: 'Not Found' });
-  res.status(200).json();
 }
 
-export async function getJobDetails() {
-  return;
+export async function getJobDetails(req: Request, res: Response) {
+  try {
+    const id = parseInt(req.params.id);
+    if (!id) {
+      res.status(400).json({ error: 'Bad request' });
+      return;
+    }
+
+    const job = await Job.findOne({
+      attributes: [
+        'id',
+        'position',
+        'company',
+        'entryLevel',
+        'createdAt',
+        'description',
+      ],
+      where: { id: { [Op.eq]: id } },
+      include: [
+        {
+          model: TechStack,
+          attributes: ['id', 'name'],
+          through: { attributes: [] },
+        },
+      ],
+    });
+    if (!job) {
+      res.status(404).json({ error: 'Not Found' });
+      return;
+    }
+    res.status(200).json({ data: job });
+  } catch (err) {
+    console.error('error occured: ', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 }

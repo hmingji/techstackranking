@@ -4,7 +4,7 @@ import expressWinston from 'express-winston';
 import cors from 'cors';
 import { sendScrapCommand } from './batch/sendScrapCommand';
 import { getTechStacks } from './controllers/techStackController';
-import { getJobs } from './controllers/jobController';
+import { getJobDetails, getJobs } from './controllers/jobController';
 
 export const app = express();
 
@@ -45,3 +45,5 @@ app.get('/startscrap', async function (req, res) {
 app.get('/techstacks', getTechStacks);
 
 app.get('/jobs', getJobs);
+
+app.get('/jobs/:id', getJobDetails);

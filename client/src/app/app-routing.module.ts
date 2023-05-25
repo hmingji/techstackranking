@@ -14,6 +14,13 @@ import { ExtraOptions, RouterModule, Routes } from '@angular/router';
             import('./rank/rank.module').then((m) => m.RankModule),
         },
         { path: '', redirectTo: 'rank', pathMatch: 'full' },
+        //add path for module job
+        {
+          path: 'jobs',
+          data: { preload: false },
+          loadChildren: () =>
+            import('./job/job.module').then((m) => m.JobModule),
+        },
       ],
       { relativeLinkResolution: 'legacy' } as ExtraOptions
     ),
