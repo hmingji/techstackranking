@@ -13,6 +13,10 @@ export interface JobDetail extends Job {
   description: string;
 }
 
+export interface JobDetailResponse {
+  data: JobDetail;
+}
+
 export interface JobResponse {
   rows: Job[];
   count: number;
