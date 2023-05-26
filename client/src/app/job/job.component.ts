@@ -11,10 +11,7 @@ import { JobService } from './job.service';
 export class JobComponent {
   constructor(private route: ActivatedRoute, private jobService: JobService) {}
 
-  hasJobDetail$ = this.route.queryParamMap.pipe(
-    //tap((p) => console.log(p.keys)),
-    map((p) => p.has('jd'))
-  );
+  hasJobDetail$ = this.route.queryParamMap.pipe(map((p) => p.has('jd')));
 
-  jobs$ = this.jobService.joblist$;
+  //jobs$ = this.jobService.joblist$;
 }

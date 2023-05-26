@@ -1,5 +1,5 @@
 <app-list></app-list>
-<a
+<!-- <a
   [routerLink]="['/jobs']"
   [queryParams]="{ jd: '123,12' }"
   queryParamsHandling="merge"
@@ -16,5 +16,5 @@
   queryParamsHandling="merge"
   >link 2</a
 >
-<div *ngIf="jobs$ | async">job listing</div>
+<div *ngIf="jobs$ | async">job listing</div> -->
 <app-detail *ngIf="hasJobDetail$ | async"></app-detail>

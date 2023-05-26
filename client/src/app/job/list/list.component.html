@@ -1,1 +1,25 @@
-<p>list works!</p>
+<div
+  class="table-wrapper"
+  *ngIf="jobList$ | async as jobList"
+>
+  <table>
+    <thead>
+      <tr>
+        <th>POSITION</th>
+        <th>COMPANY</th>
+        <th>TECH STACKS</th>
+        <th>ENTRY LEVEL</th>
+        <th>CREATED</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let job of jobList.rows">
+        <td>{{ job.position }}</td>
+        <td>{{ job.company }}</td>
+        <td>{{ job.TechStacks | mapJoin : 'name' }}</td>
+        <td>{{ job.entryLevel }}</td>
+        <td>{{ job.createdAt | date : 'medium' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

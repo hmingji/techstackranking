@@ -1,0 +1,43 @@
+@import '../../../styles.scss';
+
+.table-wrapper {
+  width: 100%;
+  max-width: 800px;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  color: $dimPrimaryFontColor;
+  font-size: 10px;
+  font-weight: 500;
+  font-family: 'Inter';
+  text-align: left;
+}
+
+tr {
+  border-bottom: 1px solid $primaryBorderColor;
+  width: 100%;
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.5fr) minmax(0, 1.5fr) minmax(0, 2fr) minmax(0, 1fr)
+    minmax(0, 1fr);
+  column-gap: 20px;
+  padding: 10px 0;
+}
+
+td {
+  color: $primaryFontColor;
+  font-size: 11px;
+  font-weight: 400;
+  font-family: 'Inter';
+}
+
+.alert {
+  color: $primaryFontColor;
+  font-size: 11px;
+  font-weight: 400;
+  font-family: 'Inter';
+}

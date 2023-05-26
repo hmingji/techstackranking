@@ -24,7 +24,7 @@ export class JobService {
   private pageSizeSubject = new BehaviorSubject<number>(this.pageSizes[0]);
   pageSizeAction$ = this.pageSizeSubject.asObservable();
 
-  joblist$ = combineLatest([
+  jobList$ = combineLatest([
     this.route.queryParamMap,
     this.pageSizeAction$,
   ]).pipe(

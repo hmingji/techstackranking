@@ -4,7 +4,7 @@ export interface Job {
   id: number;
   position: string;
   company: string;
-  techstacks: Omit<TechStack, 'count'>[];
+  TechStacks: Omit<TechStack, 'count'>[];
   entryLevel: boolean;
   createdAt: string;
 }
