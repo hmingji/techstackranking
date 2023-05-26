@@ -22,4 +22,10 @@
       </tr>
     </tbody>
   </table>
+  <app-dropdown
+    [title]="currentPageSizeTitle"
+    [options]="pageSizes"
+    [default]="pageSizes[0]"
+    (currentValueChange)="setPageSize($event)"
+  ></app-dropdown>
 </div>
