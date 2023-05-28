@@ -1,0 +1,38 @@
+@import '../../../styles.scss';
+
+.paginator-btn-group {
+  display: flex;
+  gap: 5px;
+}
+
+button {
+  border: 1px solid $primaryBorderColor;
+  border-radius: 5px;
+  padding: 4px 10px;
+  background-color: $bodyBgColor;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Inter';
+  color: $dimPrimaryFontColor;
+  cursor: pointer;
+  &:hover {
+    border: 1px solid $primaryPaleBorderColor;
+    color: $primaryFontColor;
+  }
+
+  &.selected {
+    border: 1px solid $primaryPaleBorderColor;
+    color: $primaryFontColor;
+    cursor: default;
+  }
+
+  &:disabled {
+    cursor: default;
+    color: $primaryBorderColor;
+    border: 1px solid $secondaryBorderColor;
+    &:hover {
+      color: $primaryBorderColor;
+      border: 1px solid $secondaryBorderColor;
+    }
+  }
+}

@@ -19,6 +19,8 @@ export class PaginatorComponent {
   pageNums = _.range(this.lb, Math.min(this.ub, this._totalPages + 1));
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
+  disabledPrev = false;
+  disabledNext = false;
 
   @Input()
   get totalPages(): number {
@@ -37,6 +39,8 @@ export class PaginatorComponent {
     this.lb = Math.max(1, this.currentPage - 2);
     this.ub = Math.min(this.lb + this.interval, this._totalPages + 1);
     this.pageNums = _.range(this.lb, this.ub);
+    this.disabledPrev = this._currentPage === 1 ? true : false;
+    this.disabledNext = this._currentPage === this._totalPages ? true : false;
   }
 
   @Output() pageChange = new EventEmitter<number>();

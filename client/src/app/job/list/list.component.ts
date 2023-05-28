@@ -20,6 +20,7 @@ export class ListComponent {
   );
 
   //next => service and backend api need to add all tech stacks fetching
+  //improvement => scroll to beginning of list upon change of page size or page num
   pageSizes = this.jobService.pageSizes;
   currentPageSizeTitle = this.pageSizes[0].toString().concat(' / page');
 

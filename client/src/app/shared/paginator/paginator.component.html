@@ -1,5 +1,8 @@
 <div class="paginator-btn-group">
-  <button (click)="decrementPage()">
+  <button
+    (click)="decrementPage()"
+    [disabled]="disabledPrev"
+  >
     <fa-icon
       [icon]="faChevronLeft"
       size="xs"
@@ -8,10 +11,14 @@
   <button
     *ngFor="let p of pageNums"
     (click)="setPage(p)"
+    [ngClass]="{ selected: p === currentPage }"
   >
     {{ p }}
   </button>
-  <button (click)="incrementPage()">
+  <button
+    (click)="incrementPage()"
+    [disabled]="disabledNext"
+  >
     <fa-icon
       [icon]="faChevronRight"
       size="xs"
