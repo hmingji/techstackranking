@@ -22,12 +22,24 @@
       </tr>
     </tbody>
   </table>
-  <div class="dropdown-wrapper">
-    <app-dropdown
-      [title]="currentPageSizeTitle"
-      [options]="pageSizes"
-      [default]="pageSizes[0]"
-      (currentValueChange)="setPageSize($event)"
-    ></app-dropdown>
+  <div class="pagination">
+    <div class="dropdown-wrapper">
+      <app-dropdown
+        [title]="currentPageSizeTitle"
+        [options]="pageSizes"
+        [default]="pageSizes[0]"
+        (currentValueChange)="setPageSize($event)"
+      ></app-dropdown>
+    </div>
+    <div
+      class="paginator-wrapper"
+      *ngIf="pagination$ | async as p"
+    >
+      <app-paginator
+        [totalPages]="p.totalPages"
+        [currentPage]="p.curPageNum"
+        (pageChange)="setPageNum($event)"
+      ></app-paginator>
+    </div>
   </div>
 </div>

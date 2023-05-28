@@ -46,3 +46,9 @@ td {
   width: 100%;
   max-width: 110px;
 }
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

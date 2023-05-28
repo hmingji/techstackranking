@@ -52,6 +52,16 @@ export class JobService {
     catchError(this.handleError)
   );
 
+  totalResults$ = this.jobList$.pipe(map((res) => res.count));
+
+  totalPages$ = combineLatest([this.totalResults$, this.pageSizeAction$]).pipe(
+    map(([total, pageSize]) => Math.ceil(total / pageSize))
+  );
+
+  curPageNum$ = this.route.queryParamMap.pipe(
+    map((paramMap) => parseInt(paramMap.get('page') ?? '1'))
+  );
+
   jobDetail$ = this.route.queryParamMap.pipe(
     filter((paramMap) => !!paramMap.get('jd')),
     switchMap((paramMap) =>

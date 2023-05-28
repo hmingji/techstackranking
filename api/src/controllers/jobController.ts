@@ -69,7 +69,8 @@ export async function getJobs(req: Request, res: Response) {
     total = jobsMatched.length;
 
     const jobIds = jobsMatched.map((p) => p.id);
-    const jobIdsPaged = jobIds.slice(offset, limit);
+    const jobIdsPaged = jobIds.slice(offset + 1, offset + limit + 1);
+
     const jobsPaged = await Job.findAll({
       attributes: ['id', 'position', 'company', 'entryLevel', 'createdAt'],
       where: { id: { [Op.in]: jobIdsPaged } },

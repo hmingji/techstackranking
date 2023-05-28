@@ -1,0 +1,20 @@
+<div class="paginator-btn-group">
+  <button (click)="decrementPage()">
+    <fa-icon
+      [icon]="faChevronLeft"
+      size="xs"
+    ></fa-icon>
+  </button>
+  <button
+    *ngFor="let p of pageNums"
+    (click)="setPage(p)"
+  >
+    {{ p }}
+  </button>
+  <button (click)="incrementPage()">
+    <fa-icon
+      [icon]="faChevronRight"
+      size="xs"
+    ></fa-icon>
+  </button>
+</div>
