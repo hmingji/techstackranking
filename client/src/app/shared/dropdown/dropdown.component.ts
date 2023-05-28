@@ -6,6 +6,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { faCheck, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-dropdown',
@@ -17,6 +18,8 @@ export class DropdownComponent implements OnInit {
   @Input() title!: string;
   @Input() default: any;
   @Output() currentValueChange: EventEmitter<string> = new EventEmitter();
+  faChevronDown = faChevronDown;
+  faCheck = faCheck;
 
   currentValue: string | undefined | number;
   dropdownOpen: boolean = false;

@@ -7,6 +7,11 @@
     (clickOutside)="dropdownOpen = false"
   >
     <span id="dropdown-label">{{ title }}</span>
+    <fa-icon
+      [icon]="faChevronDown"
+      size="xs"
+      [ngClass]="{ 'dropdown-open': dropdownOpen }"
+    ></fa-icon>
   </button>
   <ul
     class="dropdown-list"
@@ -20,7 +25,11 @@
       (click)="select(o)"
       role="option"
     >
-      {{ o }}
+      <span>{{ o }}</span>
+      <fa-icon
+        [icon]="faCheck"
+        size="xs"
+      ></fa-icon>
     </li>
   </ul>
 </div>

@@ -1,65 +1,84 @@
-$accent-color: cornflowerblue;
-$text-color: #444;
-$width: 300px;
-$font-size: 0.85em;
-$background-color: white;
-$border-color: #ddd;
 @import '../../../styles.scss';
 
 .dropdown-collection {
-  width: $width;
+  width: 100%;
+  height: 100%;
   position: relative;
-  margin-right: 8px;
 }
 
 .dropdown-button {
-  border: none;
-  border-top: 1px solid $border-color;
-  position: relative;
+  border: 1px solid $primaryBorderColor;
+  border-radius: 5px;
   justify-content: space-between;
-  padding: 12px 32px 12px 12px;
-  background-color: $background-color;
+  padding: 4px 10px;
+  background-color: $bodyBgColor;
   display: flex;
-  font-size: $font-size;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Inter';
+  color: $dimPrimaryFontColor;
   width: 100%;
   cursor: pointer;
   align-items: center;
-  //background-image: url('/assets/svg/chevron.svg');
-  //background-size: 10px;
-  //background-position: right 16px bottom 45%;
-  //background-repeat: no-repeat;
   &:hover {
-    outline: 1px solid fade_out($accent-color, 0.5);
+    border: 1px solid $primaryPaleBorderColor;
+    color: $primaryFontColor;
+
+    fa-icon {
+      color: $primaryPaleBorderColor;
+    }
+  }
+  fa-icon {
+    transition: transform 300ms ease-in-out;
+    color: $primaryBorderColor;
+    &.dropdown-open {
+      transform: rotate(180deg);
+    }
   }
 }
 
 .dropdown-value {
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 13px;
+  font-family: 'Inter';
+  color: $primaryFontColor;
 }
 
 .dropdown-list {
   display: none;
-  background: $background-color;
+  background: $bodyBgColor;
   list-style: none;
-  border: 1px solid $accent-color;
-  box-shadow: 0px 0px 15px -1px fade_out($accent-color, 0.6);
+  border: 1px solid $primaryBorderColor;
+  border-radius: 5px;
+  color: $primaryFontColor;
   position: absolute;
-  bottom: 0;
+  width: 100%;
+  top: 30px;
   left: 0;
-  padding: 0;
-  z-index: 10;
-  right: 0;
-  margin: 0;
-  transform: translateY(100%);
+  padding: 5px;
+  z-index: 999;
   li {
-    padding: 4px 16px;
+    padding: 4px 10px;
     cursor: pointer;
-    font-weight: 700;
+    font-weight: 500;
+    border-radius: 5px;
+    font-family: 'Inter';
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    fa-icon {
+      display: none;
+      color: $blueLinkColor;
+    }
     &.selected {
-      background: darken($background-color, 5%);
+      fa-icon {
+        display: inline;
+      }
     }
     &:hover {
-      background: fade_out($accent-color, 0.6);
+      background: $primaryBorderColor;
     }
   }
   &.dropdown-open {
