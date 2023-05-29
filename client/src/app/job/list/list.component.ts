@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { JobService } from '../job.service';
 import { Router } from '@angular/router';
 import { combineLatest, map } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-list',
@@ -10,6 +11,9 @@ import { combineLatest, map } from 'rxjs';
 })
 export class ListComponent {
   constructor(private jobService: JobService, private router: Router) {}
+
+  //for date picker
+  datepickerControl = new FormControl();
 
   jobList$ = this.jobService.jobList$;
   totalPages$ = this.jobService.totalPages$;

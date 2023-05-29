@@ -1,0 +1,28 @@
+@import '../calendar-mixins';
+@import '../../../../styles.scss';
+:host-context(.calendar--disabled) > * {
+  opacity: 0.38;
+}
+
+.days-of-week {
+  @include calendarGrid();
+  position: sticky;
+  top: 0;
+  //background-color: white;
+  z-index: 1;
+  color: $primaryFontColor;
+  font-family: 'Inter';
+  font-size: 11px;
+  font-weight: 400;
+  :host-context(.calendar--first-day-of-week-monday) & {
+    abbr:first-child {
+      order: 1;
+    }
+  }
+
+  &__day {
+    @include calendarGridCell();
+    font-variant: none;
+    text-decoration: none;
+  }
+}

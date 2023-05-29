@@ -1,3 +1,10 @@
+<div class="calendar-wrapper">
+  <app-calendar
+    [formControl]="datepickerControl"
+    id="datepicker-calendar"
+  ></app-calendar>
+</div>
+<p>{{ datepickerControl.value | date }}</p>
 <div
   class="table-wrapper"
   *ngIf="jobList$ | async as jobList"

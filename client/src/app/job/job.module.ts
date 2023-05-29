@@ -6,6 +6,7 @@ import { DetailComponent } from './detail/detail.component';
 import { RouterModule } from '@angular/router';
 import { MapJoinPipe } from './map-join.pipe';
 import { SharedModule } from '../shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ListComponent, JobComponent, DetailComponent, MapJoinPipe],
@@ -13,6 +14,7 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     RouterModule.forChild([{ path: '', component: JobComponent }]),
     SharedModule,
+    ReactiveFormsModule,
   ],
 })
 export class JobModule {}
