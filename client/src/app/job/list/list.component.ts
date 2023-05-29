@@ -14,7 +14,7 @@ export class ListComponent {
 
   //for date picker
   datepickerControl = new FormControl();
-
+  dateRangeControl = new FormControl();
   jobList$ = this.jobService.jobList$;
   totalPages$ = this.jobService.totalPages$;
   curPageNum$ = this.jobService.curPageNum$;

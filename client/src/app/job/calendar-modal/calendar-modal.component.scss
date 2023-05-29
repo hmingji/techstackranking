@@ -1,0 +1,71 @@
+@import '../../../styles.scss';
+
+.calendar-wrapper {
+  width: 100%;
+  max-width: 200px;
+  background-color: $bodyBgColor;
+  border-radius: 5px;
+  border: 1px solid $primaryBorderColor;
+  padding: 10px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.date-range-radio {
+  display: none;
+}
+
+label {
+  font-size: 13px;
+  font-weight: 400;
+  font-family: 'Inter';
+  color: $dimPrimaryFontColor;
+
+  cursor: pointer;
+  &:hover {
+    color: $primaryFontColor;
+  }
+
+  &.selected {
+    color: $primaryFontColor;
+    border-bottom: 2px solid $primaryFontColor;
+    cursor: default;
+  }
+}
+
+p {
+  font-size: 13px;
+  font-weight: 400;
+  font-family: 'Inter';
+  color: $primaryFontColor;
+}
+
+.setting-bar {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  background-color: $primaryBgColor;
+  border: 0;
+  border-radius: 5px;
+  padding: 4px 10px;
+  color: $primaryFontColor;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 400;
+  font-family: 'Inter';
+  color: $primaryFontColor;
+
+  &:hover {
+    background-color: $primaryBorderColor;
+  }
+
+  &:disabled {
+    cursor: default;
+    &:hover {
+      background-color: $primaryBgColor;
+    }
+  }
+}

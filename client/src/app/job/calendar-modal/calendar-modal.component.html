@@ -1,0 +1,34 @@
+<div class="calendar-wrapper">
+  <div class="setting-bar">
+    <input
+      class="date-range-radio"
+      type="radio"
+      id="before"
+      value="lte"
+      [formControl]="dateRangeControl"
+    />
+    <label
+      for="before"
+      [ngClass]="{ selected: this.dateRangeControl.value === 'lte' }"
+      >Before</label
+    >
+    <input
+      class="date-range-radio"
+      type="radio"
+      id="after"
+      value="gte"
+      [formControl]="dateRangeControl"
+    />
+    <label
+      for="after"
+      [ngClass]="{ selected: this.dateRangeControl.value === 'gte' }"
+      >After</label
+    >
+    <p>{{ datepickerControl.value | date }}</p>
+  </div>
+  <app-calendar
+    [formControl]="datepickerControl"
+    id="datepicker-calendar"
+  ></app-calendar>
+  <button (click)="submit()">Ok</button>
+</div>
