@@ -23,7 +23,7 @@ export class ListComponent {
   onValueChange(val: string) {
     console.log(val);
   }
-  placeholderText = 'search';
+  placeholderText = 'Search';
   //next => service and backend api need to add all tech stacks fetching
   //improvement => scroll to beginning of list upon change of page size or page num
   pageSizes = this.jobService.pageSizes;

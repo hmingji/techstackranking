@@ -1,0 +1,53 @@
+@import '../../../styles.scss';
+
+.input-wrapper {
+  width: 100%;
+  max-width: 150px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border: 1px solid $dimPrimaryPaleBorderColor;
+  border-radius: 5px;
+  color: $dimPrimaryPaleBorderColor;
+
+  &:focus-within {
+    border: 1px solid $primaryPaleBorderColor;
+    color: $primaryPaleBorderColor;
+
+    input::placeholder {
+      color: $primaryPaleBorderColor;
+    }
+  }
+
+  &:hover {
+    border: 1px solid $primaryPaleBorderColor;
+    color: $primaryPaleBorderColor;
+
+    input::placeholder {
+      color: $primaryPaleBorderColor;
+    }
+  }
+}
+
+input {
+  background: none;
+  border: none;
+  color: $primaryFontColor;
+  width: 100%;
+  font-family: 'Inter';
+  font-size: 13px;
+  font-weight: 500;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: $dimPrimaryPaleBorderColor;
+  }
+
+  &::spelling-error {
+    text-decoration: none;
+  }
+}

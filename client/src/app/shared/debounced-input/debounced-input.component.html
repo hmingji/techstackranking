@@ -1,6 +1,13 @@
-<input
-  type="text"
-  [placeholder]="placeholderText"
-  [(ngModel)]="input"
-  (ngModelChange)="onValueChange()"
-/>
+<div class="input-wrapper">
+  <fa-icon
+    [icon]="faMagnifyingGlass"
+    size="xs"
+  ></fa-icon>
+  <input
+    type="text"
+    [placeholder]="placeholderText"
+    [spellcheck]="false"
+    [(ngModel)]="input"
+    (ngModelChange)="onValueChange()"
+  />
+</div>

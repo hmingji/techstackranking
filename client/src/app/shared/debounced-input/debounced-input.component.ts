@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import * as _ from 'lodash';
 
 @Component({
@@ -11,7 +12,7 @@ export class DebouncedInputComponent implements OnInit {
   @Input() placeholderText!: string;
   input: string = '';
   @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
-
+  faMagnifyingGlass = faMagnifyingGlass;
   debounced = _.debounce((val) => this.valueChange.emit(val), 400);
 
   ngOnInit(): void {
