@@ -1,4 +1,7 @@
-<app-calendar-modal></app-calendar-modal>
+<app-debounced-input
+  [placeholderText]="placeholderText"
+  (valueChange)="onValueChange($event)"
+></app-debounced-input>
 <div
   class="table-wrapper"
   *ngIf="jobList$ | async as jobList"

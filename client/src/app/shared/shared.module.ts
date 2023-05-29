@@ -9,6 +9,8 @@ import { MonthComponent } from './calendar/month/month.component';
 import { MonthHeaderComponent } from './calendar/month-header/month-header.component';
 import { DaysOfWeekComponent } from './calendar/days-of-week/days-of-week.component';
 import { MonthAndYearPipe } from './calendar/month-and-year/month-and-year.pipe';
+import { DebouncedInputComponent } from './debounced-input/debounced-input.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,13 +22,15 @@ import { MonthAndYearPipe } from './calendar/month-and-year/month-and-year.pipe'
     MonthHeaderComponent,
     DaysOfWeekComponent,
     MonthAndYearPipe,
+    DebouncedInputComponent,
   ],
-  imports: [CommonModule, FontAwesomeModule],
+  imports: [CommonModule, FontAwesomeModule, FormsModule],
   exports: [
     DropdownComponent,
     ClickOutsideDirective,
     PaginatorComponent,
     CalendarComponent,
+    DebouncedInputComponent,
   ],
 })
 export class SharedModule {}

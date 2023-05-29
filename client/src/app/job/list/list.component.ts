@@ -12,9 +12,6 @@ import { FormControl } from '@angular/forms';
 export class ListComponent {
   constructor(private jobService: JobService, private router: Router) {}
 
-  //for date picker
-  datepickerControl = new FormControl();
-  dateRangeControl = new FormControl();
   jobList$ = this.jobService.jobList$;
   totalPages$ = this.jobService.totalPages$;
   curPageNum$ = this.jobService.curPageNum$;
@@ -23,6 +20,10 @@ export class ListComponent {
     map(([totalPages, curPageNum]) => ({ totalPages, curPageNum }))
   );
 
+  onValueChange(val: string) {
+    console.log(val);
+  }
+  placeholderText = 'search';
   //next => service and backend api need to add all tech stacks fetching
   //improvement => scroll to beginning of list upon change of page size or page num
   pageSizes = this.jobService.pageSizes;
