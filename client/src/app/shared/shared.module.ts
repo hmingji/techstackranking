@@ -10,7 +10,8 @@ import { MonthHeaderComponent } from './calendar/month-header/month-header.compo
 import { DaysOfWeekComponent } from './calendar/days-of-week/days-of-week.component';
 import { MonthAndYearPipe } from './calendar/month-and-year/month-and-year.pipe';
 import { DebouncedInputComponent } from './debounced-input/debounced-input.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CheckboxAsBadgeComponent } from './checkbox-as-badge/checkbox-as-badge.component';
 
 @NgModule({
   declarations: [
@@ -23,14 +24,16 @@ import { FormsModule } from '@angular/forms';
     DaysOfWeekComponent,
     MonthAndYearPipe,
     DebouncedInputComponent,
+    CheckboxAsBadgeComponent,
   ],
-  imports: [CommonModule, FontAwesomeModule, FormsModule],
+  imports: [CommonModule, FontAwesomeModule, FormsModule, ReactiveFormsModule],
   exports: [
     DropdownComponent,
     ClickOutsideDirective,
     PaginatorComponent,
     CalendarComponent,
     DebouncedInputComponent,
+    CheckboxAsBadgeComponent,
   ],
 })
 export class SharedModule {}

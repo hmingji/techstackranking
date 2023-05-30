@@ -3,7 +3,10 @@ import winston from 'winston';
 import expressWinston from 'express-winston';
 import cors from 'cors';
 import { sendScrapCommand } from './batch/sendScrapCommand';
-import { getTechStacks } from './controllers/techStackController';
+import {
+  getAllTechStacks,
+  getTechStacks,
+} from './controllers/techStackController';
 import { getJobDetails, getJobs } from './controllers/jobController';
 
 export const app = express();
@@ -43,6 +46,8 @@ app.get('/startscrap', async function (req, res) {
 });
 
 app.get('/techstacks', getTechStacks);
+
+app.get('/techstacks/all', getAllTechStacks);
 
 app.get('/jobs', getJobs);
 

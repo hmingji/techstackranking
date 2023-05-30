@@ -1,16 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { JobService } from '../job.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, map } from 'rxjs';
-import { FormControl } from '@angular/forms';
+import { FormArray, FormControl } from '@angular/forms';
+import { TechStackNameAndId } from '../job';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent {
-  constructor(private jobService: JobService, private router: Router) {}
+export class ListComponent implements OnChanges, OnInit {
+  constructor(
+    private jobService: JobService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
+  options = ['a', 'b', 'c'];
+  checkboxFormControl = new FormControl();
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.checkboxFormControl.value);
+  }
+  techstacks?: TechStackNameAndId[];
+  techstackControls?: FormArray;
+  ngOnInit(): void {
+    this.jobService.techstacks$.subscribe((res) => {
+      this.techstacks = res.rows;
+      console.log(this.techstacks);
+      //if (this.route.queryParamMap.subscribe())
+    });
+
+    combineLatest([this.jobService.techstacks$, this.route.queryParamMap]);
+  }
+  onClick() {
+    console.log(this.techstacks);
+    console.log(this.techstackControls);
+  }
 
   jobList$ = this.jobService.jobList$;
   totalPages$ = this.jobService.totalPages$;

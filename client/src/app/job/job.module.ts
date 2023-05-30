@@ -8,9 +8,10 @@ import { MapJoinPipe } from './map-join.pipe';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CalendarModalComponent } from './calendar-modal/calendar-modal.component';
+import { TechStackModalComponent } from './tech-stack-modal/tech-stack-modal.component';
 
 @NgModule({
-  declarations: [ListComponent, JobComponent, DetailComponent, MapJoinPipe, CalendarModalComponent],
+  declarations: [ListComponent, JobComponent, DetailComponent, MapJoinPipe, CalendarModalComponent, TechStackModalComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([{ path: '', component: JobComponent }]),

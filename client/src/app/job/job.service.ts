@@ -12,17 +12,34 @@ import {
   tap,
   throwError,
 } from 'rxjs';
-import { JobDetailResponse, JobResponse } from './job';
+import {
+  AllTechStacksResponse,
+  JobDetailResponse,
+  JobResponse,
+  TechStackFilter,
+  TechStackNameAndId,
+} from './job';
 
 @Injectable({
   providedIn: 'root',
 })
 export class JobService {
-  constructor(private http: HttpClient, private route: ActivatedRoute) {}
-  private apiUrl = 'http://localhost:80/jobs';
+  constructor(private http: HttpClient, private route: ActivatedRoute) {
+    //initialize techstackfilters
+    this.techstacks$.subscribe((res) => {
+      this.techstacks = res.rows;
+      console.log(this.techstacks);
+    });
+  }
+  private apiUrl = 'http://localhost:80';
   pageSizes = [15, 25, 50];
   private pageSizeSubject = new BehaviorSubject<number>(this.pageSizes[0]);
   pageSizeAction$ = this.pageSizeSubject.asObservable();
+  techstacks: TechStackNameAndId[] = [];
+
+  techstacks$ = this.http
+    .get<AllTechStacksResponse>(`${this.apiUrl}/techstacks/all`)
+    .pipe(catchError(this.handleError));
 
   jobList$ = combineLatest([
     this.route.queryParamMap,
@@ -44,7 +61,7 @@ export class JobService {
           ((parseInt(paramMap.get('page')!) - 1) * pageSize).toString()
         );
       params = params.append('limit', pageSize.toString());
-      return this.http.get<JobResponse>(this.apiUrl, {
+      return this.http.get<JobResponse>(`${this.apiUrl}/jobs`, {
         params,
       });
     }),

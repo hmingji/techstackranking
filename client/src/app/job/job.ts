@@ -21,3 +21,17 @@ export interface JobResponse {
   rows: Job[];
   count: number;
 }
+
+export interface AllTechStacksResponse {
+  rows: TechStackNameAndId[];
+  count: number;
+}
+
+export interface TechStackNameAndId {
+  id: number;
+  name: string;
+}
+
+export interface TechStackFilter extends TechStackNameAndId {
+  selection: boolean;
+}

@@ -1,0 +1,11 @@
+<div *ngIf="techstackFilter">
+  <div *ngFor="let t of techstackFilter">
+    <input
+      type="checkbox"
+      [id]="t.id"
+      [checked]="t.selection"
+      (change)="onChange($event)"
+    />
+    <label [for]="t.id">{{ t.name }}</label>
+  </div>
+</div>

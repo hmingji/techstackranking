@@ -37,3 +37,19 @@ export async function getTechStacks(req: Request, res: Response) {
     res.status(500).json({ error: 'Internal server error' });
   }
 }
+
+export async function getAllTechStacks(req: Request, res: Response) {
+  try {
+    const result = await TechStack.findAndCountAll({
+      attributes: ['id', 'name'],
+    });
+    if (!result) {
+      res.status(404).json({ message: 'Not found' });
+      return;
+    }
+    res.status(200).json(result);
+  } catch (err) {
+    console.log('err', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+}
