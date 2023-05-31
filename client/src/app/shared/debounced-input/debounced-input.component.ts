@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import * as _ from 'lodash';
 
@@ -7,19 +8,20 @@ import * as _ from 'lodash';
   templateUrl: './debounced-input.component.html',
   styleUrls: ['./debounced-input.component.scss'],
 })
-export class DebouncedInputComponent implements OnInit {
-  @Input() default?: string;
+export class DebouncedInputComponent {
+  //@Input() default?: string;
   @Input() placeholderText!: string;
-  input: string = '';
-  @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
+  @Input() control!: FormControl;
+  //input: string = '';
+  //@Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
   faMagnifyingGlass = faMagnifyingGlass;
-  debounced = _.debounce((val) => this.valueChange.emit(val), 400);
+  //debounced = _.debounce((val) => this.valueChange.emit(val), 400);
 
-  ngOnInit(): void {
-    if (this.default) this.input = this.default;
-  }
+  // ngOnInit(): void {
+  //   if (this.default) this.input = this.default;
+  // }
 
-  onValueChange() {
-    this.debounced(this.input);
-  }
+  // onValueChange() {
+  //   this.debounced(this.input);
+  // }
 }

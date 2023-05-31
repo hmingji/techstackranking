@@ -1,11 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&&family=Spectral:wght@200;300;400&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Spectral:wght@200;300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Spectral:wght@400&display=swap');
 $bodyBgColor: rgb(23, 23, 23);
 $primaryFontColor: rgb(255, 255, 255);
 $dimPrimaryFontColor: rgba(255, 255, 255, 0.6);
 $layoutBorderColor: rgba(42, 43, 43);
 $blueLinkColor: rgb(104, 170, 242);
+$primaryBlueColor: rgb(40, 102, 223);
+$primaryDarkBlueColor: rgb(33, 90, 200);
 $primaryBgColor: rgb(42, 43, 43);
 $primaryBorderColor: rgb(75, 75, 75);
 $primaryPaleBorderColor: rgb(102, 102, 102);
@@ -21,4 +25,32 @@ $secondaryBorderColor: rgb(58, 58, 58);
 
 body {
   background-color: $bodyBgColor;
+}
+
+@mixin scrollbars(
+  $size,
+  $foreground-color,
+  $background-color: mix($foreground-color, white, 50%)
+) {
+  // For Google Chrome
+  &::-webkit-scrollbar {
+    width: $size;
+    height: $size;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $foreground-color;
+    border-radius: 100px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $background-color;
+    border-radius: 100px;
+  }
+
+  // For Internet Explorer
+  & {
+    scrollbar-face-color: $foreground-color;
+    scrollbar-track-color: $background-color;
+  }
 }

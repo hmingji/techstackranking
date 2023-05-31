@@ -1,11 +1,38 @@
-<div *ngIf="techstackFilter">
-  <div *ngFor="let t of techstackFilter">
-    <input
-      type="checkbox"
-      [id]="t.id"
-      [checked]="t.selection"
-      (change)="onChange($event)"
-    />
-    <label [for]="t.id">{{ t.name }}</label>
+<div class="modal-container">
+  <app-debounced-input
+    [placeholderText]="placeholderText"
+    [control]="filterControl"
+  ></app-debounced-input>
+
+  <div class="techstack-container">
+    <div
+      class="filtered"
+      *ngIf="filtered$ | async as filtered"
+    >
+      <div *ngFor="let f of filtered">
+        <input
+          type="checkbox"
+          [id]="f.id"
+          [checked]="f.selection"
+          (click)="onChange($event)"
+        />
+        <label [for]="f.id">{{ f.name }}</label>
+      </div>
+    </div>
+
+    <div
+      class="all"
+      *ngIf="all$ | async as all"
+    >
+      <div *ngFor="let a of all">
+        <input
+          type="checkbox"
+          [id]="a.id"
+          [checked]="a.selection"
+          (click)="onChange($event)"
+        />
+        <label [for]="a.id">{{ a.name }}</label>
+      </div>
+    </div>
   </div>
 </div>

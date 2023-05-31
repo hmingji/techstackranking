@@ -3,11 +3,17 @@
     [icon]="faMagnifyingGlass"
     size="xs"
   ></fa-icon>
-  <input
+  <!-- <input
     type="text"
     [placeholder]="placeholderText"
     [spellcheck]="false"
     [(ngModel)]="input"
     (ngModelChange)="onValueChange()"
+  /> -->
+  <input
+    type="text"
+    [placeholder]="placeholderText"
+    [spellcheck]="false"
+    [formControl]="control"
   />
 </div>
