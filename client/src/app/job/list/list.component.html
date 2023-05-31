@@ -1,11 +1,8 @@
-<!-- <app-debounced-input
-  [placeholderText]="placeholderText"
-  (valueChange)="onValueChange($event)"
-></app-debounced-input> -->
 <app-tech-stack-modal
   [techstacks]="techstacks"
   *ngIf="techstacks"
 ></app-tech-stack-modal>
+<app-actionable-badge [text]="text"></app-actionable-badge>
 <div
   class="table-wrapper"
   *ngIf="jobList$ | async as jobList"

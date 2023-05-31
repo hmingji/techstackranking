@@ -1,0 +1,25 @@
+@import '../../../styles.scss';
+
+.actionable-badge {
+  max-width: fit-content;
+  background-color: $primaryBgColor;
+  border-radius: 10px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 4px 10px;
+  color: $primaryFontColor;
+  font-size: 13px;
+  font-family: 'Inter';
+  font-weight: 500;
+}
+
+fa-icon {
+  color: $primaryBorderColor;
+  border-radius: 999px;
+  background-color: $bodyBgColor;
+  cursor: pointer;
+  &:hover {
+    color: $primaryPaleBorderColor;
+  }
+}
