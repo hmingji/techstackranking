@@ -24,18 +24,11 @@ import {
   providedIn: 'root',
 })
 export class JobService {
-  constructor(private http: HttpClient, private route: ActivatedRoute) {
-    //initialize techstackfilters
-    this.techstacks$.subscribe((res) => {
-      this.techstacks = res.rows;
-      console.log(this.techstacks);
-    });
-  }
+  constructor(private http: HttpClient, private route: ActivatedRoute) {}
   private apiUrl = 'http://localhost:80';
   pageSizes = [15, 25, 50];
   private pageSizeSubject = new BehaviorSubject<number>(this.pageSizes[0]);
   pageSizeAction$ = this.pageSizeSubject.asObservable();
-  techstacks: TechStackNameAndId[] = [];
 
   techstacks$ = this.http
     .get<AllTechStacksResponse>(`${this.apiUrl}/techstacks/all`)

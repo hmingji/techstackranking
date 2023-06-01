@@ -1,12 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
-  OnInit,
+  Output,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TechStackFilter, TechStackNameAndId } from '../job';
-import { combineLatest, debounceTime, map, switchMap } from 'rxjs';
+import { combineLatest, debounceTime, map } from 'rxjs';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -18,34 +19,11 @@ import { FormControl } from '@angular/forms';
 export class TechStackModalComponent {
   constructor(private route: ActivatedRoute, private router: Router) {}
   @Input() techstacks!: TechStackNameAndId[]; //list of all available tech stack
-  //techstackFilters!: TechStackFilter[];
-  //filtered: TechStackFilter[] = [];
   placeholderText = 'Search tech stack';
   filterControl = new FormControl('');
+  @Output() closeModal = new EventEmitter();
 
-  // ngOnInit(): void {
-  //   // this.route.queryParamMap.subscribe((paramMap) => {
-  //   //   if (paramMap.has('techstacks')) {
-  //   //     const ids = paramMap
-  //   //       .get('techstacks')!
-  //   //       .split(',')
-  //   //       .map((i) => parseInt(i));
-  //   //     this.techstackFilters = this.techstacks.map((t) => {
-  //   //       return {
-  //   //         ...t,
-  //   //         selection: ids.includes(t.id) ? true : false,
-  //   //       } as TechStackFilter;
-  //   //     });
-  //   //   } else {
-  //   //     this.techstackFilters = this.techstacks.map((t) => {
-  //   //       return { ...t, selection: false } as TechStackFilter;
-  //   //     });
-  //   //   }
-  //   // });
-  //   //set value for search input
-  // }
-
-  //vm stream and filtered stream
+  //all stream and filtered stream
   all$ = this.route.queryParamMap.pipe(
     map((paramMap) => {
       if (paramMap.has('techstacks')) {
@@ -72,7 +50,6 @@ export class TechStackModalComponent {
     this.filterControl.valueChanges.pipe(debounceTime(1000)),
   ]).pipe(
     map(([all, filterBy]) => {
-      // if (!filterBy) return [] as TechStackFilter[];
       if (!filterBy) return null;
       return all.filter(
         (i) => i.name.toLocaleLowerCase().indexOf(filterBy) !== -1
@@ -80,11 +57,9 @@ export class TechStackModalComponent {
     })
   );
 
-  // onSearchValueChange(val: string) {
-  //   this.filtered = this.techstackFilters.filter(
-  //     (i) => i.name.toLocaleLowerCase().indexOf(val) !== -1
-  //   );
-  // }
+  setModalClose() {
+    this.closeModal.emit();
+  }
 
   onChange(event: Event) {
     this.route.queryParamMap.subscribe((paramMap) => {
@@ -103,8 +78,7 @@ export class TechStackModalComponent {
       if (!checked) {
         param = param.filter((i) => i !== target);
       }
-      // const idx = this.techstackFilters.findIndex((i) => i.id === target);
-      // this.techstackFilters[idx].selection = checked;
+
       this.router.navigate([], {
         queryParams: {
           techstacks: param.length === 0 ? null : param.join(','),

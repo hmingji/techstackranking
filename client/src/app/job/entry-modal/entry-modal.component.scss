@@ -1,0 +1,45 @@
+@import '../../../styles.scss';
+
+.entry-modal {
+  background: $bodyBgColor;
+  border: 1px solid $primaryBorderColor;
+  border-radius: 5px;
+  color: $primaryFontColor;
+  position: absolute;
+  width: 100%;
+  min-width: 150px;
+  top: 30px;
+  left: 0;
+  padding: 5px;
+  z-index: 999;
+
+  ul {
+    list-style: none;
+    width: 100%;
+  }
+
+  li {
+    padding: 4px 10px;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 5px;
+    font-family: 'Inter';
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    fa-icon {
+      display: none;
+      color: $blueLinkColor;
+    }
+    &.selected {
+      fa-icon {
+        display: inline;
+      }
+    }
+    &:hover {
+      background: $primaryBorderColor;
+    }
+  }
+}

@@ -9,9 +9,10 @@ import { MonthComponent } from './calendar/month/month.component';
 import { MonthHeaderComponent } from './calendar/month-header/month-header.component';
 import { DaysOfWeekComponent } from './calendar/days-of-week/days-of-week.component';
 import { MonthAndYearPipe } from './calendar/month-and-year/month-and-year.pipe';
-import { DebouncedInputComponent } from './debounced-input/debounced-input.component';
+import { SearchInputComponent } from './search-input/search-input.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActionableBadgeComponent } from './actionable-badge/actionable-badge.component';
+import { DropdownButtonComponent } from './dropdown-button/dropdown-button.component';
 
 @NgModule({
   declarations: [
@@ -23,8 +24,9 @@ import { ActionableBadgeComponent } from './actionable-badge/actionable-badge.co
     MonthHeaderComponent,
     DaysOfWeekComponent,
     MonthAndYearPipe,
-    DebouncedInputComponent,
+    SearchInputComponent,
     ActionableBadgeComponent,
+    DropdownButtonComponent,
   ],
   imports: [CommonModule, FontAwesomeModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -32,8 +34,9 @@ import { ActionableBadgeComponent } from './actionable-badge/actionable-badge.co
     ClickOutsideDirective,
     PaginatorComponent,
     CalendarComponent,
-    DebouncedInputComponent,
+    SearchInputComponent,
     ActionableBadgeComponent,
+    DropdownButtonComponent,
   ],
 })
 export class SharedModule {}

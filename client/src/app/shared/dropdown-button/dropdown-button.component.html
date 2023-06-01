@@ -1,0 +1,11 @@
+<button
+  class="dropdown-button"
+  (click)="toggleDropdown(); $event.stopPropagation()"
+>
+  <span class="dropdown-label">{{ title }}</span>
+  <fa-icon
+    [icon]="faChevronDown"
+    size="xs"
+    [ngClass]="{ 'dropdown-open': dropdownOpen }"
+  ></fa-icon>
+</button>

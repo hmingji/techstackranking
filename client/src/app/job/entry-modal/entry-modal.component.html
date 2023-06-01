@@ -1,0 +1,21 @@
+<div
+  class="entry-modal"
+  (clickOutside)="setModalClose($event)"
+>
+  <ul
+    class="list"
+    *ngIf="vm$ | async as vm"
+  >
+    <li
+      *ngFor="let o of vm"
+      [ngClass]="{ selected: o.selected }"
+      (click)="select(o.id); $event.stopPropagation()"
+    >
+      <span>{{ o.label }}</span>
+      <fa-icon
+        [icon]="faCheck"
+        size="xs"
+      ></fa-icon>
+    </li>
+  </ul>
+</div>

@@ -22,7 +22,7 @@
     <li
       *ngFor="let o of options"
       [ngClass]="{ selected: currentValue === o }"
-      (click)="select(o)"
+      (click)="select(o); $event.stopPropagation()"
       role="option"
     >
       <span>{{ o }}</span>

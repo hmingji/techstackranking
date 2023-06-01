@@ -1,0 +1,32 @@
+@import '../../../styles.scss';
+
+.dropdown-button {
+  border: 1px solid $primaryBorderColor;
+  border-radius: 5px;
+  justify-content: space-between;
+  padding: 4px 10px;
+  background-color: $bodyBgColor;
+  display: flex;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Inter';
+  color: $dimPrimaryFontColor;
+  width: 100%;
+  cursor: pointer;
+  align-items: center;
+  &:hover {
+    border: 1px solid $primaryPaleBorderColor;
+    color: $primaryFontColor;
+
+    fa-icon {
+      color: $primaryPaleBorderColor;
+    }
+  }
+  fa-icon {
+    transition: transform 300ms ease-in-out;
+    color: $primaryBorderColor;
+    &.dropdown-open {
+      transform: rotate(180deg);
+    }
+  }
+}

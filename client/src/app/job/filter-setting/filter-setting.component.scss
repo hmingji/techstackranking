@@ -1,0 +1,20 @@
+@import '../../../styles.scss';
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter {
+  flex: 1 1 100px;
+  width: 100%;
+  position: relative;
+}
+
+.search {
+  min-width: 300px;
+  flex: 4 4 0%;
+}

@@ -4,11 +4,11 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import * as _ from 'lodash';
 
 @Component({
-  selector: 'app-debounced-input',
-  templateUrl: './debounced-input.component.html',
-  styleUrls: ['./debounced-input.component.scss'],
+  selector: 'app-search-input',
+  templateUrl: './search-input.component.html',
+  styleUrls: ['./search-input.component.scss'],
 })
-export class DebouncedInputComponent {
+export class SearchInputComponent {
   //@Input() default?: string;
   @Input() placeholderText!: string;
   @Input() control!: FormControl;

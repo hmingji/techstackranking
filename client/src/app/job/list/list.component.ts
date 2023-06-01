@@ -10,34 +10,12 @@ import { TechStackNameAndId } from '../job';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent implements OnChanges, OnInit {
+export class ListComponent {
   constructor(
     private jobService: JobService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
-
-  options = ['a', 'b', 'c'];
-  checkboxFormControl = new FormControl();
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.checkboxFormControl.value);
-  }
-  techstacks?: TechStackNameAndId[];
-  techstackControls?: FormArray;
-  ngOnInit(): void {
-    this.jobService.techstacks$.subscribe((res) => {
-      this.techstacks = res.rows;
-      console.log(this.techstacks);
-      //if (this.route.queryParamMap.subscribe())
-    });
-
-    combineLatest([this.jobService.techstacks$, this.route.queryParamMap]);
-  }
-  onClick() {
-    console.log(this.techstacks);
-    console.log(this.techstackControls);
-  }
-
   jobList$ = this.jobService.jobList$;
   totalPages$ = this.jobService.totalPages$;
   curPageNum$ = this.jobService.curPageNum$;
@@ -46,11 +24,6 @@ export class ListComponent implements OnChanges, OnInit {
     map(([totalPages, curPageNum]) => ({ totalPages, curPageNum }))
   );
 
-  onValueChange(val: string) {
-    console.log(val);
-  }
-  text = 'abc';
-  //next => service and backend api need to add all tech stacks fetching
   //improvement => scroll to beginning of list upon change of page size or page num
   pageSizes = this.jobService.pageSizes;
   currentPageSizeTitle = this.pageSizes[0].toString().concat(' / page');

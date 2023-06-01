@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="filter">
+    <app-dropdown-button
+      [title]="entryModalTitle"
+      [dropdownOpen]="isEntryModalOpen"
+      (toggled)="toggleEntryModal()"
+    ></app-dropdown-button>
+    <app-entry-modal
+      *ngIf="isEntryModalOpen"
+      (closeModal)="closeEntryModal()"
+    ></app-entry-modal>
+  </div>
+
+  <div class="filter">
+    <app-dropdown-button
+      [title]="createdModalTitle"
+      [dropdownOpen]="isCreatedModalOpen"
+      (toggled)="toggleCreatedModal()"
+    ></app-dropdown-button>
+    <app-calendar-modal
+      *ngIf="isCreatedModalOpen"
+      (closeModal)="closeCreatedModal()"
+    ></app-calendar-modal>
+  </div>
+
+  <div class="filter">
+    <app-dropdown-button
+      [title]="techStackModalTitle"
+      [dropdownOpen]="isTechStackModalOpen"
+      (toggled)="toggleTechStackModal()"
+    ></app-dropdown-button>
+    <app-tech-stack-modal
+      *ngIf="isTechStackModalOpen"
+      [techstacks]="techstacks"
+      (closeModal)="closeTechStackModal()"
+    ></app-tech-stack-modal>
+  </div>
+
+  <div class="search">
+    <app-search-input
+      [placeholderText]="placeholderText"
+      [control]="companyControl"
+    ></app-search-input>
+  </div>
+</div>

@@ -1,8 +1,11 @@
-<div class="modal-container">
-  <app-debounced-input
+<div
+  class="techstack-modal"
+  (clickOutside)="setModalClose()"
+>
+  <app-search-input
     [placeholderText]="placeholderText"
     [control]="filterControl"
-  ></app-debounced-input>
+  ></app-search-input>
 
   <div class="techstack-container">
     <div
