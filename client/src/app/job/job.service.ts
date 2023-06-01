@@ -8,6 +8,7 @@ import {
   combineLatest,
   filter,
   map,
+  shareReplay,
   switchMap,
   tap,
   throwError,
@@ -32,7 +33,11 @@ export class JobService {
 
   techstacks$ = this.http
     .get<AllTechStacksResponse>(`${this.apiUrl}/techstacks/all`)
-    .pipe(catchError(this.handleError));
+    .pipe(
+      tap(() => console.log('requesting ts')),
+      catchError(this.handleError),
+      shareReplay()
+    );
 
   jobList$ = combineLatest([
     this.route.queryParamMap,

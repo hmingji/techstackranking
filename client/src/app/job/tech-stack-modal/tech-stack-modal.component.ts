@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TechStackFilter, TechStackNameAndId } from '../job';
-import { combineLatest, debounceTime, map } from 'rxjs';
+import { combineLatest, debounceTime, first, map } from 'rxjs';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -62,7 +62,7 @@ export class TechStackModalComponent {
   }
 
   onChange(event: Event) {
-    this.route.queryParamMap.subscribe((paramMap) => {
+    this.route.queryParamMap.pipe(first()).subscribe((paramMap) => {
       let param = paramMap.get('techstacks')
         ? paramMap
             .get('techstacks')!

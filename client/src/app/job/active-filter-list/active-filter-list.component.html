@@ -1,1 +1,27 @@
-<p>active-filter-list works!</p>
+<div class="filter-list">
+  <app-actionable-badge
+    [text]="entry"
+    *ngIf="entry$ | async as entry"
+    (clicked)="removeEntry()"
+  ></app-actionable-badge>
+
+  <app-actionable-badge
+    [text]="created"
+    *ngIf="created$ | async as created"
+    (clicked)="removeCreated()"
+  ></app-actionable-badge>
+
+  <app-actionable-badge
+    [text]="company"
+    *ngIf="company$ | async as company"
+    (clicked)="removeCompany()"
+  ></app-actionable-badge>
+
+  <ng-container *ngIf="techstack$ | async as techstack">
+    <app-actionable-badge
+      [text]="t.name"
+      *ngFor="let t of techstack"
+      (clicked)="removeTechStack(t)"
+    ></app-actionable-badge>
+  </ng-container>
+</div>

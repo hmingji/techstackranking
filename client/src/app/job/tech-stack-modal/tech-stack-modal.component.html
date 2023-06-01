@@ -17,7 +17,7 @@
           type="checkbox"
           [id]="f.id"
           [checked]="f.selection"
-          (click)="onChange($event)"
+          (click)="onChange($event); $event.stopPropagation()"
         />
         <label [for]="f.id">{{ f.name }}</label>
       </div>
@@ -32,7 +32,7 @@
           type="checkbox"
           [id]="a.id"
           [checked]="a.selection"
-          (click)="onChange($event)"
+          (click)="onChange($event); $event.stopPropagation()"
         />
         <label [for]="a.id">{{ a.name }}</label>
       </div>
