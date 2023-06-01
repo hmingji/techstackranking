@@ -21,9 +21,9 @@ export class ActiveFilterListComponent {
       const param = paramMap.get('entry')!;
       if (!['true', 'false'].includes(param.toLowerCase())) return null;
       if (param.toLowerCase() === 'true') {
-        return 'Entry Level';
+        return 'entry level';
       } else {
-        return 'Non-entry Level';
+        return 'non-entry level';
       }
     })
   );
@@ -41,7 +41,7 @@ export class ActiveFilterListComponent {
       let prefix: string =
         param[0].toLowerCase() === 'lte' ? 'before' : 'after';
       let dt: string = new Date(param[1]).toLocaleDateString('en-US', {
-        dateStyle: 'short',
+        dateStyle: 'medium',
       });
       return prefix + ' ' + dt;
     })

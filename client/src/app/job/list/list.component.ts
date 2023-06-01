@@ -1,4 +1,10 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { JobService } from '../job.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, map } from 'rxjs';
@@ -14,7 +20,7 @@ export class ListComponent {
   constructor(
     private jobService: JobService,
     private router: Router,
-    private route: ActivatedRoute
+    private elementRef: ElementRef
   ) {}
   jobList$ = this.jobService.jobList$;
   totalPages$ = this.jobService.totalPages$;
@@ -24,7 +30,7 @@ export class ListComponent {
     map(([totalPages, curPageNum]) => ({ totalPages, curPageNum }))
   );
 
-  //improvement => scroll to beginning of list upon change of page size or page num
+  //next add ordering adjust
   pageSizes = this.jobService.pageSizes;
   currentPageSizeTitle = this.pageSizes[0].toString().concat(' / page');
 
@@ -36,6 +42,10 @@ export class ListComponent {
         page: 1,
       },
       queryParamsHandling: 'merge',
+    });
+    this.elementRef.nativeElement.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
     });
   }
 

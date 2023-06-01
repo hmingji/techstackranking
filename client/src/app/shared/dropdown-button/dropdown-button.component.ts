@@ -13,11 +13,6 @@ export class DropdownButtonComponent {
   faChevronDown = faChevronDown;
 
   toggleDropdown() {
-    //this.dropdownOpen = !this.dropdownOpen;
     this.toggled.emit();
   }
-
-  // closeDropdown() {
-  //   this.dropdownOpen = false;
-  // }
 }

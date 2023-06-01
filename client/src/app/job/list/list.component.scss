@@ -1,8 +1,15 @@
 @import '../../../styles.scss';
 
+.list-container {
+  width: 100%;
+  max-width: 650px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
 .table-wrapper {
   width: 100%;
-  max-width: 800px;
 }
 
 table {

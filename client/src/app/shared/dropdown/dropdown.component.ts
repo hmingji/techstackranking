@@ -38,7 +38,7 @@ export class DropdownComponent implements OnInit {
 
   select(value: string) {
     this.currentValue = value;
-    //this.closeDropdown();
+    this.closeDropdown();
     this.currentValueChange.emit(this.currentValue);
   }
 

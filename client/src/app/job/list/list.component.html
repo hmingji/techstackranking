@@ -1,52 +1,49 @@
-<app-filter-setting></app-filter-setting>
-<app-active-filter-list></app-active-filter-list>
-<!-- <app-tech-stack-modal
-  [techstacks]="techstacks"
-  *ngIf="techstacks"
-></app-tech-stack-modal>
-<app-actionable-badge [text]="text"></app-actionable-badge> -->
-<div
-  class="table-wrapper"
-  *ngIf="jobList$ | async as jobList"
->
-  <table>
-    <thead>
-      <tr>
-        <th>POSITION</th>
-        <th>COMPANY</th>
-        <th>TECH STACKS</th>
-        <th>ENTRY LEVEL</th>
-        <th>CREATED</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let job of jobList.rows">
-        <td>{{ job.position }}</td>
-        <td>{{ job.company }}</td>
-        <td>{{ job.TechStacks | mapJoin : 'name' }}</td>
-        <td>{{ job.entryLevel }}</td>
-        <td>{{ job.createdAt | date : 'medium' }}</td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="pagination">
-    <div class="dropdown-wrapper">
-      <app-dropdown
-        [title]="currentPageSizeTitle"
-        [options]="pageSizes"
-        [default]="pageSizes[0]"
-        (currentValueChange)="setPageSize($event)"
-      ></app-dropdown>
-    </div>
-    <div
-      class="paginator-wrapper"
-      *ngIf="pagination$ | async as p"
-    >
-      <app-paginator
-        [totalPages]="p.totalPages"
-        [currentPage]="p.curPageNum"
-        (pageChange)="setPageNum($event)"
-      ></app-paginator>
+<div class="list-container">
+  <app-filter-setting></app-filter-setting>
+  <app-active-filter-list></app-active-filter-list>
+  <div
+    class="table-wrapper"
+    *ngIf="jobList$ | async as jobList"
+  >
+    <table>
+      <thead>
+        <tr>
+          <th>POSITION</th>
+          <th>COMPANY</th>
+          <th>TECH STACKS</th>
+          <th>ENTRY LEVEL</th>
+          <th>CREATED</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let job of jobList.rows">
+          <td>{{ job.position }}</td>
+          <td>{{ job.company }}</td>
+          <td>{{ job.TechStacks | mapJoin : 'name' }}</td>
+          <td>{{ job.entryLevel }}</td>
+          <td>{{ job.createdAt | date }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="pagination">
+      <div class="dropdown-wrapper">
+        <app-dropdown
+          [title]="currentPageSizeTitle"
+          [options]="pageSizes"
+          [default]="pageSizes[0]"
+          (currentValueChange)="setPageSize($event)"
+        ></app-dropdown>
+      </div>
+      <div
+        class="paginator-wrapper"
+        *ngIf="pagination$ | async as p"
+      >
+        <app-paginator
+          [totalPages]="p.totalPages"
+          [currentPage]="p.curPageNum"
+          (pageChange)="setPageNum($event)"
+        ></app-paginator>
+      </div>
     </div>
   </div>
 </div>
