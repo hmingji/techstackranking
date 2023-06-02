@@ -1,21 +1,8 @@
-import {
-  Component,
-  ElementRef,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { JobService } from '../job.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { combineLatest, first, map } from 'rxjs';
-import { FormArray, FormControl } from '@angular/forms';
-import {
-  JobOrder,
-  JobPageSize,
-  JobSort,
-  PAGE_SIZES,
-  TechStackNameAndId,
-} from '../job';
+import { JobPageSize, PAGE_SIZES } from '../job';
 import {
   faSort,
   faSortDown,
@@ -43,13 +30,12 @@ export class ListComponent {
   pagination$ = combineLatest([this.totalPages$, this.curPageNum$]).pipe(
     map(([totalPages, curPageNum]) => ({ totalPages, curPageNum }))
   );
+
   sortAndOrder$ = combineLatest([
     this.jobService.sortAction$,
     this.jobService.orderAction$,
   ]).pipe(map(([sort, order]) => ({ sort, order })));
-  //orderOptions: JobOrder[] = [undefined, 'desc', 'asc'];
 
-  //next add ordering adjust
   pageSizes = PAGE_SIZES;
   currentPageSizeTitle = this.pageSizes[0].toString().concat(' / page');
 
@@ -111,5 +97,14 @@ export class ListComponent {
         this.jobService.changeJobSort(undefined);
         this.jobService.changeJobOrder(undefined);
       });
+  }
+
+  setJobDetail(id: number) {
+    this.router.navigate([], {
+      queryParams: {
+        jd: id,
+      },
+      queryParamsHandling: 'merge',
+    });
   }
 }

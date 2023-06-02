@@ -46,6 +46,14 @@ tr {
     minmax(0, 1fr);
   column-gap: 20px;
   padding: 10px 0;
+
+  &.selectable {
+    cursor: pointer;
+
+    &:hover {
+      background-color: $secondaryBgColor;
+    }
+  }
 }
 
 td {

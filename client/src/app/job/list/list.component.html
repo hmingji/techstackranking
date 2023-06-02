@@ -64,7 +64,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let job of jobList.rows">
+        <tr
+          *ngFor="let job of jobList.rows"
+          class="selectable"
+          (click)="setJobDetail(job.id)"
+        >
           <td>{{ job.position }}</td>
           <td>{{ job.company }}</td>
           <td>{{ job.TechStacks | mapJoin : 'name' }}</td>
