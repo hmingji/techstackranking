@@ -7,9 +7,20 @@ import {
 } from '@angular/core';
 import { JobService } from '../job.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest, map } from 'rxjs';
+import { combineLatest, first, map } from 'rxjs';
 import { FormArray, FormControl } from '@angular/forms';
-import { TechStackNameAndId } from '../job';
+import {
+  JobOrder,
+  JobPageSize,
+  JobSort,
+  PAGE_SIZES,
+  TechStackNameAndId,
+} from '../job';
+import {
+  faSort,
+  faSortDown,
+  faSortUp,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-list',
@@ -22,6 +33,9 @@ export class ListComponent {
     private router: Router,
     private elementRef: ElementRef
   ) {}
+  faSort = faSort;
+  faSortDown = faSortDown;
+  faSortUp = faSortUp;
   jobList$ = this.jobService.jobList$;
   totalPages$ = this.jobService.totalPages$;
   curPageNum$ = this.jobService.curPageNum$;
@@ -29,14 +43,19 @@ export class ListComponent {
   pagination$ = combineLatest([this.totalPages$, this.curPageNum$]).pipe(
     map(([totalPages, curPageNum]) => ({ totalPages, curPageNum }))
   );
+  sortAndOrder$ = combineLatest([
+    this.jobService.sortAction$,
+    this.jobService.orderAction$,
+  ]).pipe(map(([sort, order]) => ({ sort, order })));
+  //orderOptions: JobOrder[] = [undefined, 'desc', 'asc'];
 
   //next add ordering adjust
-  pageSizes = this.jobService.pageSizes;
+  pageSizes = PAGE_SIZES;
   currentPageSizeTitle = this.pageSizes[0].toString().concat(' / page');
 
   setPageSize(pageSize: string) {
     this.currentPageSizeTitle = pageSize.toString().concat(' / page');
-    this.jobService.changePageSize(parseInt(pageSize));
+    this.jobService.changePageSize(parseInt(pageSize) as JobPageSize);
     this.router.navigate([], {
       queryParams: {
         page: 1,
@@ -56,5 +75,41 @@ export class ListComponent {
       },
       queryParamsHandling: 'merge',
     });
+  }
+
+  toggleTechStackOrder() {
+    combineLatest([this.jobService.sortAction$, this.jobService.orderAction$])
+      .pipe(first())
+      .subscribe(([sort, order]) => {
+        if (sort !== 'techstack') {
+          this.jobService.changeJobSort('techstack');
+          this.jobService.changeJobOrder('desc');
+          return;
+        }
+        if (order === 'desc') {
+          this.jobService.changeJobOrder('asc');
+          return;
+        }
+        this.jobService.changeJobSort(undefined);
+        this.jobService.changeJobOrder(undefined);
+      });
+  }
+
+  toggleCreatedOrder() {
+    combineLatest([this.jobService.sortAction$, this.jobService.orderAction$])
+      .pipe(first())
+      .subscribe(([sort, order]) => {
+        if (sort !== 'created') {
+          this.jobService.changeJobSort('created');
+          this.jobService.changeJobOrder('desc');
+          return;
+        }
+        if (order === 'desc') {
+          this.jobService.changeJobOrder('asc');
+          return;
+        }
+        this.jobService.changeJobSort(undefined);
+        this.jobService.changeJobOrder(undefined);
+      });
   }
 }

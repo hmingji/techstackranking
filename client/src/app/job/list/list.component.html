@@ -6,13 +6,61 @@
     *ngIf="jobList$ | async as jobList"
   >
     <table>
-      <thead>
+      <thead *ngIf="sortAndOrder$ | async as so">
         <tr>
           <th>POSITION</th>
           <th>COMPANY</th>
-          <th>TECH STACKS</th>
+          <th
+            class="sortable"
+            [ngClass]="{ sorted: so.sort === 'techstack' }"
+            (click)="toggleTechStackOrder()"
+          >
+            TECH STACKS
+            <ng-container *ngIf="so.sort !== 'techstack'; else techstackSorted"
+              ><fa-icon
+                [icon]="faSort"
+                size="sm"
+              ></fa-icon
+            ></ng-container>
+            <ng-template #techstackSorted
+              ><fa-icon
+                *ngIf="so.order === 'desc'"
+                [icon]="faSortDown"
+                size="sm"
+              ></fa-icon>
+              <fa-icon
+                *ngIf="so.order === 'asc'"
+                [icon]="faSortUp"
+                size="sm"
+              ></fa-icon>
+            </ng-template>
+          </th>
           <th>ENTRY LEVEL</th>
-          <th>CREATED</th>
+          <th
+            class="sortable"
+            [ngClass]="{ sorted: so.sort === 'created' }"
+            (click)="toggleCreatedOrder()"
+          >
+            CREATED
+            <ng-container *ngIf="so.sort !== 'created'; else createdSorted"
+              ><fa-icon
+                [icon]="faSort"
+                size="sm"
+              ></fa-icon
+            ></ng-container>
+            <ng-template #createdSorted
+              ><fa-icon
+                *ngIf="so.order === 'desc'"
+                [icon]="faSortDown"
+                size="sm"
+              ></fa-icon>
+              <fa-icon
+                *ngIf="so.order === 'asc'"
+                [icon]="faSortUp"
+                size="sm"
+              ></fa-icon>
+            </ng-template>
+          </th>
         </tr>
       </thead>
       <tbody>

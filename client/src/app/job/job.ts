@@ -35,3 +35,8 @@ export interface TechStackNameAndId {
 export interface TechStackFilter extends TechStackNameAndId {
   selection: boolean;
 }
+
+export type JobSort = 'created' | 'techstack' | undefined;
+export type JobOrder = 'desc' | 'asc' | undefined;
+export type JobPageSize = 15 | 25 | 50;
+export const PAGE_SIZES = [15, 25, 50];

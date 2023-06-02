@@ -16,7 +16,10 @@ import {
 import {
   AllTechStacksResponse,
   JobDetailResponse,
+  JobOrder,
+  JobPageSize,
   JobResponse,
+  JobSort,
   TechStackFilter,
   TechStackNameAndId,
 } from './job';
@@ -27,9 +30,12 @@ import {
 export class JobService {
   constructor(private http: HttpClient, private route: ActivatedRoute) {}
   private apiUrl = 'http://localhost:80';
-  pageSizes = [15, 25, 50];
-  private pageSizeSubject = new BehaviorSubject<number>(this.pageSizes[0]);
+  private pageSizeSubject = new BehaviorSubject<JobPageSize>(15);
+  private sortSubject = new BehaviorSubject<JobSort>(undefined);
+  private orderSubject = new BehaviorSubject<JobOrder>(undefined);
   pageSizeAction$ = this.pageSizeSubject.asObservable();
+  sortAction$ = this.sortSubject.asObservable();
+  orderAction$ = this.orderSubject.asObservable();
 
   techstacks$ = this.http
     .get<AllTechStacksResponse>(`${this.apiUrl}/techstacks/all`)
@@ -42,8 +48,10 @@ export class JobService {
   jobList$ = combineLatest([
     this.route.queryParamMap,
     this.pageSizeAction$,
+    this.sortAction$,
+    this.orderAction$,
   ]).pipe(
-    switchMap(([paramMap, pageSize]) => {
+    switchMap(([paramMap, pageSize, sort, order]) => {
       let params = new HttpParams();
       if (paramMap.has('entry'))
         params = params.append('entry', paramMap.get('entry')!);
@@ -59,6 +67,11 @@ export class JobService {
           ((parseInt(paramMap.get('page')!) - 1) * pageSize).toString()
         );
       params = params.append('limit', pageSize.toString());
+      if (sort) {
+        params = params.append('sort', sort);
+        params = params.append('order', order ?? 'desc');
+      }
+
       return this.http.get<JobResponse>(`${this.apiUrl}/jobs`, {
         params,
       });
@@ -86,8 +99,16 @@ export class JobService {
     )
   );
 
-  changePageSize(size: number): void {
+  changePageSize(size: JobPageSize): void {
     this.pageSizeSubject.next(size);
+  }
+
+  changeJobSort(sort: JobSort) {
+    this.sortSubject.next(sort);
+  }
+
+  changeJobOrder(order: JobOrder) {
+    this.orderSubject.next(order);
   }
 
   private handleError(err: any): Observable<never> {
