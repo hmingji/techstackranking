@@ -36,13 +36,15 @@ export class EntryModalComponent {
     })
   );
 
-  select(id: number) {
-    this.router.navigate([], {
-      queryParams: {
-        entry: id === 1 ? 'true' : 'false',
-      },
-      queryParamsHandling: 'merge',
-    });
+  select(id: number, selected: Boolean) {
+    if (!selected)
+      this.router.navigate([], {
+        queryParams: {
+          entry: id === 1 ? 'true' : 'false',
+          page: 1,
+        },
+        queryParamsHandling: 'merge',
+      });
   }
 
   setModalClose(event: any) {

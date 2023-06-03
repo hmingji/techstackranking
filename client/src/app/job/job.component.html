@@ -5,11 +5,10 @@
   >
     <app-list></app-list>
   </div>
-  <div
-    #detail
-    class="detail-wrapper"
-    *ngIf="hasJobDetail$ | async"
-  >
-    <app-detail></app-detail>
+  <div class="detail-wrapper">
+    <app-detail
+      [fullWidthMode]="!showList"
+      *ngIf="hasJobDetail$ | async"
+    ></app-detail>
   </div>
 </div>

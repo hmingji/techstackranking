@@ -11,6 +11,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   Subscription,
+  combineLatest,
   debounceTime,
   filter,
   fromEvent,
@@ -30,7 +31,8 @@ export class JobComponent implements OnDestroy, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
     private renderer: Renderer2,
-    private elementRef: ElementRef<HTMLDivElement>
+    private elementRef: ElementRef<HTMLDivElement>,
+    private jobService: JobService
   ) {
     this.resizeDetailSub = fromEvent(window, 'scroll')
       //.pipe(throttleTime(100))
@@ -43,15 +45,19 @@ export class JobComponent implements OnDestroy, AfterViewInit {
         console.log('resizing height');
         this.setDetailHeight();
       });
-    this.showListSub = fromEvent(window, 'resize')
+    //add in the smallscreen subject
+    this.resizeSub = combineLatest([
+      fromEvent(window, 'resize'),
+      this.showList$,
+    ])
       .pipe(
-        filter(() => {
+        filter(([w, showList]) => {
           const transitionToSmallScreen =
             window.innerWidth < 900 &&
             this.route.snapshot.queryParamMap.has('jd') &&
-            this.showList === true;
+            showList === true;
           const transitionToBigScreen =
-            window.innerWidth > 900 && this.showList === false;
+            window.innerWidth > 900 && showList === false;
           return transitionToSmallScreen || transitionToBigScreen;
         })
       )
@@ -60,26 +66,48 @@ export class JobComponent implements OnDestroy, AfterViewInit {
           window.innerWidth < 900 &&
           this.route.snapshot.queryParamMap.has('jd')
         ) {
-          this.showList = false;
+          //this.showList = false;
+          this.jobService.changeShowList(false);
         } else {
-          this.showList = true;
+          //this.showList = true;
+          this.jobService.changeShowList(true);
           this.setDetailHeight();
         }
       });
   }
-  @ViewChild('detail', { static: false }) detail!: ElementRef<HTMLElement>;
-  showList = true;
+  showList: Boolean = true;
+  showList$ = this.jobService.showListAction$;
   hasJobDetail$ = this.route.queryParamMap.pipe(map((p) => p.has('jd')));
   resizeDetailSub!: Subscription;
   showListSub!: Subscription;
+  resizeSub!: Subscription;
 
   ngAfterViewInit(): void {
-    this.setDetailHeight();
+    this.setInitDetailHeight();
+    if (
+      window.innerWidth < 900 &&
+      this.route.snapshot.queryParamMap.has('jd')
+    ) {
+      //this.showList = false;
+      this.jobService.changeShowList(false);
+    } else {
+      //this.showList = true;
+      this.jobService.changeShowList(true);
+    }
+    this.showListSub = this.showList$.subscribe((s) => {
+      this.showList = s;
+    });
   }
 
   ngOnDestroy(): void {
     this.resizeDetailSub.unsubscribe();
     this.showListSub.unsubscribe();
+    this.resizeSub.unsubscribe();
+  }
+
+  private setInitDetailHeight() {
+    const wh = window.innerHeight;
+    this.jobService.changeDetailHeight(wh - 191);
   }
 
   private setDetailHeight() {
@@ -87,9 +115,9 @@ export class JobComponent implements OnDestroy, AfterViewInit {
     const wh = window.innerHeight;
     let res =
       r.bottom - 100 < wh
-        ? `${r.bottom - 100 - 16 - (r.top > 0 ? r.top : 0)}px`
-        : `${wh - (r.top > 0 ? r.top : 0) - 32}px`;
-    console.log(res, r.bottom, wh, r.top);
-    this.renderer.setStyle(this.detail.nativeElement, 'height', res);
+        ? r.bottom - 100 - 16 - (r.top > 0 ? r.top : 0)
+        : wh - (r.top > 0 ? r.top : 0) - 32;
+    console.log(res, r.bottom, wh, r.top, r);
+    this.jobService.changeDetailHeight(res);
   }
 }

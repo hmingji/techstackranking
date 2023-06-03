@@ -33,9 +33,18 @@ export class JobService {
   private pageSizeSubject = new BehaviorSubject<JobPageSize>(15);
   private sortSubject = new BehaviorSubject<JobSort>(undefined);
   private orderSubject = new BehaviorSubject<JobOrder>(undefined);
+
+  private detailHeightSubject = new BehaviorSubject<number>(0);
+  private showListSubject = new BehaviorSubject<Boolean>(true);
+  private smallScreenSubject = new BehaviorSubject<Boolean>(false);
+
   pageSizeAction$ = this.pageSizeSubject.asObservable();
   sortAction$ = this.sortSubject.asObservable();
   orderAction$ = this.orderSubject.asObservable();
+
+  detailHeightAction$ = this.detailHeightSubject.asObservable();
+  showListAction$ = this.showListSubject.asObservable();
+  smallScreenAction$ = this.smallScreenSubject.asObservable();
 
   techstacks$ = this.http
     .get<AllTechStacksResponse>(`${this.apiUrl}/techstacks/all`)
@@ -94,8 +103,11 @@ export class JobService {
     filter((paramMap) => !!paramMap.get('jd')),
     switchMap((paramMap) =>
       this.http
-        .get<JobDetailResponse>(`${this.apiUrl}/${paramMap.get('jd')}`)
-        .pipe(catchError(this.handleError))
+        .get<JobDetailResponse>(`${this.apiUrl}/jobs/${paramMap.get('jd')}`)
+        .pipe(
+          tap((r) => console.log(r)),
+          catchError(this.handleError)
+        )
     )
   );
 
@@ -109,6 +121,18 @@ export class JobService {
 
   changeJobOrder(order: JobOrder) {
     this.orderSubject.next(order);
+  }
+
+  changeDetailHeight(h: number) {
+    this.detailHeightSubject.next(h);
+  }
+
+  changeShowList(v: Boolean) {
+    this.showListSubject.next(v);
+  }
+
+  changeSmallScreen(v: Boolean) {
+    this.smallScreenSubject.next(v);
   }
 
   private handleError(err: any): Observable<never> {

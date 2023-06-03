@@ -9,7 +9,7 @@
     <li
       *ngFor="let o of vm"
       [ngClass]="{ selected: o.selected }"
-      (click)="select(o.id); $event.stopPropagation()"
+      (click)="select(o.id, o.selected); $event.stopPropagation()"
     >
       <span>{{ o.label }}</span>
       <fa-icon

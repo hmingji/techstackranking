@@ -61,6 +61,10 @@ export class ListComponent {
       },
       queryParamsHandling: 'merge',
     });
+    this.elementRef.nativeElement.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
   }
 
   toggleTechStackOrder() {

@@ -82,6 +82,7 @@ export class TechStackModalComponent {
       this.router.navigate([], {
         queryParams: {
           techstacks: param.length === 0 ? null : param.join(','),
+          page: 1,
         },
         queryParamsHandling: 'merge',
       });

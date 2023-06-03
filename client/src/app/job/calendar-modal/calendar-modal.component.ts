@@ -37,6 +37,7 @@ export class CalendarModalComponent implements OnInit {
     this.router.navigate([], {
       queryParams: {
         created: result,
+        page: 1,
       },
       queryParamsHandling: 'merge',
     });

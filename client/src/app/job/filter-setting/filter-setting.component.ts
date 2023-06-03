@@ -36,6 +36,7 @@ export class FilterSettingComponent {
         this.router.navigate([], {
           queryParams: {
             company: val && val.trim() !== '' ? val.trim() : null,
+            page: 1,
           },
           queryParamsHandling: 'merge',
         });

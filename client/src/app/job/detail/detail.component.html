@@ -1,4 +1,35 @@
-<div class="detail-container">
-  <p>detail works!</p>
-  <button>click me</button>
+<div
+  #detail
+  class="detail-container"
+  [ngClass]="{ fullWidth: fullWidthMode }"
+>
+  <div class="action">
+    <fa-icon
+      [icon]="faChevronLeft"
+      size="xs"
+      *ngIf="fullWidthMode"
+      class="back-icon"
+      (click)="closeDetailFullWidthMode()"
+    ></fa-icon>
+    <fa-icon
+      [icon]="faXmark"
+      size="xs"
+      *ngIf="!fullWidthMode"
+      class="close-icon"
+      (click)="closeDetail()"
+    ></fa-icon>
+  </div>
+  <ng-container *ngIf="detail$ | async as d">
+    <h3
+      class="position-title"
+      [ngClass]="{ fullWidth: fullWidthMode }"
+    >
+      {{ d.data.position }}
+    </h3>
+    <h3 class="company-title">{{ d.data.company }}</h3>
+
+    <div class="description-wrapper">
+      <div class="description-content">{{ d.data.description }}</div>
+    </div>
+  </ng-container>
 </div>
