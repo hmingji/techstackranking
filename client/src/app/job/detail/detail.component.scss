@@ -1,0 +1,23 @@
+@import '../../../styles.scss';
+
+p {
+  color: $primaryFontColor;
+  //height: calc(100vh - 12px);
+}
+
+.detail-container {
+  border-radius: 5px;
+  border: 1px solid $primaryBorderColor;
+  padding: 10px 10px;
+  //position: sticky;
+  //top: 0;
+  //bottom: 0;
+  //align-self: flex-start;
+  //max-height: calc(100vh - 30px);
+  //height: calc(100vh - 50px);
+  height: 100%;
+  width: 100%;
+  //max-width: 100%;
+  //height: 100%;
+  //flex-grow: 1;
+}

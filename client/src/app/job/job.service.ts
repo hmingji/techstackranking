@@ -51,7 +51,6 @@ export class JobService {
     this.sortAction$,
     this.orderAction$,
   ]).pipe(
-    //add filter for all queryParam stream
     switchMap(([paramMap, pageSize, sort, order]) => {
       let params = new HttpParams();
       if (paramMap.has('entry'))

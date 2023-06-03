@@ -1,5 +1,22 @@
 .container {
   width: 100%;
-  height: 100%;
+  //height: 100%;
+  padding: 0 10px;
   padding-bottom: 100px;
+  max-width: 1024px;
+  margin: auto;
+  display: flex;
+  gap: 10px;
+  min-height: calc(100vh - 191px);
+}
+
+.detail-wrapper {
+  flex: 1 1 0%;
+  max-height: calc(100vh - 32px);
+  position: sticky;
+  top: 16px;
+}
+
+.list-wrapper {
+  flex: 2 2 0%;
 }

@@ -1,22 +1,15 @@
 <div class="container">
-  <app-list></app-list>
-  <!-- <a
-  [routerLink]="['/jobs']"
-  [queryParams]="{ jd: '123,12' }"
-  queryParamsHandling="merge"
-  >link 1</a
->
-<a
-  [routerLink]="['/jobs']"
-  [queryParams]="{
-    company: 'govtech',
-    entry: true,
-    techstacks: '1,2',
-    created: 'gte,2023-05-11T10:30:23.965Z'
-  }"
-  queryParamsHandling="merge"
-  >link 2</a
->
-<div *ngIf="jobs$ | async">job listing</div> -->
-  <app-detail *ngIf="hasJobDetail$ | async"></app-detail>
+  <div
+    class="list-wrapper"
+    *ngIf="showList"
+  >
+    <app-list></app-list>
+  </div>
+  <div
+    #detail
+    class="detail-wrapper"
+    *ngIf="hasJobDetail$ | async"
+  >
+    <app-detail></app-detail>
+  </div>
 </div>

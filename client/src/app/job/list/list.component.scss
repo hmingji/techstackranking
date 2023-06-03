@@ -2,10 +2,12 @@
 
 .list-container {
   width: 100%;
-  max-width: 650px;
+  max-width: 750px;
+  //min-width: 500px;
   display: flex;
   flex-direction: column;
   gap: 5px;
+  flex: 3 3 0%;
 }
 
 .table-wrapper {
