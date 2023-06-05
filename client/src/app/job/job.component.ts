@@ -1,25 +1,6 @@
-import {
-  AfterContentInit,
-  AfterViewChecked,
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnDestroy,
-  Renderer2,
-  ViewChild,
-} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import {
-  Subscription,
-  combineLatest,
-  debounceTime,
-  filter,
-  fromEvent,
-  map,
-  switchMap,
-  tap,
-  throttleTime,
-} from 'rxjs';
+import { AfterViewInit, Component, ElementRef, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription, combineLatest, filter, fromEvent, map } from 'rxjs';
 import { JobService } from './job.service';
 
 @Component({
@@ -30,7 +11,6 @@ import { JobService } from './job.service';
 export class JobComponent implements OnDestroy, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
-    private renderer: Renderer2,
     private elementRef: ElementRef<HTMLDivElement>,
     private jobService: JobService
   ) {
@@ -45,69 +25,67 @@ export class JobComponent implements OnDestroy, AfterViewInit {
         console.log('resizing height');
         this.setDetailHeight();
       });
-    //add in the smallscreen subject
-    this.resizeSub = combineLatest([
+
+    this.screenSizeSub = combineLatest([
       fromEvent(window, 'resize'),
-      this.showList$,
+      this.jobService.smallScreenAction$,
     ])
       .pipe(
-        filter(([w, showList]) => {
-          const transitionToSmallScreen =
-            window.innerWidth < 900 &&
-            this.route.snapshot.queryParamMap.has('jd') &&
-            showList === true;
-          const transitionToBigScreen =
-            window.innerWidth > 900 && showList === false;
-          return transitionToSmallScreen || transitionToBigScreen;
+        filter(([w, smallScreen]) => {
+          return (
+            (window.innerWidth <= 900 && !smallScreen) ||
+            (window.innerWidth > 900 && smallScreen)
+          );
         })
       )
       .subscribe(() => {
-        if (
-          window.innerWidth < 900 &&
-          this.route.snapshot.queryParamMap.has('jd')
-        ) {
-          //this.showList = false;
+        this.jobService.changeSmallScreen(window.innerWidth <= 900);
+      });
+
+    this.listDisplaySub = this.jobService.smallScreenAction$.subscribe(
+      (smallScreen) => {
+        if (smallScreen && this.route.snapshot.queryParamMap.has('jd')) {
           this.jobService.changeShowList(false);
         } else {
-          //this.showList = true;
           this.jobService.changeShowList(true);
           this.setDetailHeight();
         }
-      });
+      }
+    );
   }
-  showList: Boolean = true;
-  showList$ = this.jobService.showListAction$;
+
   hasJobDetail$ = this.route.queryParamMap.pipe(map((p) => p.has('jd')));
   resizeDetailSub!: Subscription;
-  showListSub!: Subscription;
-  resizeSub!: Subscription;
+  screenSizeSub!: Subscription;
+  listDisplaySub!: Subscription;
+
+  vm$ = combineLatest([
+    this.jobService.showListAction$,
+    this.jobService.smallScreenAction$,
+    this.hasJobDetail$,
+  ]).pipe(
+    map(([showList, smallScreen, hasJd]) => {
+      return { showList, hasJd, jdLayout: !(smallScreen && !hasJd) };
+    })
+  );
 
   ngAfterViewInit(): void {
     this.setInitDetailHeight();
-    if (
-      window.innerWidth < 900 &&
-      this.route.snapshot.queryParamMap.has('jd')
-    ) {
-      //this.showList = false;
-      this.jobService.changeShowList(false);
-    } else {
-      //this.showList = true;
-      this.jobService.changeShowList(true);
-    }
-    this.showListSub = this.showList$.subscribe((s) => {
-      this.showList = s;
-    });
+    const smallSceen = window.innerWidth <= 900;
+    const hasJd = this.route.snapshot.queryParamMap.has('jd');
+    this.jobService.changeSmallScreen(smallSceen);
+    this.jobService.changeShowList(!(smallSceen && hasJd));
   }
 
   ngOnDestroy(): void {
     this.resizeDetailSub.unsubscribe();
-    this.showListSub.unsubscribe();
-    this.resizeSub.unsubscribe();
+    this.screenSizeSub.unsubscribe();
+    this.listDisplaySub.unsubscribe();
   }
 
   private setInitDetailHeight() {
     const wh = window.innerHeight;
-    this.jobService.changeDetailHeight(wh - 191);
+    this.jobService.changeDetailHeight(wh - 191 - 85);
   }
 
   private setDetailHeight() {
@@ -116,7 +94,7 @@ export class JobComponent implements OnDestroy, AfterViewInit {
     let res =
       r.bottom - 100 < wh
         ? r.bottom - 100 - 16 - (r.top > 0 ? r.top : 0)
-        : wh - (r.top > 0 ? r.top : 0) - 32;
+        : wh - (r.top > 0 ? r.top + 45 : 0) - 32;
     console.log(res, r.bottom, wh, r.top, r);
     this.jobService.changeDetailHeight(res);
   }

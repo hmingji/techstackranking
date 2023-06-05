@@ -110,5 +110,7 @@ export class ListComponent {
       },
       queryParamsHandling: 'merge',
     });
+    const smallScreen = window.innerWidth <= 900;
+    if (smallScreen) this.jobService.changeShowList(false);
   }
 }

@@ -1,13 +1,28 @@
+@import '../../styles.scss';
+
 .container {
   width: 100%;
   height: 100%;
   padding: 0 10px;
-  padding-bottom: 100px;
+  padding-top: 15px;
   max-width: 1024px;
   margin: auto;
+  min-height: calc(100vh - 191px);
+}
+
+.layout {
   display: flex;
   gap: 10px;
-  min-height: calc(100vh - 191px);
+  width: 100%;
+  padding-bottom: 100px;
+}
+
+h6 {
+  font-family: 'Inter';
+  font-size: 14px;
+  font-weight: 500;
+  color: $primaryFontColor;
+  margin-bottom: 15px;
 }
 
 .detail-wrapper {

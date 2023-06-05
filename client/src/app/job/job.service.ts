@@ -35,8 +35,8 @@ export class JobService {
   private orderSubject = new BehaviorSubject<JobOrder>(undefined);
 
   private detailHeightSubject = new BehaviorSubject<number>(0);
-  private showListSubject = new BehaviorSubject<Boolean>(true);
-  private smallScreenSubject = new BehaviorSubject<Boolean>(false);
+  private showListSubject = new BehaviorSubject<boolean>(true);
+  private smallScreenSubject = new BehaviorSubject<boolean>(false);
 
   pageSizeAction$ = this.pageSizeSubject.asObservable();
   sortAction$ = this.sortSubject.asObservable();
@@ -127,11 +127,11 @@ export class JobService {
     this.detailHeightSubject.next(h);
   }
 
-  changeShowList(v: Boolean) {
+  changeShowList(v: boolean) {
     this.showListSubject.next(v);
   }
 
-  changeSmallScreen(v: Boolean) {
+  changeSmallScreen(v: boolean) {
     this.smallScreenSubject.next(v);
   }
 
