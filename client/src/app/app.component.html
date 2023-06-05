@@ -1,20 +1,26 @@
 <div class="header-wrapper">
   <header>
-    <h1 class="title">techstack-ranking</h1>
+    <h1 class="title">
+      <a
+        [routerLink]="['/rank']"
+        routerLinkActive="active"
+        >techstack-ranking</a
+      >
+    </h1>
     <nav>
       <ul>
         <li>
           <a
-            [routerLink]="['/rank']"
+            [routerLink]="['/rank/list']"
             routerLinkActive="active"
-            >Rank</a
+            >Ranking</a
           >
         </li>
         <li>
           <a
             [routerLink]="['/jobs']"
             routerLinkActive="active"
-            >Job</a
+            >Jobs</a
           >
         </li>
         <li>

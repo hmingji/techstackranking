@@ -22,7 +22,6 @@ export class JobComponent implements OnDestroy, AfterViewInit {
         })
       )
       .subscribe(() => {
-        console.log('resizing height');
         this.setDetailHeight();
       });
 
@@ -95,7 +94,7 @@ export class JobComponent implements OnDestroy, AfterViewInit {
       r.bottom - 100 < wh
         ? r.bottom - 100 - 16 - (r.top > 0 ? r.top : 0)
         : wh - (r.top > 0 ? r.top + 45 : 0) - 32;
-    console.log(res, r.bottom, wh, r.top, r);
+
     this.jobService.changeDetailHeight(res);
   }
 }

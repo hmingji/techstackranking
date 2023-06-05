@@ -13,6 +13,12 @@ import { ExtraOptions, RouterModule, Routes } from '@angular/router';
           loadChildren: () =>
             import('./rank/rank.module').then((m) => m.RankModule),
         },
+        {
+          path: 'rank/list',
+          data: { preload: false },
+          loadChildren: () =>
+            import('./rank/rank.module').then((m) => m.RankModule),
+        },
         { path: '', redirectTo: 'rank', pathMatch: 'full' },
         //add path for module job
         {
