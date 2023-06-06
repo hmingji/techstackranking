@@ -3,11 +3,9 @@ import winston from 'winston';
 import expressWinston from 'express-winston';
 import cors from 'cors';
 import { sendScrapCommand } from './batch/sendScrapCommand';
-import {
-  getAllTechStacks,
-  getTechStacks,
-} from './controllers/techStackController';
-import { getJobDetails, getJobs } from './controllers/jobController';
+import * as techStackController from './controllers/techStackController';
+import * as jobController from './controllers/jobController';
+import * as commandController from './controllers/commandController';
 
 export const app = express();
 
@@ -45,10 +43,18 @@ app.get('/startscrap', async function (req, res) {
   }
 });
 
-app.get('/techstacks', getTechStacks);
+app.get('/techstacks', techStackController.getTechStacks);
 
-app.get('/techstacks/all', getAllTechStacks);
+app.get('/techstacks/all', techStackController.getAllTechStacks);
 
-app.get('/jobs', getJobs);
+app.get('/jobs', jobController.getJobs);
 
-app.get('/jobs/:id', getJobDetails);
+app.get('/jobs/:id', jobController.getJobDetails);
+
+app.get('/commands', commandController.getAllCommands);
+
+app.post('/commands', commandController.createCommand);
+
+app.put('/commands/:id', commandController.updateCommand);
+
+app.delete('/commands/:id', commandController.removeCommand);
