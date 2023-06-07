@@ -59,11 +59,16 @@ export const indeedsgCommands: Command[] = [
           },
           {
             action: 'extract',
-            extractMap: new Map<string, string>([
+            extractMap: [
               ['position', '.jobsearch-JobInfoHeader-title'],
               ['company', '.jobsearch-CompanyInfoContainer a'],
               ['description', '#jobDescriptionText'],
-            ]),
+            ],
+            // extractMap: new Map<string, string>([
+            //   ['position', '.jobsearch-JobInfoHeader-title'],
+            //   ['company', '.jobsearch-CompanyInfoContainer a'],
+            //   ['description', '#jobDescriptionText'],
+            // ]),
           },
         ],
       },

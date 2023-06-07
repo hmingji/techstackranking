@@ -16,7 +16,7 @@ export type Command = {
   text?: string; // provide the text to type
   key?: KeyInput; // provide the key to press
   // extractMap?: Map<string, string>; //property name => selector
-  extractMap?: string[]; //property name => selector
+  extractMap?: string[][]; //property name => selector
   loopOption?: Omit<executeOption, 'loopOver'>; // define loop behavior
   ms?: number; // millis for sleep action
 };

@@ -1,21 +1,19 @@
 import { uploadToS3 } from './s3/uploadToS3';
 import { launchPuppeteer } from './puppeteer/launchPuppeteer';
-import { loadCommands } from './commands/loadCommands';
 import { executeCommands } from './commands/executeCommands';
 import { getCommandById } from './dynamodb/getCommandById';
-import { publishProcessorJob } from 'batch/publishProcessorJob';
+import { publishProcessorJob } from './batch/publishProcessorJob';
 
 async function main() {
-  //add functionality to get command from ddb
-  //based on input in cmd argument
-  //extract map creation will be moved into here
-  //add functionality to send command to processor after completing
   const commandIdFlagIdx = process.argv.indexOf('-id');
+  process.argv.forEach((val, index) => {
+    console.log(`${index}: ${val}`);
+  });
   if (commandIdFlagIdx <= -1) {
     console.log('No command id provided, exiting...');
     return;
   }
-  //process.argv[keyFlagIdx + 1]
+
   const browser = await launchPuppeteer();
   const page = await browser.newPage();
   //const commandsToScrapIndeed = loadCommands('indeedsg'); //local command

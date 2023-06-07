@@ -9,7 +9,7 @@ export async function publishScraperJob(id: string) {
       jobDefinition: 'scrap-def',
       parameters: {
         //parameter command id
-        commandId: id,
+        command: `Xvfb :99 -screen 0 1024x768x16 & NODE_ENV=production node ./build/index.js -id ${id}`,
       },
     };
     const data = await batchClient.send(new SubmitJobCommand(input));

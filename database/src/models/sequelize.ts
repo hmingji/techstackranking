@@ -4,7 +4,7 @@ import pg from 'pg';
 
 const env = process.env.NODE_ENV || 'development';
 let dbConfig;
-console.log(dbConfig);
+
 if (env === 'development') {
   dbConfig = config.development;
 } else {
