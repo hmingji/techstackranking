@@ -1,12 +1,15 @@
 service: techStack-ranking-api
 
 plugins:
+  - serverless-plugin-monorepo
   - serverless-esbuild
 
 custom:
   esbuild:
     bundle: true
     minify: false
+    exclude:
+      - pg-native
 
 provider:
   name: aws
@@ -15,12 +18,27 @@ provider:
   region: ap-southeast-1
   environment:
     NODE_ENV: production
+    S3_BUCKET: ${env:S3_BUCKET}
+    PRODDB_NAME: ${env:PRODDB_NAME}
+    PRODDB_USER: ${env:PRODDB_USER}
+    PRODDB_PW: ${env:PRODDB_PW}
+    PRODDB_HOST: ${env:PRODDB_HOST}
+    TABLE_NAME: ${env:TABLE_NAME}
   iam:
     role:
       statements:
         - Effect: Allow
           Action:
             - 'batch:SubmitJob'
+            - 'dynamodb:Scan'
+            - 'dynamodb:UpdateItem'
+            - 'dynamodb:DeleteItem'
+            - 'dynamodb:PutItem'
+            - 'ec2:DescribeNetworkInterfaces'
+            - 'ec2:CreateNetworkInterface'
+            - 'ec2:DeleteNetworkInterface'
+            - 'ec2:DescribeInstances'
+            - 'ec2:AttachNetworkInterface'
           Resource: '*'
 
 functions:

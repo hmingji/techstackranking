@@ -1,9 +1,10 @@
 import { Dialect, Sequelize } from 'sequelize';
 import config from '../../config/config';
+import pg from 'pg';
 
 const env = process.env.NODE_ENV || 'development';
 let dbConfig;
-
+console.log(dbConfig);
 if (env === 'development') {
   dbConfig = config.development;
 } else {
@@ -17,6 +18,7 @@ const sequelize = new Sequelize(
   {
     host: dbConfig.host,
     dialect: dbConfig.dialect as Dialect,
+    dialectModule: pg,
   }
 );
 
