@@ -2,10 +2,10 @@ import express from 'express';
 import winston from 'winston';
 import expressWinston from 'express-winston';
 import cors from 'cors';
-import { sendScrapCommand } from './batch/sendScrapCommand';
 import * as techStackController from './controllers/techStackController';
 import * as jobController from './controllers/jobController';
 import * as commandController from './controllers/commandController';
+import { publishScraperJob } from './batch/publishScraperJob';
 
 export const app = express();
 
@@ -34,12 +34,13 @@ app.use(
   })
 );
 
-app.get('/startscrap', async function (req, res) {
+app.get('/startscrap/:id', async function (req, res) {
   try {
-    const result = await sendScrapCommand();
-    res.send(`sent command ${result}`);
+    const id = req.params.id;
+    const result = await publishScraperJob(id);
+    res.status(200).json({ message: `Job ${result.jobName} published.` });
   } catch (err) {
-    return res.status(500).send('Error');
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 

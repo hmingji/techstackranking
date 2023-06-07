@@ -15,7 +15,8 @@ export type Command = {
   url?: string; // url to visit
   text?: string; // provide the text to type
   key?: KeyInput; // provide the key to press
-  extractMap?: Map<string, string>; //property name => selector
+  // extractMap?: Map<string, string>; //property name => selector
+  extractMap?: string[]; //property name => selector
   loopOption?: Omit<executeOption, 'loopOver'>; // define loop behavior
   ms?: number; // millis for sleep action
 };
@@ -107,11 +108,11 @@ export async function executeCommands(
         console.log(`extract, action number: ${i}`);
 
         let content: Record<string, string> = {};
-        commands[i].extractMap!.forEach(async (value, key) => {
+        commands[i].extractMap!.forEach(async (e) => {
           const text = await page.evaluate((s) => {
             return document.querySelector(s)?.innerHTML;
-          }, value);
-          content[key] = text ?? '';
+          }, e[1]);
+          content[e[0]] = text ?? '';
         });
         extractedContentList.push(content);
         break;
