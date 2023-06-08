@@ -4,6 +4,7 @@ import { executeCommands } from './commands/executeCommands';
 import { getCommandById } from './dynamodb/getCommandById';
 import { publishProcessorJob } from './batch/publishProcessorJob';
 
+// add try catch clause
 async function main() {
   const commandIdFlagIdx = process.argv.indexOf('-id');
   process.argv.forEach((val, index) => {

@@ -16,6 +16,7 @@ export const launchPuppeteer = async () => {
         '--disable-gpu',
         '--disable-dev-shm-usage',
         '--disable-setuid-sandbox',
+        '--shm-size=3gb',
       ],
     }); //in prod mode or docker
   } else {

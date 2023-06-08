@@ -87,7 +87,7 @@ export async function executeCommands(
       case 'click': {
         while (page.url().includes('viewjob')) {
           await page.goBack({ waitUntil: 'networkidle0' });
-        }
+        } //could be removed
         const selector =
           iterateBy && iterateBy === 'loopAmount'
             ? commands[i].selector!.replace('::i', loopCount.toString())
