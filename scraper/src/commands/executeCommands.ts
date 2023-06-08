@@ -80,13 +80,18 @@ export async function executeCommands(
       }
 
       case 'sleep': {
+        console.log('sleeping...');
         await sleep(commands[i].ms!);
+        console.log('sleep ended');
         break;
       }
 
       case 'click': {
+        console.log('clicking...');
         while (page.url().includes('viewjob')) {
+          console.log('found url contain viewjob, going back');
           await page.goBack({ waitUntil: 'networkidle0' });
+          console.log('go back ended');
         } //could be removed
         const selector =
           iterateBy && iterateBy === 'loopAmount'
@@ -98,9 +103,10 @@ export async function executeCommands(
           return document.querySelector(s);
         }, selector);
 
-        console.log(`clicking target node: ${node}`);
+        console.log(`clicking target node: ${node?.innerHTML}`);
 
         if (node !== null) page.click(selector);
+        console.log('click ended');
         break;
       }
 
