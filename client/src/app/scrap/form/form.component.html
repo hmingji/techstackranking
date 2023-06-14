@@ -13,12 +13,14 @@
     />
 
     <label for="config-input">Configuration (JSON)</label>
-    <input
-      id="config-input"
-      type="text"
-      formControlName="command"
-      required
-    />
+    <ace
+      [config]="config"
+      [mode]="'json'"
+      [theme]="'monokai'"
+      [(value)]="editorInput"
+      style="height: 400px"
+      (valueChange)="onChange($event)"
+    ></ace>
 
     <button
       type="submit"

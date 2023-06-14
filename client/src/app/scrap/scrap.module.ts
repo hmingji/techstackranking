@@ -9,15 +9,23 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { JsonParsePipe } from './json-parse.pipe';
+import { AceModule } from 'ngx-ace-wrapper';
 
 @NgModule({
-  declarations: [ScrapComponent, ListComponent, FormComponent, ToastComponent, JsonParsePipe],
+  declarations: [
+    ScrapComponent,
+    ListComponent,
+    FormComponent,
+    ToastComponent,
+    JsonParsePipe,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild([{ path: '', component: ScrapComponent }]),
     FontAwesomeModule,
     ReactiveFormsModule,
     NgxJsonViewerModule,
+    AceModule,
   ],
 })
 export class ScrapModule {}

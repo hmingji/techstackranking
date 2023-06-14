@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Command } from '../command';
+import 'brace';
+import 'brace/mode/json';
+import 'brace/theme/monokai';
+import { AceConfigInterface } from 'ngx-ace-wrapper';
 
 @Component({
   selector: 'app-form',
@@ -16,6 +20,11 @@ export class FormComponent implements OnInit {
   @Output() formSubmit = new EventEmitter<Command>();
   @Output() formClose = new EventEmitter();
   title = this.edit ? 'Edit Command' : 'Add Command';
+  editorInput = '';
+  config: AceConfigInterface = {
+    tabSize: 2,
+    wrap: true,
+  };
 
   commandForm = this.fb.group({
     name: ['', Validators.required],
@@ -33,6 +42,7 @@ export class FormComponent implements OnInit {
         name: this.initialNameValue,
         command: this.initialCommandValue,
       });
+      this.editorInput = this.initialCommandValue;
     }
   }
 
@@ -41,10 +51,20 @@ export class FormComponent implements OnInit {
       this.formSubmit.emit({
         ...this.commandForm.value,
         id: this.id,
+        command: this.editorInput,
       } as Command);
     } else {
-      this.formSubmit.emit(this.commandForm.value as Command);
+      this.formSubmit.emit({
+        ...this.commandForm.value,
+        command: this.editorInput,
+      } as Command);
     }
+  }
+
+  onChange(val: string) {
+    this.commandForm.patchValue({
+      command: val,
+    });
   }
 
   onClose() {
