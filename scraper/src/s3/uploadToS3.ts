@@ -4,7 +4,7 @@ const client = new S3Client({ region: 'ap-southeast-1' });
 
 export const uploadToS3 = async (key: string, body: string) => {
   const command = new PutObjectCommand({
-    Bucket: 'techstackranking-scraped-data',
+    Bucket: process.env.S3_BUCKET ?? '',
     Key: key,
     Body: body,
     ContentType: 'application/json',
