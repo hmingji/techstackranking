@@ -1,1 +1,37 @@
-<p>list works!</p>
+<div
+  class="table-wrapper"
+  *ngIf="commands$ | async as commands"
+  [ngClass]="{ expand: showCommand }"
+>
+  <table>
+    <thead>
+      <tr [ngClass]="{ expand: showCommand }">
+        <th>COMMAND</th>
+        <th>
+          CONFIG <button (click)="toggleShowCommand()">{{ buttonText }}</button>
+        </th>
+        <th>ACTION</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let c of commands.data"
+        [ngClass]="{ expand: showCommand }"
+      >
+        <td>{{ c.name }}</td>
+        <td class="command-cell">
+          <ngx-json-viewer
+            *ngIf="showCommand"
+            [json]="c.command | jsonParse"
+          >
+          </ngx-json-viewer>
+        </td>
+        <td class="action-cell">
+          <button (click)="invokeCommand(c.id!)">Invoke</button>
+          <button (click)="onEditClicked(c)">Edit</button>
+          <button (click)="deleteCommand(c)">Remove</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

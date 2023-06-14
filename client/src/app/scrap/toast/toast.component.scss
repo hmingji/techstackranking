@@ -1,0 +1,31 @@
+@import '../../../styles.scss';
+
+.toast-container {
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid $primaryBorderColor;
+  border-radius: 5px;
+  padding: 10px 10px;
+  background-color: $bodyBgColor;
+}
+
+.action {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+fa-icon {
+  color: $dimPrimaryFontColor;
+  cursor: pointer;
+  &:hover {
+    color: $primaryFontColor;
+  }
+}
+
+.content {
+  color: $primaryFontColor;
+  font-family: 'Inter';
+  font-size: 12px;
+  font-weight: 400;
+}

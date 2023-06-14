@@ -1,33 +1,6 @@
+import { Command, executeOption } from './commands';
 import { sleep } from './sleep';
-import { KeyInput, Page } from 'puppeteer';
-
-export type Command = {
-  action:
-    | 'visitUrl'
-    | 'click'
-    | 'press'
-    | 'type'
-    | 'extract'
-    | 'loop'
-    | 'sleep';
-  selector?: string; // target node for action click, type
-  commands?: Command[]; // list of commands to loop over
-  url?: string; // url to visit
-  text?: string; // provide the text to type
-  key?: KeyInput; // provide the key to press
-  // extractMap?: Map<string, string>; //property name => selector
-  extractMap?: string[][]; //property name => selector
-  loopOption?: Omit<executeOption, 'loopOver'>; // define loop behavior
-  ms?: number; // millis for sleep action
-};
-
-export type executeOption = {
-  loopOver: Boolean;
-  iterateBy?: 'loopAmount' | 'selector';
-  loopAmount?: number;
-  loopEndSelector?: string; // dom node that indicate loop end
-  notFoundAsLoopEnd?: Boolean; // dom node not found as loop end
-};
+import { Page } from 'puppeteer';
 
 export async function executeCommands(
   page: Page,
@@ -47,11 +20,10 @@ export async function executeCommands(
     if (i == commands.length && !loopOver) break;
     if (i == commands.length && loopOver) {
       if (iterateBy === 'selector') {
-        const endNode = await page.evaluate((s) => {
-          return document.querySelector(s) ? true : false;
-        }, loopEndSelector!);
+        const endNode = await page.$(loopEndSelector!);
         console.log('evaluating node exist: ', endNode);
         const endNodeNotFound = endNode ? false : true;
+        await endNode?.dispose();
         if (notFoundAsLoopEnd === endNodeNotFound) break;
       } else {
         if (loopCount === loopAmount) break;
@@ -63,83 +35,113 @@ export async function executeCommands(
 
     switch (commands[i].action) {
       case 'visitUrl': {
-        console.log(`visitUrl, action number: ${i}`);
-        await page.goto(commands[i].url!, { waitUntil: 'networkidle0' });
-        break;
+        try {
+          console.log(`visiting Url...`);
+          await page.goto(commands[i].url!, { waitUntil: 'networkidle0' });
+          console.log('visit ended');
+          break;
+        } catch (err) {
+          console.log('visit url error ', err);
+          break;
+        }
       }
 
       case 'type': {
-        console.log(`type, action number: ${i}`);
-        await page.type(commands[i].selector!, commands[i].text!);
-        break;
+        try {
+          console.log(`typing...`);
+          await page.type(commands[i].selector!, commands[i].text!);
+          console.log('type ended');
+          break;
+        } catch (err) {
+          console.log('typing err ', err);
+          break;
+        }
       }
 
       case 'press': {
-        await page.keyboard.press(commands[i].key!);
-        break;
+        try {
+          console.log('pressing...');
+          await page.keyboard.press(commands[i].key!);
+          console.log('press ended');
+          break;
+        } catch (err) {
+          console.log('press error ', err);
+          break;
+        }
       }
 
       case 'sleep': {
-        console.log('sleeping...');
-        await sleep(commands[i].ms!);
-        console.log('sleep ended');
-        break;
+        try {
+          console.log('sleeping...');
+          await sleep(commands[i].ms!);
+          console.log('sleep ended');
+          break;
+        } catch (err) {
+          console.log('sleep error ', err);
+          break;
+        }
       }
 
       case 'click': {
-        console.log('clicking...');
-        while (page.url().includes('viewjob')) {
-          console.log('found url contain viewjob, going back');
-          await page.goBack({ waitUntil: 'networkidle0' });
-          console.log('go back ended');
-        } //could be removed
-        const selector =
-          iterateBy && iterateBy === 'loopAmount'
-            ? commands[i].selector!.replace('::i', loopCount.toString())
-            : commands[i].selector!;
-        console.log(`click, action number: ${i}, selector ${selector}`);
+        try {
+          console.log('clicking...');
+          const selector =
+            iterateBy && iterateBy === 'loopAmount'
+              ? commands[i].selector!.replace('::i', loopCount.toString())
+              : commands[i].selector!;
+          console.log(`clicking..., selector: ${selector}`);
 
-        const node = await page.evaluate((s) => {
-          return document.querySelector(s);
-        }, selector);
-
-        console.log(`clicking target node: ${node?.innerHTML}`);
-
-        if (node !== null) page.click(selector);
-        console.log('click ended');
-        break;
+          await page.click(selector);
+          console.log('click ended');
+          break;
+        } catch (err) {
+          console.log(`clicking error: ${err}`);
+          break;
+        }
       }
 
       case 'extract': {
-        console.log(`extract, action number: ${i}`);
+        try {
+          console.log(`extracting...`);
+          let content: Record<string, string> = {};
 
-        let content: Record<string, string> = {};
-        commands[i].extractMap!.forEach(async (e) => {
-          const text = await page.evaluate((s) => {
-            return document.querySelector(s)?.innerHTML;
-          }, e[1]);
-          content[e[0]] = text ?? '';
-        });
-        extractedContentList.push(content);
-        break;
+          commands[i].extractMap!.forEach(async (val, key) => {
+            const node = await page.$(val);
+            const text = await page.evaluate((n) => n?.innerHTML, node);
+            content[key] = text ?? '';
+            await node?.dispose();
+          });
+          extractedContentList.push(content);
+          console.log('extract ended');
+          break;
+        } catch (err) {
+          console.log(`Extracting error ${err}`);
+          break;
+        }
       }
 
       case 'loop': {
-        console.log(`loop, action number: ${i}`);
-        const extractedInLoop = await executeCommands(
-          page,
-          commands[i].commands!,
-          {
-            loopOver: true,
-            ...commands[i].loopOption!,
-          }
-        );
-        extractedInLoop.forEach((i) => extractedContentList.push(i));
-        break;
+        try {
+          console.log(`looping`);
+          const extractedInLoop = await executeCommands(
+            page,
+            commands[i].commands!,
+            {
+              loopOver: true,
+              ...commands[i].loopOption!,
+            }
+          );
+          extractedInLoop.forEach((i) => extractedContentList.push(i));
+          console.log('loop ended');
+          break;
+        } catch (err) {
+          console.log('loop err ', err);
+          break;
+        }
       }
     }
     i += 1;
   }
-
+  console.log(`total scraped length: ${extractedContentList.length}`);
   return extractedContentList;
 }

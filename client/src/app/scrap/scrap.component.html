@@ -1,1 +1,45 @@
-<p>scrap works!</p>
+<div class="container">
+  <div class="inner-container">
+    <div class="title">
+      <h6>Scrap</h6>
+      <button (click)="openForm()">Add Command</button>
+    </div>
+    <div class="list-wrapper">
+      <app-list (editCommand)="openEditModeForm($event)"></app-list>
+    </div>
+  </div>
+  <ng-container *ngIf="toast$ | async as t">
+    <div
+      class="toast-wrapper"
+      [ngClass]="{ show: t.showToast }"
+      *ngIf="t.showToast"
+    >
+      <app-toast
+        [text]="t.toastMessage"
+        (closeToast)="closeToast()"
+      ></app-toast>
+    </div>
+  </ng-container>
+</div>
+<div class="drawer-container">
+  <div
+    class="drawer-backdrop"
+    [ngClass]="{ opened: isDrawerOpen }"
+    (click)="closeForm()"
+  ></div>
+  <div
+    class="drawer-content"
+    [ngClass]="{ opened: isDrawerOpen }"
+  >
+    <ng-container *ngIf="isDrawerOpen">
+      <app-form
+        [edit]="editMode"
+        [initialNameValue]="initialNameValue"
+        [initialCommandValue]="initialCommandValue"
+        [id]="idOnEdit"
+        (formSubmit)="submitForm($event)"
+        (formClose)="closeForm()"
+      ></app-form>
+    </ng-container>
+  </div>
+</div>

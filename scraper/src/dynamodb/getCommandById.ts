@@ -1,6 +1,6 @@
 import { GetItemCommand, GetItemCommandInput } from '@aws-sdk/client-dynamodb';
 import { ddbClient } from './dynamo';
-import { Command } from '../commands/executeCommands';
+import { RawCommand } from '../commands/commands';
 
 export async function getCommandById(id: string) {
   try {
@@ -10,14 +10,15 @@ export async function getCommandById(id: string) {
         pk: { S: `command|${id}` },
       },
     };
+
     const data = await ddbClient.send(new GetItemCommand(params));
 
     if (!data.Item) return undefined;
+    const result: RawCommand[] = JSON.parse(data.Item.command.S!);
 
-    const result: Command[] = JSON.parse(data.Item.command.S!);
     return result;
   } catch (err: any) {
-    console.log(err);
+    console.error(err);
     throw Error(err);
   }
 }

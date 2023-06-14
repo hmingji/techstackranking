@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 async function getAllCommands(req: Request, res: Response) {
   try {
-    const limit = parseInt((req.query.limit as string) ?? '5');
+    const limit = parseInt((req.query.limit as string) ?? '20');
     const exclusiveStartKey = req.query.exclusiveStartKey as string;
 
     if (isNaN(limit)) {
@@ -52,7 +52,7 @@ async function removeCommand(req: Request, res: Response) {
   try {
     const id = req.params.id;
     const result = await commandRepository.removeCommand(id);
-    res.status(200).send('Success');
+    res.status(200).json({ message: 'Success' });
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: 'Internal server error' });

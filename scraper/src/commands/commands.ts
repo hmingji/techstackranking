@@ -1,6 +1,54 @@
-import { Command } from './executeCommands';
+import { KeyInput } from 'puppeteer';
 
-export const indeedsgCommands: Command[] = [
+export type Command = {
+  action:
+    | 'visitUrl'
+    | 'click'
+    | 'press'
+    | 'type'
+    | 'extract'
+    | 'loop'
+    | 'sleep';
+  selector?: string; // target node for action click, type
+  commands?: Command[]; // list of commands to loop over
+  url?: string; // url to visit
+  text?: string; // provide the text to type
+  key?: KeyInput; // provide the key to press
+  extractMap?: Map<string, string>; //property name => selector
+  //extractMap?: string[][]; // [...[property name, selector]]
+  loopOption?: Omit<executeOption, 'loopOver'>; // define loop behavior
+  ms?: number; // millis for sleep action
+};
+
+export type RawCommand = {
+  action:
+    | 'visitUrl'
+    | 'click'
+    | 'press'
+    | 'type'
+    | 'extract'
+    | 'loop'
+    | 'sleep';
+  selector?: string; // target node for action click, type
+  commands?: RawCommand[] | Command[]; // list of commands to loop over
+  url?: string; // url to visit
+  text?: string; // provide the text to type
+  key?: KeyInput; // provide the key to press
+  //extractMap?: Map<string, string>; //property name => selector
+  extractMap?: string[][] | any; //property name => selector
+  loopOption?: Omit<executeOption, 'loopOver'>; // define loop behavior
+  ms?: number; // millis for sleep action
+};
+
+export type executeOption = {
+  loopOver: Boolean;
+  iterateBy?: 'loopAmount' | 'selector';
+  loopAmount?: number;
+  loopEndSelector?: string; // dom node that indicate loop end
+  notFoundAsLoopEnd?: Boolean; // dom node not found as loop end
+};
+
+export const indeedsgCommands: RawCommand[] = [
   {
     action: 'visitUrl',
     url: 'https://sg.indeed.com/',
@@ -64,11 +112,6 @@ export const indeedsgCommands: Command[] = [
               ['company', '.jobsearch-CompanyInfoContainer a'],
               ['description', '#jobDescriptionText'],
             ],
-            // extractMap: new Map<string, string>([
-            //   ['position', '.jobsearch-JobInfoHeader-title'],
-            //   ['company', '.jobsearch-CompanyInfoContainer a'],
-            //   ['description', '#jobDescriptionText'],
-            // ]),
           },
         ],
       },

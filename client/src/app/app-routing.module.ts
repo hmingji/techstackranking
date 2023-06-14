@@ -27,6 +27,12 @@ import { ExtraOptions, RouterModule, Routes } from '@angular/router';
           loadChildren: () =>
             import('./job/job.module').then((m) => m.JobModule),
         },
+        {
+          path: 'scrap',
+          data: { preload: false },
+          loadChildren: () =>
+            import('./scrap/scrap.module').then((m) => m.ScrapModule),
+        },
       ],
       { relativeLinkResolution: 'legacy' } as ExtraOptions
     ),

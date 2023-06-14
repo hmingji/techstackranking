@@ -1,15 +1,14 @@
 import { SubmitJobCommandInput, SubmitJobCommand } from '@aws-sdk/client-batch';
 import { batchClient } from './batchClient';
 
-export async function publishProcessorJob(timestamp: string) {
+export async function publishProcessorJob(timestamp: string, id: string) {
   try {
     const input: SubmitJobCommandInput = {
-      jobName: `processor-${timestamp}`,
+      jobName: `processor-${id}`,
       jobQueue: 'processor-queue',
       jobDefinition: 'processor-def',
       parameters: {
-        //parameter scrap data file name
-        scrapedKey: `scrap-data-${timestamp}`,
+        taskCommand: `ts-node src/index.ts -k scrap-data-${timestamp}`,
       },
     };
 

@@ -3,17 +3,21 @@ import { CommonModule } from '@angular/common';
 import { ScrapComponent } from './scrap.component';
 import { ListComponent } from './list/list.component';
 import { FormComponent } from './form/form.component';
-
-
+import { ToastComponent } from './toast/toast.component';
+import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { JsonParsePipe } from './json-parse.pipe';
 
 @NgModule({
-  declarations: [
-    ScrapComponent,
-    ListComponent,
-    FormComponent
-  ],
+  declarations: [ScrapComponent, ListComponent, FormComponent, ToastComponent, JsonParsePipe],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    RouterModule.forChild([{ path: '', component: ScrapComponent }]),
+    FontAwesomeModule,
+    ReactiveFormsModule,
+    NgxJsonViewerModule,
+  ],
 })
-export class ScrapModule { }
+export class ScrapModule {}

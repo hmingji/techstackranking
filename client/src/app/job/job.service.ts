@@ -1,4 +1,8 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpParams,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -136,13 +140,13 @@ export class JobService {
   }
 
   private handleError(err: any): Observable<never> {
-    let errorMessage: string;
-    if (err.error instanceof ErrorEvent) {
+    let errorMessage: string = '';
+    if (!(err instanceof HttpErrorResponse)) {
       errorMessage = `An error occurred: ${err.error.message}`;
     } else {
-      errorMessage = `Backend returned code ${err.status}: ${err.body.error}`;
+      errorMessage = `Backend returned code ${err.status}: ${err.statusText}`;
     }
-    console.error(err);
-    return throwError(errorMessage);
+    console.error('error handler: ', err);
+    return throwError(() => new Error(errorMessage));
   }
 }

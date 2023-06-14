@@ -1,1 +1,31 @@
-<p>form works!</p>
+<div class="form-wrapper">
+  <h6>{{ title }}</h6>
+  <form
+    [formGroup]="commandForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <label for="name-input">Name</label>
+    <input
+      id="name-input"
+      type="text"
+      formControlName="name"
+      required
+    />
+
+    <label for="config-input">Configuration (JSON)</label>
+    <input
+      id="config-input"
+      type="text"
+      formControlName="command"
+      required
+    />
+
+    <button
+      type="submit"
+      [disabled]="!commandForm.valid"
+    >
+      Submit
+    </button>
+    <button (click)="onClose()">Cancel</button>
+  </form>
+</div>

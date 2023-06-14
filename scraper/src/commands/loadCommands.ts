@@ -1,4 +1,4 @@
-import { Command } from './executeCommands';
+import { Command } from './commands';
 import { indeedsgCommands } from './commands';
 
 const commands: Record<string, Command[]> = {
