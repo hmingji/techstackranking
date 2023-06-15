@@ -10,7 +10,7 @@ resources:
     S3Bucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: techstacking-ranking-demo-site
+        BucketName: techstacking-ranking-prod-site
         OwnershipControls:
           Rules:
             - ObjectOwnership: ObjectWriter
