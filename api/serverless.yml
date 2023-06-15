@@ -1,4 +1,4 @@
-service: techStack-ranking-api
+service: techStack-ranking-prod-api
 
 plugins:
   - serverless-plugin-monorepo
