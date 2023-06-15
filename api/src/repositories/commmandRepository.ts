@@ -12,11 +12,15 @@ import { mapIntoCommand } from '../utils/mapIntoCommand';
 import { PaginatedCommands, Command } from './command';
 import { ddbClient } from './dynamo';
 
+const tableName =
+  process.env.DEMO === 'false'
+    ? process.env.PROD_TABLE_NAME
+    : process.env.DEMO_TABLE_NAME;
+
 async function createCommand({ id, name, command }: Command) {
   try {
-    console.log(process.env.TABLE_NAME);
     const params: PutItemCommandInput = {
-      TableName: process.env.TABLE_NAME,
+      TableName: tableName,
       Item: {
         pk: { S: `command|${id}` },
         name: { S: name },
@@ -35,7 +39,7 @@ async function createCommand({ id, name, command }: Command) {
 async function getAllCommands(limit: number, exclusiveStartKey: string | null) {
   try {
     let params: ScanCommandInput = {
-      TableName: process.env.TABLE_NAME,
+      TableName: tableName,
       FilterExpression: 'begins_with (pk, :prefix)',
       ExpressionAttributeValues: {
         ':prefix': { S: 'command' },
@@ -65,7 +69,7 @@ async function getAllCommands(limit: number, exclusiveStartKey: string | null) {
 async function removeCommand(id: string) {
   try {
     const params: DeleteItemCommandInput = {
-      TableName: process.env.TABLE_NAME,
+      TableName: tableName,
       Key: {
         pk: {
           S: `command|${id}`,
@@ -84,7 +88,7 @@ async function removeCommand(id: string) {
 async function updateCommand(newCommand: Command) {
   try {
     const params: UpdateItemCommandInput = {
-      TableName: process.env.TABLE_NAME,
+      TableName: tableName,
       Key: {
         pk: { S: `command|${newCommand.id}` },
       },

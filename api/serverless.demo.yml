@@ -1,4 +1,4 @@
-service: techStack-ranking-api
+service: techStack-ranking-demo-api
 
 plugins:
   - serverless-plugin-monorepo
@@ -25,13 +25,12 @@ provider:
     PRODDB_HOST: ${env:PRODDB_HOST}
     PROD_TABLE_NAME: ${env:PROD_TABLE_NAME}
     DEMO_TABLE_NAME: ${env:DEMO_TABLE_NAME}
-    DEMO: 'false'
+    DEMO: 'true'
   iam:
     role:
       statements:
         - Effect: Allow
           Action:
-            - 'batch:SubmitJob'
             - 'dynamodb:Scan'
             - 'dynamodb:UpdateItem'
             - 'dynamodb:DeleteItem'

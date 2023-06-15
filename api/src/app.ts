@@ -30,15 +30,25 @@ app.use(
 
 app.use(
   cors({
-    origin: ['http://localhost:4200'],
+    origin: [
+      'http://localhost:4200',
+      process.env.PROD_CLIENT_URL,
+      process.env.DEMO_CLIENT_URL,
+    ],
   })
 );
 
 app.get('/startscrap/:id', async function (req, res) {
   try {
-    const id = req.params.id;
-    const result = await publishScraperJob(id);
-    res.status(200).json({ message: `Job ${result.jobName} published.` });
+    if (process.env.DEMO === 'false') {
+      const id = req.params.id;
+      const result = await publishScraperJob(id);
+      res.status(200).json({ message: `Job ${result.jobName} published.` });
+    } else {
+      res.status(403).json({
+        message: 'demo app does not have right to access this function.',
+      });
+    }
   } catch (err) {
     res.status(500).json({ error: 'Internal server error' });
   }
