@@ -36,6 +36,7 @@ jobs:
           NODE_ENV: production
           DEMO_API_URL: ${{ secrets.DEMO_API_URL }}
           PROD_API_URL: ${{ secrets.PROD_API_URL }}
+          PUPPETEER_SKIP_DOWNLOAD: 'true'
 
       - name: Deploy with serverless
         uses: serverless/github-action@v3.1
