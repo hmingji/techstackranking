@@ -1,24 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { TechStack, TechStackResponse } from './techstack';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { TechStackResponse } from './techstack';
 import {
   BehaviorSubject,
   Observable,
   catchError,
-  map,
   scan,
   switchMap,
-  tap,
   throwError,
 } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RankService {
-  //next to do api call, add button and page number observable
   constructor(private http: HttpClient) {}
-  private apiUrl = 'http://localhost:80/techstacks';
+  private apiUrl = environment.apiUrl;
   private pageNumberSubject = new BehaviorSubject<number>(1);
   pageSize = 15;
 
@@ -33,7 +31,7 @@ export class RankService {
   );
 
   techStacks$ = this.http
-    .get<TechStackResponse>(this.apiUrl, {
+    .get<TechStackResponse>(`${this.apiUrl}/techstacks`, {
       params: {
         limit: this.pageSize.toString(),
       },
@@ -42,7 +40,7 @@ export class RankService {
 
   pagedTechStacks$ = this.currentPage$.pipe(
     switchMap((pageNum) =>
-      this.http.get<TechStackResponse>(this.apiUrl, {
+      this.http.get<TechStackResponse>(`${this.apiUrl}/techstacks`, {
         params: {
           limit: this.pageSize.toString(),
           offset: ((pageNum - 1) * 15).toString(),
@@ -57,13 +55,13 @@ export class RankService {
   }
 
   private handleError(err: any): Observable<never> {
-    let errorMessage: string;
-    if (err.error instanceof ErrorEvent) {
+    let errorMessage: string = '';
+    if (!(err instanceof HttpErrorResponse)) {
       errorMessage = `An error occurred: ${err.error.message}`;
     } else {
-      errorMessage = `Backend returned code ${err.status}: ${err.body.error}`;
+      errorMessage = `Backend returned code ${err.status}: ${err.statusText}`;
     }
-    console.error(err);
-    return throwError(errorMessage);
+    console.error('error handler: ', err);
+    return throwError(() => new Error(errorMessage));
   }
 }

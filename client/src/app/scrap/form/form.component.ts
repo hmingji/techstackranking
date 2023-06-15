@@ -44,6 +44,7 @@ export class FormComponent implements OnInit {
       });
       this.editorInput = this.initialCommandValue;
     }
+    this.title = this.edit ? 'Edit Command' : 'Add Command';
   }
 
   onSubmit() {

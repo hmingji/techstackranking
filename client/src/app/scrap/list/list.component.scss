@@ -44,6 +44,7 @@ td {
   &.command-cell {
     max-height: 100px;
     overflow-y: auto;
+    overflow-x: auto;
     @include scrollbars(0.5em, $primaryBorderColor);
   }
 }

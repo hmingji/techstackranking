@@ -24,16 +24,15 @@ import {
   JobPageSize,
   JobResponse,
   JobSort,
-  TechStackFilter,
-  TechStackNameAndId,
 } from './job';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class JobService {
   constructor(private http: HttpClient, private route: ActivatedRoute) {}
-  private apiUrl = 'http://localhost:80';
+  private apiUrl = environment.apiUrl;
   private pageSizeSubject = new BehaviorSubject<JobPageSize>(15);
   private sortSubject = new BehaviorSubject<JobSort>(undefined);
   private orderSubject = new BehaviorSubject<JobOrder>(undefined);
@@ -52,11 +51,7 @@ export class JobService {
 
   techstacks$ = this.http
     .get<AllTechStacksResponse>(`${this.apiUrl}/techstacks/all`)
-    .pipe(
-      tap(() => console.log('requesting ts')),
-      catchError(this.handleError),
-      shareReplay()
-    );
+    .pipe(catchError(this.handleError), shareReplay());
 
   jobList$ = combineLatest([
     this.route.queryParamMap,

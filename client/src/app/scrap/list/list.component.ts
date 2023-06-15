@@ -16,7 +16,6 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.scrapService.loadCommand();
-    console.log('init');
   }
 
   commands$ = this.scrapService.commands$;

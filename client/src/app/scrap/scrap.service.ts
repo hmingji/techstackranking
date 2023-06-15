@@ -8,17 +8,16 @@ import { Injectable } from '@angular/core';
 import {
   BehaviorSubject,
   Observable,
-  Subject,
   catchError,
   combineLatest,
   first,
-  map,
   switchMap,
   tap,
   throwError,
 } from 'rxjs';
 import { Command, CommandResponse } from './command';
 import * as _ from 'lodash';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -31,9 +30,9 @@ const httpOptions = {
 })
 export class ScrapService {
   constructor(private http: HttpClient) {}
-  private apiUrl = 'http://localhost:80';
+  private apiUrl = environment.apiUrl;
 
-  private toastMessageSubject = new BehaviorSubject<string>(''); //change to subject
+  private toastMessageSubject = new BehaviorSubject<string>('');
   private showToastSubject = new BehaviorSubject<boolean>(false);
 
   private pageKeys: (string | null)[] = [null];
@@ -41,6 +40,7 @@ export class ScrapService {
   private isLastPageSubject = new BehaviorSubject<boolean>(false);
   private loadCommandSubject = new BehaviorSubject<void>(undefined);
 
+  //todo: add pagination to command listing
   private pageNumAction$ = this.pageNumSubject.asObservable();
   private isLastPageAction$ = this.isLastPageSubject.asObservable();
   private loadCommandAction$ = this.loadCommandSubject.asObservable();
@@ -55,7 +55,7 @@ export class ScrapService {
       const key = this.pageKeys[pageNum - 1];
       let params = new HttpParams();
       if (key) params.append('exclusiveStartKey', key);
-      console.log('requesting api');
+
       return this.http.get<CommandResponse>(`${this.apiUrl}/commands`, {
         params,
       });

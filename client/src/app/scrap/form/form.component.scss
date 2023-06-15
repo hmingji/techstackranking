@@ -1,0 +1,105 @@
+@import '../../../styles.scss';
+
+.container {
+  width: 100%;
+  padding: 30px 20px;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  @include scrollbars(0.5em, $primaryBorderColor);
+
+  .form-title {
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 500;
+    color: $primaryFontColor;
+    margin-bottom: 20px;
+  }
+}
+
+.form-wrapper {
+  //height: calc(100% - 30px);
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.form-input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  label {
+    font-family: 'Inter';
+    font-size: 12px;
+    font-weight: 300;
+    color: $primaryFontColor;
+  }
+}
+
+.input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  input {
+    background: none;
+    color: $primaryFontColor;
+    width: 100%;
+    font-family: 'Inter';
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid $primaryBorderColor;
+    border-radius: 5px;
+    //height: 30px;
+    padding: 5px 5px;
+
+    &:focus-visible {
+      outline: none;
+    }
+
+    &:hover {
+      border: 1px solid $primaryPaleBorderColor;
+    }
+
+    &::placeholder {
+      color: $dimPrimaryPaleBorderColor;
+    }
+
+    &::spelling-error {
+      text-decoration: none;
+    }
+  }
+}
+
+.form-action {
+  padding-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  background-color: $primaryBgColor;
+  border: 0;
+  border-radius: 5px;
+  padding: 4px 10px;
+  cursor: pointer;
+  color: $primaryFontColor;
+
+  &:hover {
+    background-color: $primaryBorderColor;
+  }
+
+  &:disabled {
+    cursor: default;
+    color: $dimPrimaryFontColor;
+    &:hover {
+      background-color: $primaryBgColor;
+    }
+  }
+}

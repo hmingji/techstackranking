@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { JobService } from '../job.service';
 import { TechStackNameAndId } from '../job';
 import { FormControl } from '@angular/forms';

@@ -1,33 +1,44 @@
-<div class="form-wrapper">
-  <h6>{{ title }}</h6>
+<div class="container">
+  <h6 class="form-title">{{ title }}</h6>
   <form
+    class="form-wrapper"
     [formGroup]="commandForm"
     (ngSubmit)="onSubmit()"
   >
-    <label for="name-input">Name</label>
-    <input
-      id="name-input"
-      type="text"
-      formControlName="name"
-      required
-    />
+    <div class="form-input">
+      <div class="input">
+        <label for="name">Name</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          required
+        />
+      </div>
 
-    <label for="config-input">Configuration (JSON)</label>
-    <ace
-      [config]="config"
-      [mode]="'json'"
-      [theme]="'monokai'"
-      [(value)]="editorInput"
-      style="height: 400px"
-      (valueChange)="onChange($event)"
-    ></ace>
+      <div class="input">
+        <label for="config">Configuration (JSON)</label>
+        <ace
+          id="config"
+          [config]="config"
+          [mode]="'json'"
+          [theme]="'monokai'"
+          [(value)]="editorInput"
+          style="height: 350px"
+          (valueChange)="onChange($event)"
+        ></ace>
+      </div>
+    </div>
 
-    <button
-      type="submit"
-      [disabled]="!commandForm.valid"
-    >
-      Submit
-    </button>
-    <button (click)="onClose()">Cancel</button>
+    <div class="form-action">
+      <button
+        type="submit"
+        [disabled]="!commandForm.valid"
+      >
+        Submit
+      </button>
+
+      <button (click)="onClose()">Cancel</button>
+    </div>
   </form>
 </div>

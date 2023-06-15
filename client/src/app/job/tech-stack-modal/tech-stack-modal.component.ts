@@ -23,7 +23,6 @@ export class TechStackModalComponent {
   filterControl = new FormControl('');
   @Output() closeModal = new EventEmitter();
 
-  //all stream and filtered stream
   all$ = this.route.queryParamMap.pipe(
     map((paramMap) => {
       if (paramMap.has('techstacks')) {

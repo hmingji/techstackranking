@@ -11,8 +11,6 @@ import { faChevronLeft, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { JobService } from '../job.service';
 import { Subscription, map } from 'rxjs';
 import { Router } from '@angular/router';
-import { tap } from 'lodash';
-import { JobDetailResponse } from '../job';
 
 @Component({
   selector: 'app-detail',
@@ -43,16 +41,6 @@ export class DetailComponent implements AfterViewInit, OnDestroy {
     this.detailHeightSub.unsubscribe();
   }
   detail$ = this.jobService.jobDetail$;
-  // detail$ = this.jobService.jobDetail$.pipe(
-  //   map((r) => {
-  //     return {
-  //       data: {
-  //         ...r.data,
-  //         description: r.data.description.replaceAll('\n', '<br>'),
-  //       },
-  //     } as JobDetailResponse;
-  //   })
-  // );
 
   closeDetail() {
     this.router.navigate([], {

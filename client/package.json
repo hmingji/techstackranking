@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start:dev": "ng serve --configuration development",
+    "build:prod": "ng build",
+    "build:demo": "ng build --configuration demo",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -24,7 +25,6 @@
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "chart.js": "^4.3.0",
-    "jsonformatter": "^0.7.0",
     "lodash": "^4.17.21",
     "ng2-charts": "^4.1.1",
     "ngx-ace-wrapper": "^14.0.0",
