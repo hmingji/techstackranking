@@ -26,6 +26,8 @@ provider:
     PROD_TABLE_NAME: ${env:PROD_TABLE_NAME}
     DEMO_TABLE_NAME: ${env:DEMO_TABLE_NAME}
     DEMO: 'false'
+    PROD_CLIENT_URL: ${env:PROD_CLIENT_URL}
+    DEMO_CLIENT_URL: ${env:DEMO_CLIENT_URL}
   iam:
     role:
       statements:
