@@ -10,7 +10,7 @@ resources:
     S3Bucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: techstacking-ranking-demo-site
+        BucketName: ${self:custom.bucketName}
         OwnershipControls:
           Rules:
             - ObjectOwnership: ObjectWriter
@@ -81,7 +81,7 @@ plugins:
   - serverless-s3-sync
 
 custom:
-  bucketName: techstacking-ranking-demo-site
+  bucketName: ${env:DEMO_CLIENT_BUCKET}
   s3Sync:
-    - bucketName: techstacking-ranking-demo-site
+    - bucketName: ${env:DEMO_CLIENT_BUCKET}
       localDir: dist/client

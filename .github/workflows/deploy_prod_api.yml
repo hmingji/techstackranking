@@ -29,6 +29,8 @@ jobs:
 
       - name: Install dependencies
         run: yarn
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: 'true'
 
       - name: Deploy with serverless
         uses: serverless/github-action@v3.1

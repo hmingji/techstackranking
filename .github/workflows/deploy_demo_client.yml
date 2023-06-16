@@ -29,6 +29,8 @@ jobs:
 
       - name: Install dependencies
         run: yarn
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: 'true'
 
       - name: Run build
         run: yarn run build:demo
@@ -36,7 +38,6 @@ jobs:
           NODE_ENV: production
           DEMO_API_URL: ${{ secrets.DEMO_API_URL }}
           PROD_API_URL: ${{ secrets.PROD_API_URL }}
-          PUPPETEER_SKIP_DOWNLOAD: 'true'
 
       - name: Deploy with serverless
         uses: serverless/github-action@v3.1
@@ -48,3 +49,4 @@ jobs:
           # or if using AWS credentials directly
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          DEMO_CLIENT_BUCKET: ${{ secrets.DEMO_CLIENT_BUCKET }}
