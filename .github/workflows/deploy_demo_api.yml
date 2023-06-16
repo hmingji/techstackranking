@@ -49,8 +49,10 @@ jobs:
           PRODDB_HOST: ${{ secrets.PRODDB_HOST }}
           PROD_TABLE_NAME: ${{ vars.PROD_TABLE_NAME }}
           DEMO_TABLE_NAME: ${{ vars.DEMO_TABLE_NAME }}
-          PROD_CLIENT_URL: ${{ secrets.PROD_CLIENT_URL }}
-          DEMO_CLIENT_URL: ${{ secrets.DEMO_CLIENT_URL }}
+          PROD_CLIENT_URL_1: ${{ secrets.PROD_CLIENT_URL_1 }}
+          DEMO_CLIENT_URL_1: ${{ secrets.DEMO_CLIENT_URL_1 }}
+          PROD_CLIENT_URL_2: ${{ secrets.PROD_CLIENT_URL_2 }}
+          DEMO_CLIENT_URL_2: ${{ secrets.DEMO_CLIENT_URL_2 }}
           SG_ID_1: ${{ secrets.SG_ID_1 }}
           SUBNET_ID_1: ${{ secrets.SUBNET_ID_1 }}
           SUBNET_ID_2: ${{ secrets.SUBNET_ID_2 }}

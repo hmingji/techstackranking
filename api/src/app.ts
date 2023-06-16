@@ -32,8 +32,10 @@ app.use(
   cors({
     origin: [
       'http://localhost:4200',
-      process.env.PROD_CLIENT_URL,
-      process.env.DEMO_CLIENT_URL,
+      process.env.PROD_CLIENT_URL_1,
+      process.env.DEMO_CLIENT_URL_1,
+      process.env.PROD_CLIENT_URL_2,
+      process.env.DEMO_CLIENT_URL_2,
     ],
   })
 );

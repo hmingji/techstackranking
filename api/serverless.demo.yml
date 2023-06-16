@@ -26,8 +26,10 @@ provider:
     PROD_TABLE_NAME: ${env:PROD_TABLE_NAME}
     DEMO_TABLE_NAME: ${env:DEMO_TABLE_NAME}
     DEMO: 'true'
-    PROD_CLIENT_URL: ${env:PROD_CLIENT_URL}
-    DEMO_CLIENT_URL: ${env:DEMO_CLIENT_URL}
+    PROD_CLIENT_URL_1: ${env:PROD_CLIENT_URL_1}
+    DEMO_CLIENT_URL_1: ${env:DEMO_CLIENT_URL_1}
+    PROD_CLIENT_URL_2: ${env:PROD_CLIENT_URL_2}
+    DEMO_CLIENT_URL_2: ${env:DEMO_CLIENT_URL_2}
   iam:
     role:
       statements:
