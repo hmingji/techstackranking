@@ -24,7 +24,7 @@ export class PaginatorComponent {
 
   @Input()
   get totalPages(): number {
-    return this.totalPages;
+    return this._totalPages;
   }
   set totalPages(totalPages: number) {
     this._totalPages = totalPages;

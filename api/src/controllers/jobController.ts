@@ -29,7 +29,7 @@ export async function getJobs(req: Request, res: Response) {
       return;
     }
     sort = sort === 'created' ? 'createdAt' : 'tsCount';
-
+    console.log('sort by ', sort);
     //filtering
     let whereOption: WhereOptions<
       InferAttributes<Job, { omit: 'TechStacks' }>
@@ -67,10 +67,10 @@ export async function getJobs(req: Request, res: Response) {
       order: [[sort, order]],
     });
     total = jobsMatched.length;
-
+    console.log('jobs matched: ', jobsMatched);
     const jobIds = jobsMatched.map((p) => p.id);
-    const jobIdsPaged = jobIds.slice(offset + 1, offset + limit + 1);
-
+    const jobIdsPaged = jobIds.slice(offset, offset + limit);
+    console.log('job ids ', jobIds);
     const jobsPaged = await Job.findAll({
       attributes: ['id', 'position', 'company', 'entryLevel', 'createdAt'],
       where: { id: { [Op.in]: jobIdsPaged } },
