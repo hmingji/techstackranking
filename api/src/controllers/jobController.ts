@@ -28,8 +28,8 @@ export async function getJobs(req: Request, res: Response) {
       res.status(400).json({ message: 'Invalid query string' });
       return;
     }
-    sort = sort === 'created' ? 'createdAt' : 'tsCount';
-    console.log('sort by ', sort);
+    sort = sort === 'created' ? 'createdAt' : 'techstackCount';
+
     //filtering
     let whereOption: WhereOptions<
       InferAttributes<Job, { omit: 'TechStacks' }>
@@ -58,19 +58,16 @@ export async function getJobs(req: Request, res: Response) {
 
     let total: number;
     const jobsMatched = await Job.findAll({
-      attributes: [
-        'id',
-        [sequelize.literal('COUNT(*) OVER(PARTITION BY "Job".id)'), 'tsCount'],
-      ],
+      attributes: ['id'],
       include: [{ model: TechStack }],
       where: whereOption,
       order: [[sort, order]],
     });
     total = jobsMatched.length;
-    console.log('jobs matched: ', jobsMatched);
+
     const jobIds = jobsMatched.map((p) => p.id);
     const jobIdsPaged = jobIds.slice(offset, offset + limit);
-    console.log('job ids ', jobIds);
+
     const jobsPaged = await Job.findAll({
       attributes: ['id', 'position', 'company', 'entryLevel', 'createdAt'],
       where: { id: { [Op.in]: jobIdsPaged } },

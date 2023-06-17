@@ -78,6 +78,7 @@ async function main() {
       company: comTrimmed,
       description: descTrimmed,
       entryLevel: isEntry,
+      techstackCount: techStacks.length,
     });
 
     if (job) {
