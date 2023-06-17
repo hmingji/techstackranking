@@ -10,6 +10,7 @@ import {
   Model,
   NonAttribute,
   DataTypes,
+  BelongsToManyCountAssociationsMixin,
 } from 'sequelize';
 import TechStack from './techstack';
 import { sequelize } from './sequelize';
@@ -26,6 +27,7 @@ class Job extends Model<
   declare entryLevel: CreationOptional<boolean>;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
+  declare techstackCount: CreationOptional<number>;
 
   declare TechStacks?: NonAttribute<TechStack[]>;
   declare getTechStacks: HasManyGetAssociationsMixin<TechStack>;
@@ -33,6 +35,7 @@ class Job extends Model<
   declare removeTechStacks: HasManyRemoveAssociationsMixin<TechStack, number>;
   declare addTechStack: HasManyAddAssociationMixin<TechStack, number>;
   declare removeTechStack: HasManyRemoveAssociationMixin<TechStack, number>;
+  declare countTechStacks: BelongsToManyCountAssociationsMixin;
 }
 
 Job.init(
@@ -49,6 +52,7 @@ Job.init(
     entryLevel: DataTypes.BOOLEAN,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
+    techstackCount: DataTypes.INTEGER,
   },
   {
     sequelize,

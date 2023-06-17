@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       description: DataTypes.STRING,
       expYear: DataTypes.INTEGER,
       entryLevel: DataTypes.BOOLEAN,
+      techstackCount: DataTypes.INTEGER,
     },
     {
       sequelize,
