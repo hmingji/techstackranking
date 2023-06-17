@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import {
   faChevronLeft,
   faChevronRight,
@@ -10,7 +17,7 @@ import * as _ from 'lodash';
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss'],
 })
-export class PaginatorComponent {
+export class PaginatorComponent implements OnChanges {
   private _totalPages = 1;
   private _currentPage = 1;
   interval = 5;
@@ -44,6 +51,14 @@ export class PaginatorComponent {
   }
 
   @Output() pageChange = new EventEmitter<number>();
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.lb = Math.max(1, this.currentPage - 2);
+    this.ub = Math.min(this.lb + this.interval, this._totalPages + 1);
+    this.pageNums = _.range(this.lb, this.ub);
+    this.disabledPrev = this._currentPage === 1 ? true : false;
+    this.disabledNext = this._currentPage === this._totalPages ? true : false;
+  }
 
   incrementPage() {
     this.pageChange.emit(this._currentPage + 1);
