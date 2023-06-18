@@ -45,6 +45,7 @@ app.get('/startscrap/:id', async function (req, res) {
     if (process.env.DEMO === 'false') {
       const id = req.params.id;
       const result = await publishScraperJob(id);
+      console.log('Submited batch job');
       res.status(200).json({ message: `Job ${result.jobName} published.` });
     } else {
       res.status(403).json({
