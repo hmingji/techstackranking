@@ -53,8 +53,8 @@ export class ScrapComponent {
             );
             this.scrapService.loadCommand();
           },
-          error: (msg) => {
-            this.scrapService.pushToastNotification(msg);
+          error: (r) => {
+            this.scrapService.pushToastNotification(r.error.message);
           },
         });
     } else {
@@ -68,8 +68,8 @@ export class ScrapComponent {
             );
             this.scrapService.loadCommand();
           },
-          error: (msg) => {
-            this.scrapService.pushToastNotification(msg);
+          error: (r) => {
+            this.scrapService.pushToastNotification(r.error.message);
           },
         });
     }
