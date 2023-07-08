@@ -53,7 +53,7 @@ jobs:
           DEMO_CLIENT_URL_1: ${{ secrets.DEMO_CLIENT_URL_1 }}
           PROD_CLIENT_URL_2: ${{ secrets.PROD_CLIENT_URL_2 }}
           DEMO_CLIENT_URL_2: ${{ secrets.DEMO_CLIENT_URL_2 }}
-          SG_ID_1: ${{ secrets.SG_ID_1 }}
-          SUBNET_ID_1: ${{ secrets.SUBNET_ID_1 }}
-          SUBNET_ID_2: ${{ secrets.SUBNET_ID_2 }}
-          SUBNET_ID_3: ${{ secrets.SUBNET_ID_3 }}
+          # SG_ID_1: ${{ secrets.SG_ID_1 }}
+          # SUBNET_ID_1: ${{ secrets.SUBNET_ID_1 }}
+          # SUBNET_ID_2: ${{ secrets.SUBNET_ID_2 }}
+          # SUBNET_ID_3: ${{ secrets.SUBNET_ID_3 }}

@@ -54,10 +54,10 @@ functions:
       - http:
           method: ANY
           path: /{proxy+}
-    vpc:
-      securityGroupIds:
-        - ${env:SG_ID_1}
-      subnetIds:
-        - ${env:SUBNET_ID_1}
-        - ${env:SUBNET_ID_2}
-        - ${env:SUBNET_ID_3}
+    # vpc:
+    #   securityGroupIds:
+    #     - ${env:SG_ID_1}
+    #   subnetIds:
+    #     - ${env:SUBNET_ID_1}
+    #     - ${env:SUBNET_ID_2}
+    #     - ${env:SUBNET_ID_3}
